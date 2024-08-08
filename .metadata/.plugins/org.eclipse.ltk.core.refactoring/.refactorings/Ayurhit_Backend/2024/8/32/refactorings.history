@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.app&apos; to &apos;com.ayurhit&apos;&#x0D;&#x0A;- Original project: &apos;Ayurhit_Backend&apos;&#x0D;&#x0A;- Original element: &apos;Ayurhit_Backend/src/main/java/com.app&apos;&#x0D;&#x0A;- Renamed element: &apos;Ayurhit_Backend/src/main/java/com.ayurhit&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.app&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.app" name="com.ayurhit" qualified="false" references="true" stamp="1723147108347" textual="false" version="1.0"/>
+</session>
