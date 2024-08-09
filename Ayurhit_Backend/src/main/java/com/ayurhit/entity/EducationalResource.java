@@ -33,8 +33,7 @@ public class EducationalResource extends BaseEntity {
 	private String resourceDescription;
 
 	@ManyToOne
-	@JoinColumn(name="doctor_id")
-	@Column(nullable = false)
+	@JoinColumn(name="doctor_id",nullable=false)
 	private Doctor doctor;
 
 	@OneToMany(mappedBy = "educationalResource", cascade = CascadeType.ALL, orphanRemoval = true)

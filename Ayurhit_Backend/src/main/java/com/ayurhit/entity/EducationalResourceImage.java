@@ -21,12 +21,12 @@ public class EducationalResourceImage extends BaseEntity {
 	
 	@Column(nullable=false)
 	private String image;
+	
 	@Column(nullable=false)
 	private String name;
 
 	@ManyToOne
-	@Column(nullable=false)
-	@JoinColumn(name="educational_resource_id")
+	@JoinColumn(name="educational_resource_id",nullable=false)
 	private EducationalResource educationalResource;
 	
 }

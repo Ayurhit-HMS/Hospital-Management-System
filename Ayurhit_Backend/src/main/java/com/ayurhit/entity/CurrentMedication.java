@@ -2,6 +2,7 @@ package com.ayurhit.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
@@ -25,11 +26,11 @@ public class CurrentMedication extends BaseEntity {
 	private String duration;
 
 	@ManyToOne
-	@Column(nullable=false)
+	@JoinColumn(nullable=false)
 	private Medicine medicine;
 
 	@ManyToOne
-	@Column(nullable=false)
+	@JoinColumn(nullable=false)
 	private Patient patient;
 
 }
