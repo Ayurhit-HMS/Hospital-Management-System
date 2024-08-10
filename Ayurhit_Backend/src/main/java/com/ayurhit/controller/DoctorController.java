@@ -24,4 +24,24 @@ public class DoctorController {
 		List<DoctorDTO> docList = doctorService.getDoctorsByDepartment(departmentName);
 		return ResponseEntity.ok(docList);
 	}
+
+	@PostMapping
+	private ResponseEntity<?> addDoctor(@RequestBody DoctorRequestDTO dto) {
+		return ResponseEntity.ok(doctorService.addDoctor(dto));
+	}
+	
+	@GetMapping("/{id}")
+	private ResponseEntity<?> getDoctorDetails(@PathVariable Long id) {
+		return ResponseEntity.ok(doctorService.getDoctorDetails(id));
+	}
+	
+	@PutMapping("/{id}")
+	private ResponseEntity<?> updateDoctorDetails(@PathVariable Long id, @RequestBody UpdateDoctorDTO  dto ) {
+		return ResponseEntity.ok(doctorService.updateDoctorDetails(id, dto));
+	}
+	
+	@DeleteMapping("/{id}")
+	private ResponseEntity<?> deleteDoctorDetails(@PathVariable Long id) {
+		return ResponseEntity.ok(doctorService.deleteDoctorDetails(id));
+	}
 }
