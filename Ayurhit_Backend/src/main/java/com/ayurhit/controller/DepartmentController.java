@@ -19,8 +19,30 @@ public class DepartmentController {
 	private DepartmentService departmentService;
 
 	@GetMapping
+
+	@PostMapping
+	public ResponseEntity<?> addNewDepartment(@RequestBody DepartmentDTO dto){
+		return ResponseEntity.status(HttpStatus.CREATED).body(departmentService.addDepartment(dto));
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateDepartmentDetails(@PathVariable Long id, @RequestBody DepartmentDTO dto){
+		return ResponseEntity.ok(departmentService.updateDepartment(id, dto));
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteDepartmentDetails(@PathVariable Long id){
+		return ResponseEntity.ok(departmentService.deleteDepartment(id));
+	}
+
 	public ResponseEntity<List<DepartmentDTO>> getAllDepartments() {
 		List<DepartmentDTO> deptList = departmentService.getAllDepartments();
 		return ResponseEntity.ok(deptList);
 	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getDepartmentDetails(@PathVariable Long id){
+		return ResponseEntity.ok(departmentService.getDepartmentDetails(id));
+	}
+
 }
