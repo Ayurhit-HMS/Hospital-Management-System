@@ -11,7 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -62,8 +61,8 @@ public class Doctor extends Employee {
 	@Column(columnDefinition = "TEXT")
 	private String description;
 
-	@JoinColumn(name="department_id",nullable = false)
 	@ManyToOne
+	@JoinColumn(name="department_id",nullable = false)
 	private Department department;
 
 	@OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL,orphanRemoval = true)

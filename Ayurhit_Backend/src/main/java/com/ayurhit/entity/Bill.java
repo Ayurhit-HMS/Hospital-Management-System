@@ -68,7 +68,7 @@ public class Bill extends BaseEntity {
 	private Admission admission;
 
 	@ManyToOne
-	@Column(nullable =false)
+	@JoinColumn(nullable =false)
 	private Doctor doctor;
 
 	@ManyToOne
