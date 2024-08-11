@@ -1,0 +1,20 @@
+
+.register {
+    background-color: #c0eb75;
+    background: url("../images/login_background.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+.registration {
+    background-color: white;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#cancel-button{
+    text-decoration: none;
+}
