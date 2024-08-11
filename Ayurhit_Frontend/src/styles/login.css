@@ -1,0 +1,29 @@
+.login-container {
+  background: url("../images/login_background.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.login-box {
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: white;
+}
+
+.image-side {
+  padding: 0;
+}
+
+.image-side img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.form-side {
+  padding: 2rem;
+}
+
+.form-side h2 {
+  margin-bottom: 1.5rem;
+}
