@@ -4,8 +4,6 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.List;
 
-
-
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,7 @@ import com.ayurhit.entity.Branch;
 import com.ayurhit.entity.Department;
 import com.ayurhit.entity.Doctor;
 import com.ayurhit.entity.Language;
+
 import com.ayurhit.entity.Role;
 
 @Service
