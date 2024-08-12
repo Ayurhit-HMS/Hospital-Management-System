@@ -4,7 +4,7 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.management.relation.Role;
+
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -12,9 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ayurhit.dao.AddressDAO;
+import com.ayurhit.dao.BranchDAO;
+import com.ayurhit.dao.DepartmentDAO;
 import com.ayurhit.dao.DoctorDAO;
+import com.ayurhit.dao.LanguageDAO;
+import com.ayurhit.dao.RoleDAO;
 import com.ayurhit.dto.DoctorDTO;
+import com.ayurhit.dto.DoctorRequestDTO;
+import com.ayurhit.dto.DoctorResponseDTO;
+import com.ayurhit.dto.UpdateDoctorDTO;
+import com.ayurhit.entity.Address;
+import com.ayurhit.entity.Branch;
+import com.ayurhit.entity.Department;
 import com.ayurhit.entity.Doctor;
+import com.ayurhit.entity.Language;
+import com.ayurhit.entity.Role;
 
 @Service
 @Transactional

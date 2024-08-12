@@ -26,4 +26,14 @@ public class Role extends BaseEntity {
 
 	@OneToMany(mappedBy = "role")
 	private Set<User> users = new HashSet<>();
+	
+	public void addUser(User user) {
+		users.add(user);
+		user.setRole(this);
+	}
+	
+	public void removeUser(User user) {
+		users.remove(user);
+		user.setRole(null);
+	}
 }

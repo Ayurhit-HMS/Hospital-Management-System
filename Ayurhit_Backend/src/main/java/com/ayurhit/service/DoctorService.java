@@ -3,6 +3,9 @@ package com.ayurhit.service;
 import java.util.List;
 
 import com.ayurhit.dto.DoctorDTO;
+import com.ayurhit.dto.DoctorRequestDTO;
+import com.ayurhit.dto.DoctorResponseDTO;
+import com.ayurhit.dto.UpdateDoctorDTO;
 
 public interface DoctorService {
 
