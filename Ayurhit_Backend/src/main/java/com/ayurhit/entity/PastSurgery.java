@@ -32,7 +32,7 @@ public class PastSurgery extends BaseEntity {
 	private String surgeryDescription;
 
 	@ManyToOne
-	@Column(nullable=false)
+	@JoinColumn(nullable=false)
 	private Patient patient;
 
 }
