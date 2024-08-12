@@ -26,7 +26,6 @@ public class Branch extends BaseEntity {
 	@Column(unique=true,nullable=false)
 	private int code;
 	
-	@Email
 	@Column(length=30, nullable=false)
 	private String name;
 	
@@ -42,7 +41,7 @@ public class Branch extends BaseEntity {
 	@Column(length=50)
 	private String longitude;
 	
-	
+	@Email
 	@Column(unique=true, nullable=false)
 	private String email;
 	

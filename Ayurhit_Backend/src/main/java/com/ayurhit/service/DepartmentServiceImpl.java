@@ -22,6 +22,42 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Override
+	public DepartmentDTO addDepartment(DepartmentDTO dto) {
+		Department department = modelMapper.map(dto, Department.class);
+		Department persistentDepartment = departmentDAO.save(department);
+		return modelMapper.map(persistentDepartment, DepartmentDTO.class);
+	}
+
+	@Override
+	public DepartmentDTO updateDepartment(Long id, DepartmentDTO dto) {
+		if(departmentDAO.existsById(id)) {
+			Department departmentEntity = departmentDAO.findById(id).orElseThrow();
+			modelMapper.map(dto, departmentEntity);
+			return modelMapper.map(departmentEntity, DepartmentDTO.class);
+		}
+		return null ;
+	}
+	
+	public String deleteDepartment(Long id) {
+		if(departmentDAO.existsById(id)) {
+			departmentDAO.deleteById(id);
+			return "deleted department details ....";
+		}
+		else
+			return "failed to delete department details..";
+	}
+	
+	
+	public DepartmentDTO getDepartmentDetails(Long id) {
+		if(departmentDAO.existsById(id)) {
+			Department departmentEntity = departmentDAO.findById(id).orElseThrow();
+			return modelMapper.map(departmentEntity, DepartmentDTO.class);
+		}
+		return null;
+	}
+	
+
 	public List<DepartmentDTO> getAllDepartments() {
 		Type targetListType = new TypeToken<List<DepartmentDTO>>() {
 		}.getType();
