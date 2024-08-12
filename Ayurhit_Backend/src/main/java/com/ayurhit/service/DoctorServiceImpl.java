@@ -26,6 +26,8 @@ import com.ayurhit.entity.Department;
 import com.ayurhit.entity.Doctor;
 import com.ayurhit.entity.Language;
 
+import com.ayurhit.entity.Role;
+
 @Service
 @Transactional
 public class DoctorServiceImpl implements DoctorService {
