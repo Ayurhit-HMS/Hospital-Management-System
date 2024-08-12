@@ -1,0 +1,29 @@
+.menu-button {
+    margin-top: 11rem;
+}
+
+.custom-canvas {
+    margin-top: 10.75rem;
+}
+
+.btn-custom {
+    background-color: #0A98D8;
+    color: #fff;
+    border-color: #0A98D8;
+}
+
+.btn-custom:hover {
+    color: #fff;
+    background-color: #0084C2;
+    border-color: #0084C2;
+}
+
+.btn-custom:active {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+.btn-custom:focus{
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
