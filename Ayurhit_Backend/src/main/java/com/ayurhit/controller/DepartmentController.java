@@ -41,6 +41,7 @@ public class DepartmentController {
 		return ResponseEntity.ok(departmentService.deleteDepartment(id));
 	}
 
+	@GetMapping("/get")
 	public ResponseEntity<List<DepartmentDTO>> getAllDepartments() {
 		List<DepartmentDTO> deptList = departmentService.getAllDepartments();
 		return ResponseEntity.ok(deptList);

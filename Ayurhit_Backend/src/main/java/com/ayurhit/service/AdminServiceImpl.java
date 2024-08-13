@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +43,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private ModelMapper mapper;
+	
+	 @Autowired
+	 private PasswordEncoder passwordEncoder;
 
 	@Override
 	public AdminResponseDTO addAdmin(AdminRequestDTO dto) {
@@ -55,6 +59,9 @@ public class AdminServiceImpl implements AdminService {
 			Language adminLanguage = languageDAO.findById(id).orElseThrow(null);
 			adminLanguages.add(adminLanguage);
 		}
+		
+		String password = dto.getPassword();
+		String encodedPassword = passwordEncoder.encode(password);
 				
 		Admin manager = adminDAO.findById(dto.getManagerId()).orElseThrow();
 		Branch branch = branchDAO.findById(dto.getBranchId()).orElseThrow();
@@ -62,7 +69,7 @@ public class AdminServiceImpl implements AdminService {
 		Address persistentAddress = addressDAO.save(address);
 		Role role = roleDAO.findById(dto.getRoleId()).orElseThrow();	
 		Admin adminEntity = mapper.map(dto, Admin.class);
-		role.addUser(adminEntity);
+		adminEntity.setPassword(encodedPassword);
 		adminEntity.setManager(manager);
 		adminEntity.setBranch(branch);
 		adminEntity.setAddress(persistentAddress);

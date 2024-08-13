@@ -23,10 +23,5 @@ public class AdminController {
 	public ResponseEntity<?> addAdmin(@RequestBody AdminRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(adminService.addAdmin(dto));
 	}
-	
-	
-	
-	
-	
-	
+		
 }
