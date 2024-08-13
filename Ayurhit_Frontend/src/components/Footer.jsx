@@ -3,7 +3,7 @@ import map from "../images/map.jpg";
 
 function Footer() {
     return (
-        <div className="footer fixed-bottom">
+        <div className="footer pt-3 mt-3">
             <div className="container mt-3">
                 <div className="row">
                     <div className="col-md-3 text-center">
@@ -25,14 +25,19 @@ function Footer() {
                         <a href="https://maps.app.goo.gl/z9UrvCA8iP8qCCaf9"><img className="img-fluid img-thumbnail" src={map} alt="Address Map" /></a>
                         <div className="mt-3 d-flex">
                             <input type="text" placeholder="Subscribe to newsletter" className="rounded me-1" />
-                            &copy;
+                            <a href="#" className="text-success"><i className="fab fa-telegram fa-2x"></i></a>
                         </div>
                     </div>
                 </div>
-                <hr class="border border-light border-2 opacity-50" />
+                <hr className="border border-light border-2 opacity-50" />
                 <div className="row">
-                    <div className="col-md-11"><p>&copy; {new Date().getFullYear()} Ayurhit Hospitals website. All rights reserved.</p></div>
-                    <div className="col-md-1">&copy; &copy; &copy;</div>
+                    <div className="col-md-10"><p>&copy; {new Date().getFullYear()} Ayurhit Hospitals website. All rights reserved.</p></div>
+                    <div className="col-md-2 text-center">
+                        <a href="#"><i className="fab fa-facebook-f fa-lg me-2 text-light"></i></a>
+                        <a href="#"><i className="fab fa-linkedin-in fa-lg me-2 text-light"></i></a>
+                        <a href="#"> <i className="fab fa-twitter fa-lg me-2 text-light"></i></a>
+                        <a href="#"><i className="fab fa-instagram fa-lg me-2 text-danger"></i></a>
+                    </div>
                 </div>
             </div>
         </div>

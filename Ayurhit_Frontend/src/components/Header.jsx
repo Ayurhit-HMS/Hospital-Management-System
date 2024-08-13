@@ -3,8 +3,8 @@ import "../styles/header.css"
 
 function Header() {
     return (
-        <div className="header fixed-top">
-            <div className="container">
+        <div className="custom-header fixed-top">
+            <div className="container ">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-3 d-flex justify-content-center">
                         <img src={logo} className="img-fluid mb-3" alt="Hospital Logo" style={{ height: 100 }} />
@@ -30,7 +30,7 @@ function Header() {
                     </div>
                 </div>
             </div>
-            <div className="nav-bar pt-1 pb-1">
+            <div className="custom-nav-bar pt-1 pb-1">
                 <div className=" container d-flex justify-content-center align-items-center">
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Home</a></p>
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Hospitals</a></p>
@@ -40,7 +40,7 @@ function Header() {
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Health Library</a></p>
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">About us</a></p>
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Contact us</a></p>
-                    <button className="btn btn-danger">Second Opinion</button>
+                    <button className="btn btn-sm btn-danger">Second Opinion</button>
                 </div>
             </div>
         </div>
