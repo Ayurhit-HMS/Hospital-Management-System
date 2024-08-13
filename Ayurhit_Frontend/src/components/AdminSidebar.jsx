@@ -21,7 +21,7 @@ function AdminSidebar() {
             </button>
             <div className="offcanvas offcanvas-start custom-canvas" data-bs-scroll="true" data-bs-backdrop="false" tabIndex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style={{ width: 300 }}>
                 <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasScrollingLabel"></h5>
+                    <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Hello user</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">

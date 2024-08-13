@@ -3,25 +3,33 @@ import "../styles/login.css";
 import LoginImage from "../images/login.jpg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { loginUser } from "../services/userService";
+import { jwtDecode } from 'jwt-decode';
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const Login = () => {
-  //   if (email == "patient" && password == 1234) {
-  //     navigate("/patientDash");
-  //   } else if (email == "doctor" && password == 1234) {
-  //     navigate("/doctorDash");
-  //   } else if (email == "admin" && password == 1234) {
-  //     navigate("/adminDash");
-  //   } else if (email == "front" && password == 1234) {
-  //     navigate("/frontdeskDash");
-  //   } else {
-  //     alert("Wrong email and password");
-  //   }
-  // };
+  const Login = async (event) => {
+    event.preventDefault();
+    if (email === '') {
+      toast.error("Email cannot be empty")
+    } else if (password === '') {
+      toast.error("Password cannot be empty")
+    } else {
+      const response = await loginUser({ email, password })
+      if (response && response.status === 201) {
+        console.log(response.data)
+        sessionStorage.setItem("jwt",response.data.jwt)
+        const token = response.data.jwt;
+        const decoded = jwtDecode(token);
+      } else {
+        toast.error('Login failed')
+      }
+    }
+  };
 
   return (
     <div className="login-container ">
@@ -42,6 +50,7 @@ const LoginPage = () => {
                     <input
                       type="email"
                       className="form-control"
+                      name="email"
                       id="email"
                       placeholder="Enter your email"
                       onChange={(e) => {
@@ -57,25 +66,19 @@ const LoginPage = () => {
                       type="password"
                       className="form-control"
                       id="password"
+                      name="password"
                       placeholder="Enter your password"
                       onChange={(e) => {
                         setPassword(e.target.value);
                       }}
                     />
                   </div>
-
                   <div className="d-flex justify-content-center">
-                    <button
-                      type="submit"
-                      className="btn btn-success mt-2 ps-4 pe-4"
-
-                    >
+                    <button type="submit" className="btn btn-success mt-2 ps-4 pe-4" onClick={Login}>
                       Login
                     </button>
                   </div>
-
-                  <div className="text-center mt-3">
-                    Don't have an account? <a href="/register">Register here</a>
+                  <div className="text-center mt-3">Don't have an account? <a href="/register">Register here</a>
                   </div>
                 </form>
               </div>

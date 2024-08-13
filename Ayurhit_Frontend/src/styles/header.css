@@ -1,10 +1,14 @@
+.custom-header {
+    background-color: #fff;
+}
+
 .title {
     font-weight: 900;
     color: #c2202d;
 }
 
-.nav-bar{
+.custom-nav-bar {
     width: 100%;
     background-color: #0A98D8;
-    color:white;
+    color: white;
 }

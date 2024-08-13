@@ -1,4 +1,7 @@
-.footer{
+.footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
     background-color: #1F2B6C;
     color: #fff;
 }
