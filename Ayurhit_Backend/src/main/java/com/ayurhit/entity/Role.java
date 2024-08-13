@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class Role extends BaseEntity {
 	@Column(unique = true, nullable = false, length = 50)
 	private String roleName;
 
-	@OneToMany(mappedBy = "role")
+	@OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
 	private Set<User> users = new HashSet<>();
 	
 	public void addUser(User user) {

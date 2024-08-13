@@ -7,6 +7,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +54,10 @@ public class DoctorServiceImpl implements DoctorService {
 	@Autowired
 	private DepartmentDAO departmentDAO;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	
 	public Address getAddress(DoctorRequestDTO dto) {
 		Address address = new Address();
 		address.setAddressLine1(dto.getAddressDTO().getAddressLine1());
@@ -78,6 +83,9 @@ public class DoctorServiceImpl implements DoctorService {
 			Language doctorLanguage = languageDAO.findById(id).orElseThrow(null);
 			doctorLanguages.add(doctorLanguage);
 		}
+		
+		String password = dto.getPassword();
+		String encodedPassword = passwordEncoder.encode(password);
 				
 		Branch branch = branchDAO.findById(dto.getBranchId()).orElseThrow();
 		Address address =  getAddress(dto);
@@ -85,6 +93,7 @@ public class DoctorServiceImpl implements DoctorService {
 		Role role = roleDAO.findById(dto.getRoleId()).orElseThrow();	
 		Department department = departmentDAO.findById(dto.getDepartmentId()).orElseThrow(null);
 		Doctor doctorEntity = modelMapper.map(dto, Doctor.class);
+		doctorEntity.setPassword(encodedPassword);
 		doctorEntity.setDepartment(department);
 		doctorEntity.setBranch(branch);
 		doctorEntity.setAddress(persistentAddress);
