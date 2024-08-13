@@ -85,8 +85,7 @@ public class DoctorServiceImpl implements DoctorService {
 		Role role = roleDAO.findById(dto.getRoleId()).orElseThrow();	
 		Department department = departmentDAO.findById(dto.getDepartmentId()).orElseThrow(null);
 		Doctor doctorEntity = modelMapper.map(dto, Doctor.class);
-		role.addUser(doctorEntity);
-		department.addDoctor(doctorEntity);
+		doctorEntity.setDepartment(department);
 		doctorEntity.setBranch(branch);
 		doctorEntity.setAddress(persistentAddress);
 		doctorEntity.setRole(role);
