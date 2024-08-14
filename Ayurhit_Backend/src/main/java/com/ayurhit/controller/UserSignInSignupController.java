@@ -3,7 +3,6 @@ package com.ayurhit.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,10 +22,10 @@ import com.ayurhit.service.UserService;
 public class UserSignInSignupController {
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private JwtUtils jwtUtils;
-	
+
 	@Autowired
 	private AuthenticationManager authMgr;
 
@@ -37,24 +36,19 @@ public class UserSignInSignupController {
 	 * 
 	 */
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@RequestBody 
-			@Valid SigninRequestDTO request) {
+	public ResponseEntity<?> authenticateUser(@RequestBody @Valid SigninRequestDTO request) {
 		System.out.println("in sign in" + request);
-		//create a token(implementation of Authentication i/f)
-		//to store un verified user email n pwd
-		UsernamePasswordAuthenticationToken token=new 
-				UsernamePasswordAuthenticationToken(request.getEmail(), 
-						request.getPassword());
-		//invoke auth mgr's authenticate method;
+		// create a token(implementation of Authentication i/f)
+		// to store un verified user email n pwd
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(request.getEmail(),
+				request.getPassword());
+		// invoke auth mgr's authenticate method;
 		Authentication verifiedToken = authMgr.authenticate(token);
-		//=> authentication n authorization  successful !
-		System.out.println(verifiedToken.getPrincipal().getClass());//custom user details object
-		//create JWT n send it to the clnt in response
-		SigninResponseDTO resp=new SigninResponseDTO
-				(jwtUtils.generateJwtToken(verifiedToken),
-				"Successful Auth!!!!");
-		return ResponseEntity.
-				status(HttpStatus.CREATED).body(resp);
+		// => authentication n authorization successful !
+		System.out.println(verifiedToken.getPrincipal().getClass());// custom user details object
+		// create JWT n send it to the clnt in response
+		SigninResponseDTO resp = new SigninResponseDTO(jwtUtils.generateJwtToken(verifiedToken), "Successful Auth!!!!");
+		return ResponseEntity.ok().body(resp);
 	}
 
 }

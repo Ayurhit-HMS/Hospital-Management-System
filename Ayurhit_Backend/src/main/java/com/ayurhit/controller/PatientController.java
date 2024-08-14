@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ayurhit.dto.AddPatientDTO;
 import com.ayurhit.service.PatientService;
+import com.ayurhit.util.MailService;
 
 @RestController
 @RequestMapping("/patients")
@@ -22,6 +23,10 @@ public class PatientController {
 	@PostMapping
 	public ResponseEntity<Void> addPatient(@RequestBody AddPatientDTO patientDTO) {
 		patientService.addPatient(patientDTO);
+		String firstName = patientDTO.getFirstName();
+		String lastName = patientDTO.getLastName();
+		String email = patientDTO.getEmail();
+		MailService.sendEmail(email,firstName, lastName);
 		return ResponseEntity.ok().build();
 	}
 }
