@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import "../styles/sidebar.css"
 
-function PatientSidebar({ isSidebarVisible, toggleSidebar }) {
+function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
 
     useEffect(() => {
         const offcanvasElement = document.getElementById('offcanvasScrolling');
@@ -21,6 +21,8 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar }) {
         }
         toggleSidebar();
     };
+    const patientName = patientDetails ? `${patientDetails.firstName} ${patientDetails.lastName}` : "User";
+
     return (
         <div>
             <button className="btn btn-secondary menu-button ms-1" type="button" onClick={handleShow} aria-controls="offcanvasScrolling">
@@ -28,7 +30,7 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar }) {
             </button>
             <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabIndex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style={{ width: 300 }}>
                 <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Hello User</h5>
+                    <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Hello {patientName}</h5>
                     <button type="button" className="btn-close" onClick={handleShow} data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
@@ -46,4 +48,4 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar }) {
     );
 };
 
-export default PatientSidebar;
+export default PatientSidebar

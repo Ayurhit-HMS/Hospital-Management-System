@@ -2,9 +2,32 @@ import PatientSidebar from "../components/PatientSidebar";
 import "../styles/patientDashboard.css"
 import image from "../images/login_background.jpg"
 import Footer from "../components/Footer"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getPatientDetails } from "../services/patientService";
 
 function PatientDashboard() {
+    const [patient, setPatient] = useState();
+
+    useEffect(() => {
+        const fetchPatientDetails = async () => {
+            try {
+                const jwt = sessionStorage.getItem("jwt");
+                console.log(jwt)
+                if (jwt) {
+                    const response = await getPatientDetails(jwt);
+                    console.log(response)
+                    setPatient(response);
+                } else {
+                    console.error('JWT not found');
+                }
+            } catch (error) {
+                console.error('Failed to fetch patient details:', error);
+            }
+        }
+        fetchPatientDetails();
+    }, []);
+
+
     const [isSidebarVisible, setSidebarVisible] = useState(true);
 
     const toggleSidebar = () => {
@@ -15,7 +38,7 @@ function PatientDashboard() {
         <div className="container-fluid patient-dashboard-content">
             <div className="row">
                 <div className={isSidebarVisible ? "col-md-2" : "col-md-0"}>
-                    <div className="custom-sidebar"><PatientSidebar isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar}></PatientSidebar>
+                    <div className="custom-sidebar"><PatientSidebar isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} patientDetails={patient}></PatientSidebar>
                     </div>
                 </div>
                 <div className="col">
@@ -42,7 +65,7 @@ function PatientDashboard() {
                             </button>
                         </div>
                     </div>
-                    <div  className={isSidebarVisible ? "ms-5" : "ms-0"}>
+                    <div className={isSidebarVisible ? "ms-5" : "ms-0"}>
                         <Footer></Footer>
                     </div>
 
