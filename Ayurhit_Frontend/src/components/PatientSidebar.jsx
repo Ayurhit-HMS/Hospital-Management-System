@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../Redux/actions';
 import "../styles/sidebar.css"
 
 function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const offcanvasElement = document.getElementById('offcanvasScrolling');
         const bsOffcanvas = new window.bootstrap.Offcanvas(offcanvasElement);
         bsOffcanvas.show();
-
     }, []);
 
     const handleShow = () => {
@@ -21,6 +26,13 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
         }
         toggleSidebar();
     };
+
+    const logoutUser = () => {
+        dispatch(logout());
+        sessionStorage.clear();
+        navigate('/home');
+    };
+
     const patientName = patientDetails ? `${patientDetails.firstName} ${patientDetails.lastName}` : "User";
 
     return (
@@ -41,6 +53,7 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
                         <button className="btn btn-custom mb-2">Prescriptions</button>
                         <button className="btn btn-custom mb-2">Bills</button>
                         <button className="btn btn-custom mb-2">Settings</button>
+                        <button className='btn btn-danger' onClick={logoutUser}>Logout</button>
                     </div>
                 </div>
             </div>

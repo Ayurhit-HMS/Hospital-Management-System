@@ -1,35 +1,12 @@
 import PatientSidebar from "../components/PatientSidebar";
-import "../styles/patientDashboard.css"
-import image from "../images/login_background.jpg"
 import Footer from "../components/Footer"
-import { useEffect, useState } from "react";
-import { getPatientDetails } from "../services/patientService";
+import { useSelector } from 'react-redux';
+import { useState } from "react";
 
-function PatientDashboard() {
-    const [patient, setPatient] = useState();
-
-    useEffect(() => {
-        const fetchPatientDetails = async () => {
-            try {
-                const jwt = sessionStorage.getItem("jwt");
-                console.log(jwt)
-                if (jwt) {
-                    const response = await getPatientDetails(jwt);
-                    console.log(response)
-                    setPatient(response);
-                } else {
-                    console.error('JWT not found');
-                }
-            } catch (error) {
-                console.error('Failed to fetch patient details:', error);
-            }
-        }
-        fetchPatientDetails();
-    }, []);
-
+function PatientProfile() {
+    const patient = useSelector((state) => state.patient.patient);
 
     const [isSidebarVisible, setSidebarVisible] = useState(true);
-
     const toggleSidebar = () => {
         setSidebarVisible(!isSidebarVisible);
     };
@@ -43,26 +20,32 @@ function PatientDashboard() {
                 </div>
                 <div className="col">
                     <div className={isSidebarVisible ? "ms-5" : "ms-0"} >
-                        <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                            <div className="carousel-inner  mb-5" style={{ height: 400 }}>
-                                <div className="carousel-item active">
-                                    <img src={image} className="d-block w-100" alt="..." />
+                        <div>
+                            <h1 className="text-center">Patient Profile</h1>
+                            {patient ? (
+                                <div>
+                                    <p>Name: {patient.firstName}</p>
+                                    <p>LastName: {patient.lastName}</p>
+                                    <p>Email: {patient.email}</p>
+                                    <p>Gender: {patient.gender}</p>
+                                    <p>Phone: {patient.phone}</p>
+                                    <p>Birth Date: {patient.birthDate}</p>
+                                    <p>Address: {patient.addressDTO}</p>
+                                    <p>Blood Group: {patient.bloodGroup}</p>
+                                    <p>Emergency Contact: {patient.emergencyContactName}</p>
+                                    <p>Emergency Contact Number: {patient.emergencyContactNumber}</p>
+                                    <p>Insurance number: {patient.insuranceNumber}</p>
+                                    <p>Allergies: {patient.allergies}</p>
+                                    <p>Chronic Conditions: {patient.chronicConditions}</p>
+                                    <p>Current Medications: {patient.currentMedications}</p>
+                                    <p>Insurance Provider: {patient.insuranceProvider}</p>
+                                    <p>ABHA Id: {patient.abha_Id}</p>
+                                    <p>Past Surgeries: {patient.pastSurgeries}</p>
+                                    <p>Profile Photo: {patient.profilePhoto}</p>
                                 </div>
-                                <div className="carousel-item">
-                                    <img src={image} className="d-block w-100" alt="..." />
-                                </div>
-                                <div className="carousel-item">
-                                    <img src={image} className="d-block w-100" alt="..." />
-                                </div>
-                            </div>
-                            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span className="visually-hidden">Previous</span>
-                            </button>
-                            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span className="visually-hidden">Next</span>
-                            </button>
+                            ) : (
+                                <p>No patient data available</p>
+                            )}
                         </div>
                     </div>
                     <div className={isSidebarVisible ? "ms-5" : "ms-0"}>
@@ -75,4 +58,4 @@ function PatientDashboard() {
     )
 }
 
-export default PatientDashboard;
+export default PatientProfile;

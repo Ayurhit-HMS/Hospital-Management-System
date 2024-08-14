@@ -7,6 +7,7 @@ import PatientDashboard from './pages/PatientDashboard.jsx'
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register'
 import { ToastContainer } from 'react-toastify';
+import PatientProfile from './pages/PatientProfile.jsx';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="home" element={<Home />} />
             <Route path="/patient/dashboard" element={<PatientDashboard />} />
+            <Route path="/patient/profile" element={<PatientProfile />} />
           </Route>
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />
