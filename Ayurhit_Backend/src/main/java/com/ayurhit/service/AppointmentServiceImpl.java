@@ -18,6 +18,7 @@ import com.ayurhit.dto.BookAppointmentDTO;
 import com.ayurhit.entity.Appointment;
 import com.ayurhit.entity.Doctor;
 import com.ayurhit.entity.Patient;
+import com.ayurhit.type.AppointmentStatus;
 
 @Service
 @Transactional
@@ -48,7 +49,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 	public BookAppointmentDTO bookAppointment(BookAppointmentDTO bookAppointmentDTO) {
 		Appointment appointment = modelMapper.map(bookAppointmentDTO, Appointment.class);
 		Doctor doctor = doctorDAO.findById(bookAppointmentDTO.getDoctorId()).orElseThrow();
-		Patient patient = patientDAO.findById(bookAppointmentDTO.getDoctorId()).orElseThrow();
+		Patient patient = patientDAO.findById(bookAppointmentDTO.getPatientId()).orElseThrow();
+		appointment.setStatus(AppointmentStatus.PENDING);
 		appointment.setDoctor(doctor);
 		appointment.setPatient(patient);
 		Appointment persistedAppointment = appointmentDAO.save(appointment);
