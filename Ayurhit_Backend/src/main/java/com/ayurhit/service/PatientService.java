@@ -1,7 +1,7 @@
 package com.ayurhit.service;
 
-import com.ayurhit.dto.PatientDTO;
+import com.ayurhit.dto.AddPatientDTO;
 
 public interface PatientService {
-	void addPatient(PatientDTO patientDTO);
+	void addPatient(AddPatientDTO patientDTO);
 }
