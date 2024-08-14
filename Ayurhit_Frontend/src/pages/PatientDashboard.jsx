@@ -1,22 +1,28 @@
 import PatientSidebar from "../components/PatientSidebar";
 import "../styles/patientDashboard.css"
-import image from "../images/login_background.jpg"
+import image from "../images/map.jpg"
 import Footer from "../components/Footer"
 import { useEffect, useState } from "react";
 import { getPatientDetails } from "../services/patientService";
+import { setPatientDetails } from '../Redux/features/patient/patientSlice';
+import { useDispatch } from 'react-redux';
+
 
 function PatientDashboard() {
+
+    const dispatch = useDispatch();
+    
     const [patient, setPatient] = useState();
 
     useEffect(() => {
         const fetchPatientDetails = async () => {
             try {
                 const jwt = sessionStorage.getItem("jwt");
-                console.log(jwt)
                 if (jwt) {
                     const response = await getPatientDetails(jwt);
                     console.log(response)
                     setPatient(response);
+                    dispatch(setPatientDetails(response));
                 } else {
                     console.error('JWT not found');
                 }

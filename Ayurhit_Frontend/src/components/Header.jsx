@@ -17,7 +17,7 @@ function Header() {
     };
 
     const profile = () => {
-        navigate('/profile')
+        navigate('/patient/profile')
     };
     return (
         <div className="custom-header fixed-top">
