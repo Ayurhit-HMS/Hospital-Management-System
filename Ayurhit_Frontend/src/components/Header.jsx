@@ -1,7 +1,24 @@
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import logo from "../images/logo.png"
 import "../styles/header.css"
 
 function Header() {
+
+    const navigate = useNavigate()
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    useEffect(() => {
+        const jwt = sessionStorage.getItem("jwt");
+        setIsAuthenticated(!!jwt);
+    }, []);
+
+    const login = () => {
+        navigate('/login')
+    };
+
+    const profile = () => {
+        navigate('/profile')
+    };
     return (
         <div className="custom-header fixed-top">
             <div className="container ">
@@ -26,7 +43,15 @@ function Header() {
                     </div>
 
                     <div className="col-md-3 d-flex align-items-center justify-content-center">
-                        <button className="btn btn-success ps-5 pe-5">Login</button>
+                        {isAuthenticated ? (
+                            <button className="btn btn-secondary rounded-circle" onClick={profile}>
+                                <i class="fa-solid fa-user fa-2x"></i>
+                            </button>
+                        ) : (
+                            <button className="btn btn-success ps-5 pe-5" onClick={login}>
+                                Login
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

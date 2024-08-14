@@ -20,7 +20,7 @@ function Register() {
         password: '',
     });
 
-    const [confirmPassword,setConfirmPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
@@ -109,13 +109,15 @@ function Register() {
                             <div className="col">
                                 <label className="form-label">Blood Group</label>
                                 <select class="form-select" name="bloodGroup" value={formData.bloodGroup} onChange={handleChange}>
-                                    <option selected>Select blood group</option>
+                                    <option value="" disabled>Select blood group</option>
                                     <option value="A+">A+</option>
                                     <option value="A-">A-</option>
-                                    <option value="B+">A+</option>
-                                    <option value="B-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
                                     <option value="AB+">AB+</option>
                                     <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
                                 </select>
                             </div>
 
@@ -138,7 +140,7 @@ function Register() {
                                     <div className="row">
                                         <div className="col-md-11">
                                             <label className="form-label">Confirm Password <span className="text-danger">*</span></label>
-                                            <input type={confirmPasswordVisible ? "text" : "password"} className="form-control" placeholder="Confirm password" name="confirmPassword" onChange={(e)=>{setConfirmPassword(e.target.value)}} required />
+                                            <input type={confirmPasswordVisible ? "text" : "password"} className="form-control" placeholder="Confirm password" name="confirmPassword" onChange={(e) => { setConfirmPassword(e.target.value) }} required />
                                         </div>
                                         <div className="col-md-1">
                                             <i className={`fa ${confirmPasswordVisible ? "fa-eye-slash" : "fa-eye"} password-toggle mt-5`}

@@ -20,11 +20,13 @@ const LoginPage = () => {
       toast.error("Password cannot be empty")
     } else {
       const response = await loginUser({ email, password })
-      if (response && response.status === 201) {
-        console.log(response.data)
-        sessionStorage.setItem("jwt",response.data.jwt)
+      if (response && response.status === 200) {
         const token = response.data.jwt;
         const decoded = jwtDecode(token);
+        sessionStorage.setItem("jwt", response.data.jwt)
+        if (decoded.authorities == 'patient') {
+          navigate('/patient/dashboard')
+        }
       } else {
         toast.error('Login failed')
       }
