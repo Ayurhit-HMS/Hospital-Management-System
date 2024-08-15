@@ -25,7 +25,7 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 
-	@GetMapping("/deptDoctors/{departmentName}")
+	@GetMapping("/doctots/{departmentName}")
 	public ResponseEntity<List<DoctorDTO>> findDoctorsByDepartment(@PathVariable("departmentName") String departmentName) {
 		List<DoctorDTO> docList = doctorService.getDoctorsByDepartment(departmentName);
 		return ResponseEntity.ok(docList);

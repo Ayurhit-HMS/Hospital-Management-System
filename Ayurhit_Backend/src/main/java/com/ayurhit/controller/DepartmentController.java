@@ -24,8 +24,6 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;
 
-	@GetMapping
-
 	@PostMapping
 	public ResponseEntity<?> addNewDepartment(@RequestBody DepartmentDTO dto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(departmentService.addDepartment(dto));
@@ -51,5 +49,6 @@ public class DepartmentController {
 	public ResponseEntity<?> getDepartmentDetails(@PathVariable Long id){
 		return ResponseEntity.ok(departmentService.getDepartmentDetails(id));
 	}
+	
 
 }
