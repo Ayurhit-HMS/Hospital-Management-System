@@ -4,12 +4,12 @@ import logo from "../images/logo.png"
 import "../styles/header.css"
 
 function Header() {
-
     const navigate = useNavigate()
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     useEffect(() => {
         const jwt = sessionStorage.getItem("jwt");
         setIsAuthenticated(!!jwt);
+        
     }, []);
 
     const login = () => {
@@ -65,7 +65,7 @@ function Header() {
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Health Library</a></p>
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">About us</a></p>
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Contact us</a></p>
-                    <button className="btn btn-sm btn-danger" onClick={()=>{navigate('/patient/bookAppointment')}}>Second Opinion</button>
+                    <button className="btn btn-sm btn-danger" onClick={() => { navigate('/patient/bookAppointment') }}>Second Opinion</button>
                 </div>
             </div>
         </div>

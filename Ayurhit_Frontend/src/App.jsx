@@ -10,7 +10,7 @@ import PatientDashboard from './pages/PatientDashboard.jsx'
 import PatientProfile from './pages/PatientProfile.jsx';
 import BookAppointment from './pages/BookAppointment.jsx'
 import PatientAppointments from './pages/PatientAppointments.jsx';
-import Prescription from './pages/Prescription.jsx';
+import Prescription from './pages/PatientPrescription.jsx';
 import Bill from './pages/Bill.jsx';
 
 function App() {
