@@ -1,44 +1,66 @@
 import PatientSidebar from "../components/PatientSidebar";
 import "../styles/patientDashboard.css"
-import image from "../images/map.jpg"
 import Footer from "../components/Footer"
 import { useEffect, useState } from "react";
-import { getPatientDetails } from "../services/patientService";
-import { setPatientDetails } from '../Redux/features/patient/patientSlice';
-import { useDispatch } from 'react-redux';
-
+import { getAppointments } from "../services/AppointmentService";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { cancelAppointment } from "../services/AppointmentService";
 
 function PatientAppointments() {
-
-    const dispatch = useDispatch();
-    
-    const [patient, setPatient] = useState();
+    const patient = useSelector(state => state.patient.patient)
+    const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
-        const fetchPatientDetails = async () => {
+        const fetchAppointments = async () => {
             try {
-                const jwt = sessionStorage.getItem("jwt");
-                if (jwt) {
-                    const response = await getPatientDetails(jwt);
-                    console.log(response)
-                    setPatient(response);
-                    dispatch(setPatientDetails(response));
+                const response = await getAppointments(patient.id);
+                if (response && response.status === 200) {
+                    console.log(response.data)
+                    setAppointments(response.data);
                 } else {
-                    console.error('JWT not found');
+                    toast.error('No appointments found');
                 }
-            } catch (error) {
-                console.error('Failed to fetch patient details:', error);
+            } catch (ex) {
+                toast.error('An error occurred while fetching appointments');
             }
-        }
-        fetchPatientDetails();
+        };
+        fetchAppointments();
     }, []);
-
 
     const [isSidebarVisible, setSidebarVisible] = useState(true);
 
     const toggleSidebar = () => {
         setSidebarVisible(!isSidebarVisible);
     };
+
+    const cancel = async (appointmentId) => {
+        const response = await cancelAppointment(appointmentId);
+        if (response && response.status === 200) {
+            const updatedResponse = await getAppointments(patient.id);
+            if (updatedResponse && updatedResponse.status === 200)
+                setAppointments(updatedResponse.data)
+            toast.success('Appointment cancelled successfully');
+        } else {
+            toast.error('Failed to cancel appointment');
+        }
+    };
+
+    const renderButton = (status, appointmentId) => {
+        console.log(appointmentId);
+        switch (status) {
+            case 'PENDING':
+            case 'CONFIRMED':
+                return <button className="btn btn-danger" onClick={() => cancel(appointmentId)}>Cancel</button>;
+            case 'CANCELLED':
+                return '-';
+            case 'ATTENDED':
+                return <button className="btn btn-primary">Details</button>;
+            default:
+                return null;
+        }
+    };
+
 
     return (
         <div className="container-fluid patient-dashboard-content">
@@ -49,7 +71,37 @@ function PatientAppointments() {
                 </div>
                 <div className="col">
                     <div className={isSidebarVisible ? "ms-5" : "ms-0"} >
-                        Patient Appointments here
+                        <p className="h1 text-center mt-3 mb-3">Patient Appointments</p>
+                        <div className="row d-flex justify-content-center">
+                            <div className="col-md-10">
+                                <table className="table table-lg text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Appointment ID</th>
+                                            <th>Doctor Name</th>
+                                            <th>Appointment Date</th>
+                                            <th>Appointment Time</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {appointments.map((appointment) => (
+
+                                            <tr key={appointment.id}>
+                                                <td>{appointment.id}</td>
+                                                <td>{`${appointment.doctor.firstName} ${appointment.doctor.lastName}`}</td>
+                                                <td>{appointment.appointmentDate}</td>
+                                                <td>{appointment.appointmentTime}</td>
+                                                <td>{appointment.status}</td>
+                                                <td>{renderButton(appointment.status, appointment.id)}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                     <div className={isSidebarVisible ? "ms-5" : "ms-0"}>
                         <Footer></Footer>
