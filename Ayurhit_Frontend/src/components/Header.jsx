@@ -65,7 +65,7 @@ function Header() {
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Health Library</a></p>
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">About us</a></p>
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Contact us</a></p>
-                    <button className="btn btn-sm btn-danger">Second Opinion</button>
+                    <button className="btn btn-sm btn-danger" onClick={()=>{navigate('/patient/bookAppointment')}}>Second Opinion</button>
                 </div>
             </div>
         </div>
