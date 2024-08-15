@@ -26,6 +26,7 @@ const LoginPage = () => {
         sessionStorage.setItem("jwt", response.data.jwt)
         if (decoded.authorities == 'patient') {
           navigate('/patient/dashboard')
+          toast.success("Login successful")
         }
       } else {
         toast.error('Login failed')

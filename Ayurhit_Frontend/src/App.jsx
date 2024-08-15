@@ -3,15 +3,18 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainLayout from './layout/MainLayout'
 import AuthLayout from './layout/AuthLayout'
 import Home from './pages/Home'
-import PatientDashboard from './pages/PatientDashboard.jsx'
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register'
 import { ToastContainer } from 'react-toastify';
+import PatientDashboard from './pages/PatientDashboard.jsx'
 import PatientProfile from './pages/PatientProfile.jsx';
+import BookAppointment from './pages/BookAppointment.jsx'
+import PatientAppointments from './pages/PatientAppointments.jsx';
+import Prescription from './pages/Prescription.jsx';
+import Bill from './pages/Bill.jsx';
 
 function App() {
   return (
-
     <div>
       <ToastContainer />
       <Router>
@@ -21,6 +24,10 @@ function App() {
             <Route path="home" element={<Home />} />
             <Route path="/patient/dashboard" element={<PatientDashboard />} />
             <Route path="/patient/profile" element={<PatientProfile />} />
+            <Route path="/patient/bookAppointment" element={<BookAppointment />} />
+            <Route path="/patient/appointments" element={<PatientAppointments />} />
+            <Route path="/patient/prescriptions" element={<Prescription />} />
+            <Route path="/patient/bills" element={<Bill />} />
           </Route>
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />

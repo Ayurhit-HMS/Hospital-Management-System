@@ -37,7 +37,7 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
 
     return (
         <div>
-            <button className="btn btn-secondary menu-button ms-1" type="button" onClick={handleShow} aria-controls="offcanvasScrolling">
+            <button className={`btn btn-secondary menu-button ms-1 ${isSidebarVisible ? 'invisible' : 'visible'}`} type="button" onClick={handleShow} aria-controls="offcanvasScrolling">
                 <i className="fas fa-bars"></i>
             </button>
             <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabIndex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style={{ width: 300 }}>
@@ -47,12 +47,12 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
                 </div>
                 <div className="offcanvas-body">
                     <div className="container d-grid">
-                        <button className="btn btn-custom mb-2">Dashboard</button>
-                        <button className="btn btn-custom mb-2">Book Appointment</button>
-                        <button className="btn btn-custom mb-2">View Appointments</button>
-                        <button className="btn btn-custom mb-2">Prescriptions</button>
-                        <button className="btn btn-custom mb-2">Bills</button>
-                        <button className="btn btn-custom mb-2">Settings</button>
+                        <button className="btn btn-custom mb-2" onClick={()=>{navigate('/patient/dashboard')}}>Dashboard</button>
+                        <button className="btn btn-custom mb-2" onClick={()=>{navigate('/patient/BookAppointment')}}>Book Appointment</button>
+                        <button className="btn btn-custom mb-2" onClick={()=>{navigate('/patient/appointments')}}>View Appointments</button>
+                        <button className="btn btn-custom mb-2" onClick={()=>{navigate('/patient/prescriptions')}}>Prescriptions</button>
+                        <button className="btn btn-custom mb-2" onClick={()=>{navigate('/patient/bills')}}>Bills</button>
+                        <button className="btn btn-custom mb-2" >Settings</button>
                         <button className='btn btn-danger' onClick={logoutUser}>Logout</button>
                     </div>
                 </div>
