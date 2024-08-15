@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../Redux/actions';
 import "../styles/sidebar.css"
+import { useSelector } from 'react-redux';
 
 function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
+
+    const patient = useSelector(state => state.patient.patient);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -31,9 +34,10 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
         dispatch(logout());
         sessionStorage.clear();
         navigate('/home');
+        window.location.reload();
     };
 
-    const patientName = patientDetails ? `${patientDetails.firstName} ${patientDetails.lastName}` : "User";
+    const patientName = patient ? `${patient.firstName} ${patient.lastName}` : "User";
 
     return (
         <div>
@@ -47,11 +51,11 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
                 </div>
                 <div className="offcanvas-body">
                     <div className="container d-grid">
-                        <button className="btn btn-custom mb-2" onClick={()=>{navigate('/patient/dashboard')}}>Dashboard</button>
-                        <button className="btn btn-custom mb-2" onClick={()=>{navigate('/patient/BookAppointment')}}>Book Appointment</button>
-                        <button className="btn btn-custom mb-2" onClick={()=>{navigate('/patient/appointments')}}>View Appointments</button>
-                        <button className="btn btn-custom mb-2" onClick={()=>{navigate('/patient/prescriptions')}}>Prescriptions</button>
-                        <button className="btn btn-custom mb-2" onClick={()=>{navigate('/patient/bills')}}>Bills</button>
+                        <button className="btn btn-custom mb-2" onClick={() => { navigate('/patient/dashboard') }}>Dashboard</button>
+                        <button className="btn btn-custom mb-2" onClick={() => { navigate('/patient/BookAppointment') }}>Book Appointment</button>
+                        <button className="btn btn-custom mb-2" onClick={() => { navigate('/patient/appointments') }}>View Appointments</button>
+                        <button className="btn btn-custom mb-2" onClick={() => { navigate('/patient/prescriptions') }}>Prescriptions</button>
+                        <button className="btn btn-custom mb-2" onClick={() => { navigate('/patient/bills') }}>Bills</button>
                         <button className="btn btn-custom mb-2" >Settings</button>
                         <button className='btn btn-danger' onClick={logoutUser}>Logout</button>
                     </div>

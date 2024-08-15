@@ -6,8 +6,10 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { loginUser } from "../services/userService";
 import { jwtDecode } from 'jwt-decode';
+import { useDispatch } from "react-redux";
 
 const LoginPage = () => {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -24,12 +26,19 @@ const LoginPage = () => {
         const token = response.data.jwt;
         const decoded = jwtDecode(token);
         sessionStorage.setItem("jwt", response.data.jwt)
+        dispatch({
+          type: 'LOGIN_SUCCESS',
+          payload: { isAuthenticated: true },
+        });
         if (decoded.authorities == 'patient') {
           navigate('/patient/dashboard')
           toast.success("Login successful")
         }
       } else {
         toast.error('Login failed')
+        dispatch({
+          type: 'LOGIN_FAILURE',
+        });
       }
     }
   };
