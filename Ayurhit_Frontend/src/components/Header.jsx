@@ -9,7 +9,7 @@ function Header() {
     useEffect(() => {
         const jwt = sessionStorage.getItem("jwt");
         setIsAuthenticated(!!jwt);
-        
+
     }, []);
 
     const login = () => {
@@ -35,7 +35,7 @@ function Header() {
                         <p className="me-3 ms-3"><a className="link-underline link-underline-opacity-0 text-secondary" href="#">LAB</a></p>
                         <p className="me-3"><a className="link-underline link-underline-opacity-0 text-secondary" href="#">RESEARCH</a></p>
                         <p className="me-3"><a className="link-underline link-underline-opacity-0 text-secondary" href="#">CSR</a></p>
-                        <p className="me-3"><a className="link-underline link-underline-opacity-0 text-secondary" href="#">CAREERS</a></p>
+                        <p className="me-3" onClick={() => { navigate('/careers') }}><a className="link-underline link-underline-opacity-0 text-secondary" href="#">CAREERS</a></p>
                     </div>
 
                     <div className="col-md-3 d-grid justify-content-center align-items-center">
@@ -57,14 +57,14 @@ function Header() {
             </div>
             <div className="custom-nav-bar pt-1 pb-1">
                 <div className=" container d-flex justify-content-center align-items-center">
-                    <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Home</a></p>
-                    <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Hospitals</a></p>
-                    <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Specialties</a></p>
-                    <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Find a doctor</a></p>
-                    <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Patient & visitors</a></p>
+                    <p className="me-4 mt-2" onClick={() => { navigate('/home') }}><a className="link-underline link-underline-opacity-0 text-light" href="#">Home</a></p>
+                    <p className="me-4 mt-2" onClick={() => { navigate('/hospitals') }}><a className="link-underline link-underline-opacity-0 text-light" href="#">Hospitals</a></p>
+                    <p className="me-4 mt-2" onClick={() => { navigate('/home#hms-specialities') }}><a className="link-underline link-underline-opacity-0 text-light" href="#hms-specialities">Specialties</a></p>
+                    <p className="me-4 mt-2" onClick={() => { navigate('/patient/bookAppointment') }}><a className="link-underline link-underline-opacity-0 text-light" href="#">Find a doctor</a></p>
+                    <p className="me-4 mt-2" ><a className="link-underline link-underline-opacity-0 text-light" href="#">Patient & visitors</a></p>
                     <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Health Library</a></p>
-                    <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">About us</a></p>
-                    <p className="me-4 mt-2"><a className="link-underline link-underline-opacity-0 text-light" href="#">Contact us</a></p>
+                    <p className="me-4 mt-2" onClick={() => { navigate('/about') }}><a className="link-underline link-underline-opacity-0 text-light" href="#">About us</a></p>
+                    <p className="me-4 mt-2" onClick={() => { navigate('/home#contactus') }}><a className="link-underline link-underline-opacity-0 text-light" href="#contactus">Contact us</a></p>
                     <button className="btn btn-sm btn-danger" onClick={() => { navigate('/patient/bookAppointment') }}>Second Opinion</button>
                 </div>
             </div>

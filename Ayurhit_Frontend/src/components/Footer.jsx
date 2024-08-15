@@ -18,7 +18,7 @@ function Footer() {
                         <p className="mb-0"><a class="link-underline link-underline-opacity-0 text-light" href="#">About us</a></p>
                     </div>
                     <div className="col-md-3">
-                        <h5 className="text-center">Contact us</h5>
+                        <h5 id="contactus" className="text-center">Contact us</h5>
                         <p className="ms-5">Call : 02112 1234 1234 <br />Email : ayurhit.hospital@gmail.com <br />Address : Ayurhit Hospital, Phase-2, Hinjewadi pune</p>
                     </div>
                     <div className="col ms-5">
