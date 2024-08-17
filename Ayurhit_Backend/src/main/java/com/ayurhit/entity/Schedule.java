@@ -30,6 +30,9 @@ public class Schedule extends BaseEntity {
 	
 	private boolean isSelected;
 
+	@Column(nullable=false)
+	private boolean isSelected;
+
 	@ManyToOne
 	@JoinColumn(name = "doctor_id", nullable = false)
 	private Doctor doctor;
