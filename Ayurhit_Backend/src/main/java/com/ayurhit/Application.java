@@ -19,7 +19,7 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@Bean // equivalent to <bean id ..../> in xml file
+	@Bean
 	public ModelMapper mapper() {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT)
