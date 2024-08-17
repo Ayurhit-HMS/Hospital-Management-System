@@ -13,4 +13,6 @@ public interface AppointmentService {
 
 	public Boolean updateAppointmentStatus(Long id);
 
+	public boolean cancelAppointment(Long appointmentId);
+
 }
