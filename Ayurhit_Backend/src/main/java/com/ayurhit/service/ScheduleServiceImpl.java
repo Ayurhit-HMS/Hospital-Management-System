@@ -13,7 +13,6 @@ import com.ayurhit.dao.AdminDAO;
 import com.ayurhit.dao.DepartmentDAO;
 import com.ayurhit.dao.DoctorDAO;
 import com.ayurhit.dao.ScheduleDAO;
-import com.ayurhit.dto.DepartmentDTO;
 import com.ayurhit.dto.ScheduleDTO;
 import com.ayurhit.dto.ScheduleResponseDTO;
 import com.ayurhit.entity.Admin;

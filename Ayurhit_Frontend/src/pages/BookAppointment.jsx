@@ -38,6 +38,9 @@ function BookAppointment() {
         fetchAllDepartments();
     }, []);
 
+
+    
+
     const selectDepartment = async (department) => {
         setSelectedDoctor(null);
         setSelectedSchedule(null);

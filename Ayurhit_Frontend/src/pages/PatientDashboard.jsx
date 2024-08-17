@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 function PatientDashboard() {
 
     const dispatch = useDispatch();
-    
+
     const [patient, setPatient] = useState();
 
     useEffect(() => {
@@ -50,15 +50,15 @@ function PatientDashboard() {
                 <div className="col">
                     <div className={isSidebarVisible ? "ms-5" : "ms-0"} >
                         <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                            <div className="carousel-inner  mb-5" style={{ height: 400 }}>
-                                <div className="carousel-item active">
-                                    <img src={image} className="d-block w-100" alt="..." />
+                            <div className="carousel-inner  mb-5" >
+                                <div className="carousel-item active" style={{ height: 400 }}>
+                                    <img src="https://cdn.pixabay.com/photo/2024/07/08/16/28/ai-generated-8881542_640.jpg" className="d-block w-100" alt="..." />
                                 </div>
-                                <div className="carousel-item">
-                                    <img src={image} className="d-block w-100" alt="..." />
+                                <div className="carousel-item" style={{ height: 400 }}>
+                                    <img src="https://cdn.pixabay.com/photo/2024/04/09/05/38/ai-generated-8685104_640.jpg" className="d-block w-100" alt="..." />
                                 </div>
-                                <div className="carousel-item">
-                                    <img src={image} className="d-block w-100" alt="..." />
+                                <div className="carousel-item" style={{ height: 400 }}>
+                                    <img src="https://cdn.pixabay.com/photo/2016/11/14/03/07/nurse-1822460_640.jpg" className="d-block w-100" alt="..." />
                                 </div>
                             </div>
                             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">

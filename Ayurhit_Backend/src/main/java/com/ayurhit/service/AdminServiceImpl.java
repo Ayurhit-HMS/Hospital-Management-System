@@ -63,14 +63,14 @@ public class AdminServiceImpl implements AdminService {
 		String password = dto.getPassword();
 		String encodedPassword = passwordEncoder.encode(password);
 				
-		Admin manager = adminDAO.findById(dto.getManagerId()).orElseThrow();
+		//Admin manager = adminDAO.findById(dto.getManagerId()).orElseThrow();
 		Branch branch = branchDAO.findById(dto.getBranchId()).orElseThrow();
 		Address address = mapper.map(dto.getAddressDTO(), Address.class);
 		Address persistentAddress = addressDAO.save(address);
 		Role role = roleDAO.findById(dto.getRoleId()).orElseThrow();	
 		Admin adminEntity = mapper.map(dto, Admin.class);
 		adminEntity.setPassword(encodedPassword);
-		adminEntity.setManager(manager);
+		//adminEntity.setManager(manager);
 		adminEntity.setBranch(branch);
 		adminEntity.setAddress(persistentAddress);
 		adminEntity.setRole(role);

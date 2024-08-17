@@ -12,6 +12,9 @@ import BookAppointment from './pages/BookAppointment.jsx'
 import PatientAppointments from './pages/PatientAppointments.jsx';
 import Prescription from './pages/PatientPrescription.jsx';
 import Bill from './pages/Bill.jsx';
+import AboutUs from './pages/AboutUs.jsx';
+import Hospitals from './pages/Hospitals.jsx';
+import Careers from './pages/Careers.jsx';
 
 function App() {
   return (
@@ -28,10 +31,16 @@ function App() {
             <Route path="/patient/appointments" element={<PatientAppointments />} />
             <Route path="/patient/prescriptions" element={<Prescription />} />
             <Route path="/patient/bills" element={<Bill />} />
+            <Route path="/hospitals" element={<Hospitals />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/doctor/dashboard" element={<PatientDashboard />} />
+
+
           </Route>
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
+            <Route path="/about" element={<AboutUs />} />
           </Route>
         </Routes>
       </Router>

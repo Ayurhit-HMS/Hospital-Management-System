@@ -5,6 +5,7 @@ import java.util.List;
 import com.ayurhit.dto.DoctorDTO;
 import com.ayurhit.dto.DoctorRequestDTO;
 import com.ayurhit.dto.DoctorResponseDTO;
+import com.ayurhit.dto.ScheduleDTO;
 import com.ayurhit.dto.UpdateDoctorDTO;
 
 public interface DoctorService {
@@ -18,6 +19,8 @@ public interface DoctorService {
 	 DoctorResponseDTO updateDoctorDetails(Long id, UpdateDoctorDTO dto);
 	 
 	 String deleteDoctorDetails(Long id);
+
+	List<ScheduleDTO> getAllSchedules(Long id);
 
 
 }

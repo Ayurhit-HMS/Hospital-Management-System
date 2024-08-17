@@ -57,4 +57,25 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return modelMapper.map(persistedAppointment, BookAppointmentDTO.class);
 	}
 
+	@Override
+	public Boolean updateAppointmentStatus(Long id) {
+		System.out.println("Updating using new");
+		try {
+			Appointment appointment = appointmentDAO.findById(id).orElseThrow();
+			if (appointment.getStatus().equals(AppointmentStatus.PENDING)) {
+				appointment.setStatus(AppointmentStatus.CONFIRMED);
+			} else if (appointment.getStatus().equals(AppointmentStatus.CONFIRMED)) {
+				appointment.setStatus(AppointmentStatus.ATTENDED);
+			} else if (appointment.getStatus().equals(AppointmentStatus.ATTENDED)) {
+				appointment.setStatus(AppointmentStatus.PRESCRIPTED);
+			} else if (appointment.getStatus().equals(AppointmentStatus.PRESCRIPTED)) {
+				appointment.setStatus(AppointmentStatus.BILL_GENERATED);
+			}
+			appointmentDAO.save(appointment);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }
