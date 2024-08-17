@@ -47,6 +47,7 @@ public class JwtUtils {
 		return Jwts.builder() // JWTs : a Factory class , used to create JWT tokens
 				.setSubject((userPrincipal.getUsername())) // setting subject part of the token(typically user
 															// name/email)
+				.claim("userId", userPrincipal.getUserId())
 				.setIssuedAt(new Date())// Sets the JWT Claims iat (issued at) value of current date
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))// Sets the JWT Claims exp
 																					// (expiration) value.
@@ -63,6 +64,12 @@ public class JwtUtils {
 	// this method will be invoked by our custom JWT filter
 	public String getUserNameFromJwtToken(Claims claims) {
 		return claims.getSubject();
+	}
+	
+	public  Long getId(String token) {
+		Claims claim = validateJwtToken(token);
+		  ((Integer) claim.get("userId")).longValue();
+		 return ((Integer) claim.get("userId")).longValue();
 	}
 
 	// this method will be invoked by our custom filter

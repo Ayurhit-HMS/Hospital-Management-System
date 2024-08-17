@@ -57,7 +57,7 @@ public class Employee extends User {
 	@JoinTable(name = "employee_languages", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "language_id"))
 	private Set<Language> languages = new HashSet<>();
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	private Branch branch;
 
 }

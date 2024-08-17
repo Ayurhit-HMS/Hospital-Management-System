@@ -15,7 +15,7 @@ import Bill from './pages/Bill.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Hospitals from './pages/Hospitals.jsx';
 import Careers from './pages/Careers.jsx';
-import NewDoctorAppointment from './pages/DoctorAppointment.jsx'
+
 
 function App() {
   return (
@@ -35,7 +35,6 @@ function App() {
             <Route path="/hospitals" element={<Hospitals />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/doctor/dashboard" element={<PatientDashboard />} />
-            <Route path="/doctor/appointments" element={<NewDoctorAppointment />} />
 
 
           </Route>

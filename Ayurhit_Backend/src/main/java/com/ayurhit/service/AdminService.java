@@ -10,4 +10,6 @@ public interface AdminService {
 	 AdminResponseDTO updateAdminDeails(AdminRequestDTO dto);
 	 
 	 String deleteAdminDetails(Long doctorId);
+	 
+	 AdminResponseDTO getAdminDetails(Long id);
 }

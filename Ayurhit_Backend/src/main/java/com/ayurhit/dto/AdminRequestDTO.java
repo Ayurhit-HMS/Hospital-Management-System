@@ -14,6 +14,5 @@ import lombok.ToString;
 public class AdminRequestDTO extends EmployeeDTO {
 
 	private Long managerId;
-	
-	
+
 }
