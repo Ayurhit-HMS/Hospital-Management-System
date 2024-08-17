@@ -16,6 +16,7 @@ import Hospitals from './pages/Hospitals.jsx';
 import Careers from './pages/Careers.jsx';
 import Prescription from './pages/Prescription.jsx'
 
+
 function App() {
   return (
     <div>
