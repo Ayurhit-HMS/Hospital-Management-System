@@ -37,12 +37,6 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointment);
 	}
 
-	@PutMapping("/{appointmentId}/cancel")
-	public ResponseEntity<Boolean> cancelAppointment(@PathVariable Long appointmentId) {
-		boolean updated = appointmentService.cancelAppointment(appointmentId);
-		return ResponseEntity.ok(updated);
-	}
-
 	@PutMapping("/{id}")
 	public ResponseEntity<Boolean> updateStatus(@PathVariable Long id) {
 		System.out.println("in new update API");

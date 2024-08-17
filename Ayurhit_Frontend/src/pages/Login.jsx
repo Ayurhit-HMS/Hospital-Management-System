@@ -34,13 +34,8 @@ const LoginPage = () => {
           navigate('/patient/dashboard')
           toast.success("Login successful")
         }
-<<<<<<< HEAD
         else if(decoded.authorities =='ROLE_DOCTOR'){
           navigate('/doctor/appointments')
-=======
-        else if(decoded.authorities == 'ROLE_ADMIN'){
-          navigate('/admin/emplist')
->>>>>>> bed273697f8cadb141341832830fdfe7b9b9cdf9
         }
       } else {
         toast.error('Login failed')

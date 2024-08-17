@@ -34,6 +34,7 @@ public class BranchDTO {
 	
 	private String email;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private LocalDate establishedDate;
 	
 	

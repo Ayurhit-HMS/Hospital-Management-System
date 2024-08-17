@@ -15,11 +15,7 @@ import Bill from './pages/Bill.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Hospitals from './pages/Hospitals.jsx';
 import Careers from './pages/Careers.jsx';
-<<<<<<< HEAD
 import NewDoctorAppointment from './pages/DoctorAppointment.jsx'
-=======
-import AdminEmpList from './pages/AdminEmpList.jsx';
->>>>>>> bed273697f8cadb141341832830fdfe7b9b9cdf9
 
 function App() {
   return (
@@ -39,11 +35,7 @@ function App() {
             <Route path="/hospitals" element={<Hospitals />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/doctor/dashboard" element={<PatientDashboard />} />
-<<<<<<< HEAD
             <Route path="/doctor/appointments" element={<NewDoctorAppointment />} />
-=======
-            <Route path="/admin/emplist" element={<AdminEmpList />} />
->>>>>>> bed273697f8cadb141341832830fdfe7b9b9cdf9
 
 
           </Route>
