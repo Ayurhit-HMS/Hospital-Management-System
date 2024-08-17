@@ -1,6 +1,8 @@
 package com.ayurhit.dto;
 
-import com.ayurhit.entity.BaseEntity;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,10 +15,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class PrescriptionDTO extends BaseEntity {
-	private String date;
-	private String dosage;
-	private String duration;
-	private MedicineDTO medicine;
-	private DoctorDTO doctor;
+public class PrescriptionDTO {
+	private Long id;
+	private LocalDateTime prescriptionDate;
+	private PrescriptionPatientDTO patient;
+	private PrescriptionDoctorDTO doctor;
+	private Set<PrescriptionMedicineDTO> prescriptionMedicines = new HashSet<>();
 }

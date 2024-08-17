@@ -11,11 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AppointmentDTO {
-	private Long id;
-	private String appointmentDate;
-	private String appointmentTime;
-	private DoctorDTO doctor;
-	private PatientDTO patient;
-	private String status;
+public class PrescriptionPatientDTO {
+	String firstName;
+	String LastName;
 }

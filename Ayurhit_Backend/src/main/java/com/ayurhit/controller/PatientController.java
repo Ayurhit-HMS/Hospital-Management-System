@@ -21,6 +21,7 @@ import io.jsonwebtoken.Claims;
 
 @RestController
 @RequestMapping("/patients")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PatientController {
 
 	@Autowired
@@ -52,6 +53,7 @@ public class PatientController {
 				PatientDTO patient = patientService.getPatientDetails(email);
 				return ResponseEntity.ok(patient);
 			} catch (Exception e) {
+				e.printStackTrace();
 				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 			}
 		} else {
