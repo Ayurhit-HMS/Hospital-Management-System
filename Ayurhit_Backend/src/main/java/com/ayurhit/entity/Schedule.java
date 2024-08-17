@@ -27,6 +27,8 @@ public class Schedule extends BaseEntity {
 
 	@Column(name = "schedule_time")
 	private LocalTime scheduleTime;
+	
+	private boolean isSelected;
 
 	@ManyToOne
 	@JoinColumn(name = "doctor_id", nullable = false)
@@ -37,6 +39,6 @@ public class Schedule extends BaseEntity {
 	private Department department;
 
 	@ManyToOne
-	@JoinColumn(name = "admin_id", nullable = false)
+	@JoinColumn(name = "admin_id")
 	private Admin admin;
 }

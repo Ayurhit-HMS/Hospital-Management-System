@@ -28,6 +28,25 @@ function PatientAppointments() {
         fetchAppointments();
     }, []);
 
+    const fetchAppointments = async () => {
+        try {
+            const response = await getAppointments(patient.id);
+            if (response && response.status === 200) {
+                console.log(response.data)
+                setAppointments(response.data);
+            } else {
+                toast.error('No appointments found');
+            }
+        } catch (ex) {
+            toast.error('An error occurred while fetching appointments');
+        }
+    };
+
+    const interval = 10000;
+
+    // const intervalId = setInterval(fetchAppointments, interval);
+    // console.log(intervalId)
+
     const [isSidebarVisible, setSidebarVisible] = useState(true);
 
     const toggleSidebar = () => {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ayurhit.dto.DoctorDTO;
 import com.ayurhit.dto.DoctorRequestDTO;
+import com.ayurhit.dto.ScheduleDTO;
 import com.ayurhit.dto.UpdateDoctorDTO;
 import com.ayurhit.service.DoctorService;
 
@@ -25,8 +26,9 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 
-	@GetMapping("/doctots/{departmentName}")
-	public ResponseEntity<List<DoctorDTO>> findDoctorsByDepartment(@PathVariable("departmentName") String departmentName) {
+	@GetMapping("/dept/{departmentName}")
+	public ResponseEntity<List<DoctorDTO>> findDoctorsByDepartment(
+			@PathVariable("departmentName") String departmentName) {
 		List<DoctorDTO> docList = doctorService.getDoctorsByDepartment(departmentName);
 		return ResponseEntity.ok(docList);
 	}
@@ -35,19 +37,25 @@ public class DoctorController {
 	private ResponseEntity<?> addDoctor(@RequestBody DoctorRequestDTO dto) {
 		return ResponseEntity.ok(doctorService.addDoctor(dto));
 	}
-	
+
 	@GetMapping("/{id}")
 	private ResponseEntity<?> getDoctorDetails(@PathVariable Long id) {
 		return ResponseEntity.ok(doctorService.getDoctorDetails(id));
 	}
-	
+
 	@PutMapping("/{id}")
-	private ResponseEntity<?> updateDoctorDetails(@PathVariable Long id, @RequestBody UpdateDoctorDTO  dto ) {
+	private ResponseEntity<?> updateDoctorDetails(@PathVariable Long id, @RequestBody UpdateDoctorDTO dto) {
 		return ResponseEntity.ok(doctorService.updateDoctorDetails(id, dto));
 	}
-	
+
 	@DeleteMapping("/{id}")
 	private ResponseEntity<?> deleteDoctorDetails(@PathVariable Long id) {
 		return ResponseEntity.ok(doctorService.deleteDoctorDetails(id));
+	}
+
+	@GetMapping("/schedules/{id}")
+	private ResponseEntity<List<ScheduleDTO>> getAllSchedules(@PathVariable Long id) {
+		List<ScheduleDTO> schedules = doctorService.getAllSchedules(id);
+		return ResponseEntity.ok(schedules);
 	}
 }

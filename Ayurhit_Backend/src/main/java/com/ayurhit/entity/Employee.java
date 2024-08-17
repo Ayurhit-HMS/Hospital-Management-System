@@ -37,16 +37,18 @@ public class Employee extends User {
 	private double salary;
 	@Column(nullable = false)
 	private LocalDate joinedDate;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String qualification;
+
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private EmploymentType employmentType;
-	
-	
+
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	private WorkShift workShift;
-	
+
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private EmployeeStatus employeeStatus;
@@ -57,6 +59,5 @@ public class Employee extends User {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Branch branch;
-	
-	
+
 }
