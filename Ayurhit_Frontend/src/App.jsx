@@ -17,6 +17,7 @@ import Hospitals from './pages/Hospitals.jsx';
 import Careers from './pages/Careers.jsx';
 import NewDoctorAppointment from './pages/DoctorAppointment.jsx'
 
+
 function App() {
   return (
     <div>
@@ -36,6 +37,7 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/doctor/dashboard" element={<PatientDashboard />} />
             <Route path="/doctor/appointments" element={<NewDoctorAppointment />} />
+
 
 
           </Route>
