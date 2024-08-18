@@ -2,8 +2,20 @@ import "../styles/home.css"
 import Footer from "../components/Footer"
 import video from '../videos/home.mp4'
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
+import { persistor } from "../Redux/store"
+
+
 
 function Home() {
+
+    useEffect(() => {
+        const token = sessionStorage.getItem("jwt")
+        if (!token) {
+            persistor.purge()
+        }
+    },[])
+
     const navigate = useNavigate()
     return (
         <div>

@@ -56,7 +56,6 @@ function Prescription() {
             });
         }
     };
-
     return (
         <div className="container-fluid patient-dashboard-content">
             <div className="row">

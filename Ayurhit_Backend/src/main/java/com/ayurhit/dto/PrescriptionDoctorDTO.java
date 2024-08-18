@@ -1,7 +1,5 @@
 package com.ayurhit.dto;
 
-import com.ayurhit.entity.Department;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,4 +18,5 @@ public class PrescriptionDoctorDTO {
 	private String qualification;
 	private String specelization;
 	private DepartmentDTO department;
+	private double consultationFees;
 }

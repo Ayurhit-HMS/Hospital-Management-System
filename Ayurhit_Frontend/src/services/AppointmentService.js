@@ -11,7 +11,6 @@ export async function scheduleNewAppointment(appointment) {
     }
 }
 
-
 export async function getAppointments(token) {
     const url = createUrl(`/appointments`);
     try {
@@ -25,7 +24,6 @@ export async function getAppointments(token) {
         return null;
     }
 }
-
 
 export async function cancelAppointment(appointmentId) {
     const url = createUrl(`/appointments/${appointmentId}/cancel`);

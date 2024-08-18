@@ -27,12 +27,11 @@ public class PrescriptionController {
 	@GetMapping("/patient")
 	public ResponseEntity<List<PrescriptionDTO>> findPatientPrescriptions(
 			@RequestHeader("Authorization") String authHeader) {
-		
-		if (authHeader != null && authHeader.startsWith("Bearer ")) {
-			String token = authHeader.substring(7);
+
+		if (authHeader != null) {
 			try {
 				List<PrescriptionDTO> prescriptions = prescriptionService
-						.getPatientPrescriptions(jwtUtils.getId(token));
+						.getPatientPrescriptions(jwtUtils.getId(authHeader));
 				return ResponseEntity.ok(prescriptions);
 			} catch (Exception e) {
 				e.printStackTrace();

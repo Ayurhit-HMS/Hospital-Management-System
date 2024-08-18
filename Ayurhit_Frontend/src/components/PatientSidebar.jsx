@@ -34,7 +34,6 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
         dispatch(logout());
         sessionStorage.clear();
         navigate('/home');
-        window.location.reload();
     };
 
     const patientName = patient ? `${patient.firstName} ${patient.lastName}` : "User";

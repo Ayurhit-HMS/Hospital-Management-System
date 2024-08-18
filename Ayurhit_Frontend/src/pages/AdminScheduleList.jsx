@@ -1,10 +1,8 @@
 import AdminSidebar from "../components/AdminSidebar";
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer"
-import { getAdminDetails } from "../services/adminService";
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
-import "../styles/adminList.css";
 import "../styles/patientDashboard.css"
 import { getAllSchedules} from "../services/scheduleService";
 
@@ -23,9 +21,9 @@ function AdminScheduleList (){
                 const decoded = jwtDecode(jwt)
                 const email = decoded.sub
                 if (jwt) {
-                    const response = await getAdminDetails(jwt);
-                    console.log(response)
-                    setAdmin(response);
+                    //const response = await getAdminDetails(jwt);
+                    //console.log(response)
+                    //setAdmin(response);
                  
                 } else {
                     console.error('JWT not found');
