@@ -2,15 +2,18 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import logo from "../images/logo.png"
 import "../styles/header.css"
+import { useSelector } from "react-redux";
 
 function Header() {
-    const navigate = useNavigate()
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    useEffect(() => {
-        const jwt = sessionStorage.getItem("jwt");
-        setIsAuthenticated(!!jwt);
 
-    }, []);
+    const patient = useSelector(state => state.patient.patient)
+    const navigate = useNavigate()
+    //const [isAuthenticated, setIsAuthenticated] = useState(false);
+    // useEffect(() => {
+    //     const jwt = sessionStorage.getItem("jwt");
+    //     setIsAuthenticated(!!jwt);
+
+    // }, []);
 
     const login = () => {
         navigate('/login')
@@ -43,7 +46,7 @@ function Header() {
                     </div>
 
                     <div className="col-md-3 d-flex align-items-center justify-content-center">
-                        {isAuthenticated ? (
+                        {patient ? (
                             <button className="btn btn-secondary rounded-circle" onClick={profile}>
                                 <i class="fa-solid fa-user fa-2x"></i>
                             </button>

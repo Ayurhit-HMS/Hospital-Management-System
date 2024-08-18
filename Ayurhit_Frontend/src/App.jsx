@@ -10,11 +10,11 @@ import PatientDashboard from './pages/PatientDashboard.jsx'
 import PatientProfile from './pages/PatientProfile.jsx';
 import BookAppointment from './pages/BookAppointment.jsx'
 import PatientAppointments from './pages/PatientAppointments.jsx';
-import Prescription from './pages/PatientPrescription.jsx';
 import Bill from './pages/Bill.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Hospitals from './pages/Hospitals.jsx';
 import Careers from './pages/Careers.jsx';
+import Prescription from './pages/Prescription.jsx'
 
 
 function App() {
@@ -35,13 +35,11 @@ function App() {
             <Route path="/hospitals" element={<Hospitals />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/doctor/dashboard" element={<PatientDashboard />} />
-
-
+            <Route path="/about" element={<AboutUs />} />
           </Route>
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
-            <Route path="/about" element={<AboutUs />} />
           </Route>
         </Routes>
       </Router>
