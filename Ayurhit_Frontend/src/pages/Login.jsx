@@ -59,7 +59,10 @@ const LoginPage = () => {
         }
         else if(decoded.authorities == 'ROLE_ADMIN'){
           navigate('/admin/emplist')
-        }        
+        }
+        else if(decoded.authorities == 'ROLE_DOCTOR')  {
+          navigate('/doctor/appointments')
+        }      
       } else {
         toast.error('Login failed')
       }

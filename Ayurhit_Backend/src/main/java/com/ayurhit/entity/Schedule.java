@@ -28,7 +28,6 @@ public class Schedule extends BaseEntity {
 	@Column(name = "schedule_time")
 	private LocalTime scheduleTime;
 	
-	@Column(nullable=false)
 	private boolean isSelected;
 
 	@ManyToOne

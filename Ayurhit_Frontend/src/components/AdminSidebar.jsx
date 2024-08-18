@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import "../styles/sidebar.css"
-import { useNavigate } from 'react-router-dom';
 
-function AdminSidebar({ isSidebarVisible, toggleSidebar, adminDetails }) {
-
-    const navigate = useNavigate()
+function AdminSidebar() {
 
     useEffect(() => {
         const offcanvasElement = document.getElementById('offcanvasScrolling');
@@ -15,24 +12,16 @@ function AdminSidebar({ isSidebarVisible, toggleSidebar, adminDetails }) {
     const handleShow = () => {
         const offcanvasElement = document.getElementById('offcanvasScrolling');
         const bsOffcanvas = new window.bootstrap.Offcanvas(offcanvasElement);
-       
-        if (isSidebarVisible) {
-            bsOffcanvas.hide();
-        } else {
-            bsOffcanvas.show();
-        }
-        toggleSidebar();
+        bsOffcanvas.show();
     };
-
-    const admintName = adminDetails ? `${adminDetails.firstName} ${adminDetails.lastName}` : "User";
     return (
         <div>
-            <button className="btn btn-secondary menu-button ms-1 "  style={{zIndex:4000}} type="button" onClick={handleShow} aria-controls="offcanvasScrolling">
+            <button className="btn btn-secondary menu-button ms-1" type="button" onClick={handleShow} aria-controls="offcanvasScrolling">
                 <i className="fas fa-bars"></i>
             </button>
             <div className="offcanvas offcanvas-start custom-canvas" data-bs-scroll="true" data-bs-backdrop="false" tabIndex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style={{ width: 300 }}>
                 <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Hello {admintName}</h5>
+                    <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Hello user</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">

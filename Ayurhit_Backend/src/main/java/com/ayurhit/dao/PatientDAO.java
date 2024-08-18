@@ -7,7 +7,5 @@ import com.ayurhit.entity.Patient;
 
 @Repository
 public interface PatientDAO extends JpaRepository<Patient, Long> {
-
-	Patient findByEmail(String email);
-
+	
 }

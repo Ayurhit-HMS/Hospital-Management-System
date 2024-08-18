@@ -65,11 +65,6 @@ public class JwtUtils {
 	public String getUserNameFromJwtToken(Claims claims) {
 		return claims.getSubject();
 	}
-	
-	public  Long getId(String token) {
-		Claims claim = validateJwtToken(token);
-		 return ((Integer) claim.get("userId")).longValue();
-	}
 
 	// this method will be invoked by our custom filter
 	public Claims validateJwtToken(String jwtToken) {
@@ -84,6 +79,14 @@ public class JwtUtils {
 	// Accepts Collection<GrantedAuthority> n rets comma separated list of it's
 	// string form
 	
+	public Long getId(String authHeader) {
+		String token = authHeader.substring(7);
+		Claims claim = validateJwtToken(token);
+		return ((Integer) claim.get("userId")).longValue();
+	}
+
+
+
 
 	private String getAuthoritiesInString(Collection<? extends GrantedAuthority> authorities) {
 		String authorityString = authorities.stream().

@@ -23,7 +23,7 @@ public class CustomUserDetails implements UserDetails {
 		// GrantedAuthority : i/f -<--- SimpleGrantedAuthority(String role)
 		return List.of(new SimpleGrantedAuthority(user.getRole().getRoleName()));
 	}
-
+	
 	public Long getUserId() {
 		Long userId = user.getId();
 		return userId;
