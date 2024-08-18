@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ayurhit.dao.DepartmentDAO;
 import com.ayurhit.dto.DepartmentDTO;
+import com.ayurhit.dto.DepartmentResDTO;
 import com.ayurhit.entity.Department;
 
 @Service
@@ -58,11 +59,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 	
 
-	public List<DepartmentDTO> getAllDepartments() {
-		Type targetListType = new TypeToken<List<DepartmentDTO>>() {
+	public List<DepartmentResDTO> getAllDepartments() {
+		Type targetListType = new TypeToken<List<DepartmentResDTO>>() {
 		}.getType();
 		List<Department> list = departmentDAO.findAll();
-		ArrayList<DepartmentDTO> dtolist = modelMapper.map(list, targetListType);
+		ArrayList<DepartmentResDTO> dtolist = modelMapper.map(list, targetListType);
 		return dtolist;
 	}
 

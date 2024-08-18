@@ -19,6 +19,8 @@ import AdminEmpList from './pages/AdminEmpList.jsx';
 import AdminScheduleList from './pages/AdminScheduleList.jsx';
 
 import Prescription from './pages/Prescription.jsx'
+import AdminDeptList from './pages/AdminDeptList.jsx';
+import AdminAddDepartment from './pages/AdminAddDept.jsx';
 
 
 function App() {
@@ -42,7 +44,11 @@ function App() {
 
             <Route path="/admin/emplist" element={<AdminEmpList />} />
             <Route path='/admin/schedulelist' element={<AdminScheduleList />} />
+            <Route path='/admin/deptlist' element={<AdminDeptList />} />
+            <Route path='/admin/addDepartment' element={<AdminAddDepartment/>} />
+
             <Route path="/about" element={<AboutUs />} />
+            
               
               
           </Route>

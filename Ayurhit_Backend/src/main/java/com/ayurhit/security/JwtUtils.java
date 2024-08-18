@@ -84,10 +84,6 @@ public class JwtUtils {
 	// Accepts Collection<GrantedAuthority> n rets comma separated list of it's
 	// string form
 	
-	public Long getId(String token) {
-		Claims claim = validateJwtToken(token);
-		return ((Integer) claim.get("userId")).longValue();
-	}
 
 	private String getAuthoritiesInString(Collection<? extends GrantedAuthority> authorities) {
 		String authorityString = authorities.stream().
