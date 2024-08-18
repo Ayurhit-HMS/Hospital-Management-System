@@ -24,7 +24,24 @@ export async function getPatientDetails(token) {
                 'Authorization': `Bearer ${token}`
             }
         });
-        return response.data;
+        return response;
+    } catch (ex) {
+        console.error('Error fetching patient details:', ex);
+        return null;
+    }
+}
+
+
+export async function getBills() {
+    const url = createUrl('/bill');
+    const token = sessionStorage.getItem("jwt")
+    try {
+        const response = await axios.get(url, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response;
     } catch (ex) {
         console.error('Error fetching patient details:', ex);
         return null;

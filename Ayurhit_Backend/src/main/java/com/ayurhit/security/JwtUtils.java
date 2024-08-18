@@ -29,8 +29,7 @@ public class JwtUtils {
 
 	@Value("${EXP_TIMEOUT}")
 	private int jwtExpirationMs;
-	
-	
+
 	private Key key;
 
 	@PostConstruct
@@ -69,28 +68,24 @@ public class JwtUtils {
 	// this method will be invoked by our custom filter
 	public Claims validateJwtToken(String jwtToken) {
 		// try {
-		Claims claims = Jwts.parserBuilder()
-				.setSigningKey(key).build().
+		Claims claims = Jwts.parserBuilder().setSigningKey(key).build().
 		// Sets the signing key used to verify JWT digital signature.
 				parseClaimsJws(jwtToken).getBody();// Parses the signed JWT returns the resulting Jws<Claims> instance
 		// throws exc in case of failures in verification
-		return claims;		
+		return claims;
 	}
 	// Accepts Collection<GrantedAuthority> n rets comma separated list of it's
 	// string form
-	
+
+
 	public Long getId(String authHeader) {
 		String token = authHeader.substring(7);
 		Claims claim = validateJwtToken(token);
 		return ((Integer) claim.get("userId")).longValue();
 	}
 
-
-
-
 	private String getAuthoritiesInString(Collection<? extends GrantedAuthority> authorities) {
-		String authorityString = authorities.stream().
-				map(authority -> authority.getAuthority())
+		String authorityString = authorities.stream().map(authority -> authority.getAuthority())
 				.collect(Collectors.joining(","));
 		System.out.println(authorityString);
 		return authorityString;

@@ -15,18 +15,8 @@ import AboutUs from './pages/AboutUs.jsx';
 import Hospitals from './pages/Hospitals.jsx';
 import Careers from './pages/Careers.jsx';
 import NewDoctorAppointment from './pages/DoctorAppointment.jsx'
-
-import AdminEmpList from './pages/AdminEmpList.jsx';
 import AdminScheduleList from './pages/AdminScheduleList.jsx';
-
 import Prescription from './pages/Prescription.jsx'
-
-import AdminEmpList from './pages/AdminEmpList.jsx';
-import AdminScheduleList from './pages/AdminScheduleList.jsx';
-
-import Prescription from './pages/Prescription.jsx'
-import AdminDeptList from './pages/AdminDeptList.jsx';
-import AdminAddDepartment from './pages/AdminAddDept.jsx';
 
 
 function App() {
@@ -48,7 +38,6 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/doctor/dashboard" element={<PatientDashboard />} />
             <Route path="/doctor/appointments" element={<NewDoctorAppointment />} />
-            <Route path="/admin/emplist" element={<AdminEmpList />} />
             <Route path='/admin/schedulelist' element={<AdminScheduleList />} />
             <Route path='/admin/deptlist' element={<AdminDeptList />} />
             <Route path='/admin/addDepartment' element={<AdminAddDepartment/>} />
