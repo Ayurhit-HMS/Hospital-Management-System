@@ -2,10 +2,10 @@ import PatientSidebar from "../components/PatientSidebar";
 import "../styles/patientDashboard.css"
 import Footer from "../components/Footer"
 import { useEffect, useState } from "react";
-import { getAppointments } from "../services/AppointmentService";
+import { getAppointments } from "../services/appointmentService";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { cancelAppointment } from "../services/AppointmentService";
+import { cancelAppointment } from "../services/appointmentService";
 
 function PatientAppointments() {
     const patient = useSelector(state => state.patient.patient)
@@ -13,8 +13,11 @@ function PatientAppointments() {
 
     useEffect(() => {
         const fetchAppointments = async () => {
+            const token = sessionStorage.getItem('jwt');
+            console.log(token);
             try {
-                const response = await getAppointments(patient.id);
+                const response = await getAppointments(token);
+                console.log(response.data)
                 if (response && response.status === 200) {
                     console.log(response.data)
                     setAppointments(response.data);
@@ -42,10 +45,6 @@ function PatientAppointments() {
         }
     };
 
-    const interval = 10000;
-
-    // const intervalId = setInterval(fetchAppointments, interval);
-    // console.log(intervalId)
 
     const [isSidebarVisible, setSidebarVisible] = useState(true);
 

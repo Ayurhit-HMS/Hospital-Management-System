@@ -7,7 +7,7 @@ import { getDoctors } from "../services/doctorService";
 import { getScheduls } from "../services/scheduleService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { scheduleNewAppointment } from "../services/AppointmentService";
+import { scheduleNewAppointment } from "../services/appointmentService";
 import { updateSchedules } from "../services/scheduleService";
 import { useSelector } from "react-redux";
 
@@ -39,7 +39,7 @@ function BookAppointment() {
     }, []);
 
 
-    
+
 
     const selectDepartment = async (department) => {
         setSelectedDoctor(null);
@@ -109,7 +109,7 @@ function BookAppointment() {
             <div className="row">
                 <div className={isSidebarVisible ? "col-md-2" : "col-md-0"}>
                     <div className="custom-sidebar">
-                        <PatientSidebar isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} patientDetails={patient}/>
+                        <PatientSidebar isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} patientDetails={patient} />
                     </div>
                 </div>
                 <div className="col">

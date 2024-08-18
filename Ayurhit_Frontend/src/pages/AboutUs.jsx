@@ -1,13 +1,13 @@
 import Footer from "../components/Footer"
 function AboutUs() {
     return (
-        <div className="container">
-            <p className="h1 mt-5 mb-5 text-center">About Us</p>
+        <div className="container" style={{ marginTop: 200 }}>
+            <p className="h1 mt-5  text-center" >About Us</p>
             <div className="mt-2 text-center">
-                <img src="https://media.istockphoto.com/id/1364075546/photo/empty-corridor-in-modern-hospital-with-information-counter-and-hospital-bed-in-rooms-3d.jpg?s=612x612&w=0&k=20&c=xxFDmIVpH1wJaaiorpvfzec4RRggSb48PDb_dU9bTjo=" alt="" />
+                <img className="mt-2" src="https://media.istockphoto.com/id/1364075546/photo/empty-corridor-in-modern-hospital-with-information-counter-and-hospital-bed-in-rooms-3d.jpg?s=612x612&w=0&k=20&c=xxFDmIVpH1wJaaiorpvfzec4RRggSb48PDb_dU9bTjo=" alt="" />
             </div>
 
-            <div>
+            <div className="mt-5">
                 <p>
                     Welcome to Ayurhit Hospitals, where excellence in healthcare is not just a goal, but a tradition. Founded on the principles of providing unparalleled medical care with compassion and respect, our hospital has become a cornerstone of health and wellness in the community.
 

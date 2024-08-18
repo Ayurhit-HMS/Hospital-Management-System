@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+
 function NewDoctorAppointment() {
     const [appointment, setAppointments] = useState([]);
     const [isSidebarVisible, setSidebarVisible] = useState(true);
@@ -17,39 +18,38 @@ function NewDoctorAppointment() {
 
     useEffect(() => {
         const fetchAppointmentDetails = async () => {
-            try {
-                const jwt = sessionStorage.getItem("jwt");
-                if (jwt) {
-                    const decodedToken = jwtDecode(jwt);
-                    const email = decodedToken.sub;
-                    const response = await getAppointmentDetails(jwt, email);
-                    setAppointments(response);
+            try{
+                const jwt=sessionStorage.getItem("jwt");
+                const response=getAppointmentDetails(jwt);
+                if (response && response.status === 200) {
+                    console.log(response.data)
+                    setAppointments(response.data);
                 } else {
-                    toast.error("JWT not found");
+                    toast.error('No appointments found');
                 }
-            } catch (error) {
-                console.error('Failed to fetch appointment details:', error);
-                toast.error("Error fetching appointment details");
+            } catch (ex) {
+                toast.error('An error occurred while fetching appointments');
             }
+           
         };
         fetchAppointmentDetails();
     }, []);
 
     const fetchAppointmentDetails = async () => {
-        try {
-            const jwt = sessionStorage.getItem("jwt");
-            if (jwt) {
-                const decodedToken = jwtDecode(jwt);
-                const email = decodedToken.sub;
-                const response = await getAppointmentDetails(jwt, email);
-                setAppointments(response);
+
+        try{
+            const jwt=sessionStorage.getItem("jwt");
+            const response=getAppointmentDetails(jwt);
+            if (response && response.status === 200) {
+                console.log(response.data)
+                setAppointments(response.data);
             } else {
-                toast.error("JWT not found");
+                toast.error('No appointments found');
             }
-        } catch (error) {
-            console.error('Failed to fetch appointment details:', error);
-            toast.error("Error fetching appointment details");
+        } catch (ex) {
+            toast.error('An error occurred while fetching appointments');
         }
+        
     };
 
     const updateStatus = async (appointmentId) => {

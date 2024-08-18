@@ -3,7 +3,6 @@ package com.ayurhit.dto;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.ayurhit.entity.Address;
 import com.ayurhit.entity.Branch;
 import com.ayurhit.entity.Language;
 import com.ayurhit.type.EmployeeStatus;
@@ -20,8 +19,9 @@ import lombok.ToString;
 @Getter
 @ToString
 public class DoctorResponseDTO {
+
 	private Long id;
-	
+
 	private String firstName;
 
 	private String lastName;
@@ -39,15 +39,15 @@ public class DoctorResponseDTO {
 	private AddressDTO addressDTO;
 
 	private Double salary;
-	
+
 	private LocalDate joinedDate;
-	
+
 	private String qualification;
-	
+
 	private EmploymentType employmentType;
-	
+
 	private WorkShift workShift;
-	
+
 	private EmployeeStatus employeeStatus;
 
 	private Set<LanguagesDTO> languages ;
@@ -67,7 +67,5 @@ public class DoctorResponseDTO {
 	private String availabilitySchedule;
 
 	private LicensingAuthority licensingAuthority;
-	
-	
 
-	}
+}

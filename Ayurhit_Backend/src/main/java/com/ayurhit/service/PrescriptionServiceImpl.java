@@ -28,7 +28,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 		Type targetListType = new TypeToken<List<PrescriptionDTO>>() {
 		}.getType();
 
-		List<Prescription> list = prescriptionDAO.findPatientPrescriptions(id);
+		List<Prescription> list = prescriptionDAO.findByPatientId(id);
 
 		List<PrescriptionDTO> prescriptions = modelmapper.map(list, targetListType);
 		return prescriptions;
