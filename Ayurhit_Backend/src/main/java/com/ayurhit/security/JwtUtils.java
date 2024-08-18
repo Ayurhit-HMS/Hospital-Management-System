@@ -47,6 +47,7 @@ public class JwtUtils {
 		return Jwts.builder() // JWTs : a Factory class , used to create JWT tokens
 				.setSubject((userPrincipal.getUsername())) // setting subject part of the token(typically user
 															// name/email)
+				.claim("userId", userPrincipal.getUserId())
 				.setIssuedAt(new Date())// Sets the JWT Claims iat (issued at) value of current date
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))// Sets the JWT Claims exp
 																					// (expiration) value.
@@ -78,6 +79,13 @@ public class JwtUtils {
 	// Accepts Collection<GrantedAuthority> n rets comma separated list of it's
 	// string form
 	
+	public Long getId(String authHeader) {
+		String token = authHeader.substring(7);
+		Claims claim = validateJwtToken(token);
+		return ((Integer) claim.get("userId")).longValue();
+	}
+
+
 
 
 	private String getAuthoritiesInString(Collection<? extends GrantedAuthority> authorities) {
