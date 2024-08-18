@@ -26,3 +26,18 @@ export async function updateSchedules(id) {
         return null
     }
 }
+
+export async function getAllSchedules(token) {
+    const url = createUrl('/schedules');
+    try {
+        const response = await axios.get(url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data; 
+    } catch (ex) {
+        console.error('Error fetching schedule details:', ex);
+        return null;
+    }
+}

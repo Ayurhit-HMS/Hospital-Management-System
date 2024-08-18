@@ -14,6 +14,16 @@ import Bill from './pages/Bill.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Hospitals from './pages/Hospitals.jsx';
 import Careers from './pages/Careers.jsx';
+import NewDoctorAppointment from './pages/DoctorAppointment.jsx'
+
+import AdminEmpList from './pages/AdminEmpList.jsx';
+import AdminScheduleList from './pages/AdminScheduleList.jsx';
+
+import Prescription from './pages/Prescription.jsx'
+
+import AdminEmpList from './pages/AdminEmpList.jsx';
+import AdminScheduleList from './pages/AdminScheduleList.jsx';
+
 import Prescription from './pages/Prescription.jsx'
 
 
@@ -35,8 +45,15 @@ function App() {
             <Route path="/hospitals" element={<Hospitals />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/doctor/dashboard" element={<PatientDashboard />} />
+            <Route path="/doctor/appointments" element={<NewDoctorAppointment />} />
+            <Route path="/admin/emplist" element={<AdminEmpList />} />
+            <Route path='/admin/schedulelist' element={<AdminScheduleList />} />
             <Route path="/about" element={<AboutUs />} />
+              
+              
           </Route>
+
+
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />

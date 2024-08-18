@@ -20,6 +20,8 @@ import lombok.ToString;
 @ToString
 public class DoctorResponseDTO {
 
+	private Long id;
+
 	private String firstName;
 
 	private String lastName;
@@ -34,9 +36,9 @@ public class DoctorResponseDTO {
 
 	private String profilePhoto;
 
-	private AddressDTO address;
+	private AddressDTO addressDTO;
 
-	private double salary;
+	private Double salary;
 
 	private LocalDate joinedDate;
 
@@ -48,19 +50,19 @@ public class DoctorResponseDTO {
 
 	private EmployeeStatus employeeStatus;
 
-	private Set<Language> languages;
-
-	private BranchDTO branch;
-
+	private Set<LanguagesDTO> languages ;
+	
+	private BranchDTO branchDTO;
+	
 	private String specelization;
 
 	private String licenseNumber;
 
 	private LocalDate licenseExpiryDate;
 
-	private int experience;
+	private Integer  experience;
 
-	private double consultationFees;
+	private Double consultationFees;
 
 	private String availabilitySchedule;
 

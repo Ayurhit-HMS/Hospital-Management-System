@@ -30,5 +30,5 @@ public class BillDTO extends BaseEntity {
 	private Double discount;
 	private PatientDTO patient;
 	private DepartmentDTO department;
-	private AdminResponseDTO admin;
+	private AdminDTO admin;
 }
