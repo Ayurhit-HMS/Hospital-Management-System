@@ -26,10 +26,19 @@ public class PrescriptionController {
 
 	@GetMapping("/patient")
 	public ResponseEntity<List<PrescriptionDTO>> findPatientPrescriptions(
-			@RequestHeader("Authorization") String token) {
-		System.out.println(jwtUtils.getId(token));
-		List<PrescriptionDTO> prescriptions = prescriptionService.getPatientPrescriptions(jwtUtils.getId(token));
-		return ResponseEntity.ok(prescriptions);
+			@RequestHeader("Authorization") String authHeader) {
+		
+		if (authHeader != null && authHeader.startsWith("Bearer ")) {
+			String token = authHeader.substring(7);
+			try {
+				List<PrescriptionDTO> prescriptions = prescriptionService
+						.getPatientPrescriptions(jwtUtils.getId(token));
+				return ResponseEntity.ok(prescriptions);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	@GetMapping("/doctor")

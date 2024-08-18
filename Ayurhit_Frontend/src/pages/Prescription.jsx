@@ -2,11 +2,13 @@ import PatientSidebar from "../components/PatientSidebar";
 import "../styles/patientDashboard.css"
 import Footer from "../components/Footer"
 import { useEffect, useState } from "react";
-import { getPrescriptions } from "../services/prescriptionService";
+import { getPrescriptions } from "../services/PrescriptionService";
 import { toast } from "react-toastify";
 
 
 function Prescription() {
+
+    const [prescription, setPrescription] = useState([])
 
     const [isSidebarVisible, setSidebarVisible] = useState(true);
 
@@ -18,11 +20,11 @@ function Prescription() {
         const fetchData = async () => {
             try {
                 const response = await getPrescriptions();
-                console.log(response.data)
+                if (response && response.status === 200)
+                    setPrescription(response.data)
             } catch (ex) {
-                toast.error("Something went wrong")
+                toast.error('Something went wrong')
             }
-
         }
         fetchData();
     }, [])
@@ -36,7 +38,34 @@ function Prescription() {
                 </div>
                 <div className="col">
                     <div className={isSidebarVisible ? "ms-5" : "ms-0"} >
-                        Prescriptions
+                        <div className="container">
+                            <h1 className="text-center mb-3">Prescriptions</h1>
+                            {prescription ?
+                                (<table className="table table-lg text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Prescription No</th>
+                                            <th>Prescription Date</th>
+                                            <th>Doctor Name</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {prescription.map((prescription) => (
+                                            <tr key={prescription.id}>
+                                                <td>{prescription.id}</td>
+                                                <td>{prescription.prescriptionDate}</td>
+                                                <td>{prescription.doctor.firstName + prescription.doctor.lastName}</td>
+                                                <td><button className="btn btn-warning">View Prescription</button></td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>) : (<div>You don't have any prescriptiond</div>)
+                            }
+                        </div>
+
+
+
                     </div>
                     <div className={isSidebarVisible ? "ms-5" : "ms-0"}>
                         <Footer></Footer>
