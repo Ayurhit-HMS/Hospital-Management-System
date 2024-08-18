@@ -1,8 +1,5 @@
 package com.ayurhit.dto;
 
-
-import com.ayurhit.entity.BaseEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +11,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AppointmentDTO extends BaseEntity{
-    private String appointmentDate;
-    private String appointmentTime;
-    private DoctorDTO doctor;
-    private PatientDTO patient;
+public class AppointmentDTO {
+	private Long id;
+	private String appointmentDate;
+	private String appointmentTime;
+	private DoctorDTO doctor;
+	private PatientDTO patient;
+	private String status;
 }
-
-

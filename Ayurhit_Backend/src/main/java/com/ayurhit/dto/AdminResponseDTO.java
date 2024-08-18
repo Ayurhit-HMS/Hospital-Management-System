@@ -19,6 +19,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 
+<<<<<<< HEAD
+=======
+@Getter
+@Setter
+>>>>>>> a5f81893aa40c074c13a5ab6b55118a80af55305
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

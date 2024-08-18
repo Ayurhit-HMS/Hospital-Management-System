@@ -2,6 +2,7 @@ package com.ayurhit.service;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -13,6 +14,7 @@ import com.ayurhit.dao.AdminDAO;
 import com.ayurhit.dao.DepartmentDAO;
 import com.ayurhit.dao.DoctorDAO;
 import com.ayurhit.dao.ScheduleDAO;
+import com.ayurhit.dto.DoctorResDTO;
 import com.ayurhit.dto.ScheduleDTO;
 import com.ayurhit.dto.ScheduleResponseDTO;
 import com.ayurhit.entity.Admin;
@@ -65,8 +67,15 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public List<ScheduleResponseDTO> getAllSchedules() {
 		List<Schedule> schedules = scheduleDao.findAll();
-		Type targetListType = new TypeToken <List<ScheduleResponseDTO>>() {}.getType();
-		return modelMapper.map(schedules, targetListType);
+		
+		List<ScheduleResponseDTO> scheduleResponseDTOs = schedules.stream().map(schedule -> {
+			ScheduleResponseDTO scheduleResponseDTO = modelMapper.map(schedule, ScheduleResponseDTO.class);
+			scheduleResponseDTO.setDoctorResponseDTO(new DoctorResDTO());
+			modelMapper.map(schedule.getDoctor(),scheduleResponseDTO.getDoctorResponseDTO() );
+			return scheduleResponseDTO;
+		}).collect(Collectors.toList());
+		
+		return scheduleResponseDTOs;
 	}
 	
 	public String deleteSchedule(Long id) {

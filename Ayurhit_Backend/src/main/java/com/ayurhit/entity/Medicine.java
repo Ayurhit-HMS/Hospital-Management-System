@@ -3,6 +3,7 @@ package com.ayurhit.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -29,9 +30,9 @@ public class Medicine extends BaseEntity {
 
 	private String imagePath;
 
-	@OneToMany(mappedBy = "medicine")
+	@OneToMany(mappedBy = "medicine", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<CurrentMedication> currentMedications = new HashSet<>();
 
-	@OneToMany(mappedBy = "medicine")
+	@OneToMany(mappedBy = "medicine", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<PrescriptionMedicine> prescriptionMedicines;
 }

@@ -10,8 +10,7 @@ import com.ayurhit.entity.Prescription;
 
 public interface PrescriptionDAO extends JpaRepository<Prescription, Long> {
 
-	@Query("SELECT p FROM Prescription p WHERE p.patient.id = :id")
-	List<Prescription> findPatientPrescriptions(@Param("id") Long id);
+	List<Prescription> findByPatientId(Long patientId);
 
 	@Query("SELECT p FROM Prescription p WHERE p.doctor.id = :id")
 	List<Prescription> findDoctorPrescriptions(@Param("id") Long id);

@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ayurhit.dto.AppointmentDTO;
 import com.ayurhit.dto.BookAppointmentDTO;
+import com.ayurhit.security.JwtUtils;
 import com.ayurhit.service.AppointmentService;
 
 @RestController
@@ -24,10 +25,23 @@ public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
 
+	@Autowired
+	private JwtUtils jwtUtils;
+
 	@GetMapping
-	public ResponseEntity<List<AppointmentDTO>> patientAppointments(@RequestParam Long patientId) {
-		List<AppointmentDTO> appointments = appointmentService.getPatientAppointments(patientId);
-		return ResponseEntity.ok(appointments);
+	public ResponseEntity<List<AppointmentDTO>> patientAppointments(@RequestHeader("Authorization") String authHeader) {
+
+		if (authHeader != null && authHeader.startsWith("Bearer ")) {
+			String token = authHeader.substring(7);
+
+			try {
+				List<AppointmentDTO> appointments = appointmentService.getPatientAppointments(jwtUtils.getId(token));
+				return ResponseEntity.ok(appointments);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	@PostMapping
