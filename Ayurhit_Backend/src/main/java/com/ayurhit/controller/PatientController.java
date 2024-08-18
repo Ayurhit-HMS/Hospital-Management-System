@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ayurhit.dto.AddPatientDTO;
+import com.ayurhit.security.JwtUtils;
 import com.ayurhit.service.PatientService;
 import com.ayurhit.util.MailService;
 
@@ -19,6 +20,9 @@ public class PatientController {
 
 	@Autowired
 	private PatientService patientService;
+	
+	@Autowired
+	JwtUtils jwtUtils;
 
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping
@@ -30,26 +34,5 @@ public class PatientController {
 		MailService.sendEmail(email,firstName, lastName);
 		return ResponseEntity.ok().build();
 	}
-<<<<<<< HEAD
-=======
 
-	@GetMapping
-	public ResponseEntity<PatientDTO> getPatientDetails(@RequestHeader("Authorization") String authHeader) {
-		if (authHeader != null && authHeader.startsWith("Bearer ")) {
-			String token = authHeader.substring(7);
-
-			try {
-				Claims claim = jwtUtils.validateJwtToken(token);
-				String email = claim.getSubject();
-				PatientDTO patient = patientService.getPatientDetails(email);
-				return ResponseEntity.ok(patient);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-			}
-		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
-	}
->>>>>>> a5f81893aa40c074c13a5ab6b55118a80af55305
 }
