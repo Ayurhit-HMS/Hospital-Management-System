@@ -11,11 +11,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor()
 @ToString
-public class DepartmentDTO {
+public class DepartmentResDTO {
+
 	private Long id;
 	private String departmentName;
+	private LocalDateTime createdAt;
 	private String about;
 	private String deptImage;
 }

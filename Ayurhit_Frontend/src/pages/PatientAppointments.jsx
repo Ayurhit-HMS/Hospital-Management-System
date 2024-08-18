@@ -2,10 +2,11 @@ import PatientSidebar from "../components/PatientSidebar";
 import "../styles/patientDashboard.css"
 import Footer from "../components/Footer"
 import { useEffect, useState } from "react";
-import { getAppointments } from "../services/appointmentService";
+import { getAppointments } from "../services/appointmentService.js";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { cancelAppointment } from "../services/appointmentService";
+import { cancelAppointment } from "../services/appointmentService.js";
+
 
 function PatientAppointments() {
     const patient = useSelector(state => state.patient.patient)

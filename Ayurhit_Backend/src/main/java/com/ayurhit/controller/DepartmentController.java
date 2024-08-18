@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ayurhit.dto.DepartmentDTO;
+import com.ayurhit.dto.DepartmentResDTO;
 import com.ayurhit.service.DepartmentService;
 
 @RestController
@@ -41,8 +42,8 @@ public class DepartmentController {
 	}
 
 	@GetMapping	
-	public ResponseEntity<List<DepartmentDTO>> getAllDepartments() {
-		List<DepartmentDTO> deptList = departmentService.getAllDepartments();
+	public ResponseEntity<List<DepartmentResDTO>> getAllDepartments() {
+		List<DepartmentResDTO> deptList = departmentService.getAllDepartments();
 		return ResponseEntity.ok(deptList);
 	}
 

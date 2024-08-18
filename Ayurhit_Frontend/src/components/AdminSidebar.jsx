@@ -26,10 +26,11 @@ function AdminSidebar() {
                 </div>
                 <div className="offcanvas-body">
                     <div className="container d-grid">
-                        <button className="btn btn-custom mb-2">Dashboard</button>
-                        <button className="btn btn-custom mb-2">Employee</button>
-                        <button className="btn btn-custom mb-2">Department</button>
-                        <button className="btn btn-custom mb-2">Session</button>
+                        <button className="btn btn-custom mb-2" onClick={() => { navigate('/admin/dashboard') }}>Dashboard</button>
+                        <button className="btn btn-custom mb-2" onClick={() => { navigate('/admin/emplist') }}>Employees</button>
+                        <button className="btn btn-custom mb-2" onClick={() => { navigate('/admin/schedulelist') }}>Schedules</button>
+                        <button className="btn btn-custom mb-2" onClick={() => { navigate('/admin/deptlist') }}>Departments</button>
+
                         <button className="btn btn-custom mb-2">Ward</button>
                         <button className="btn btn-custom mb-2">Settings</button>
                     </div>

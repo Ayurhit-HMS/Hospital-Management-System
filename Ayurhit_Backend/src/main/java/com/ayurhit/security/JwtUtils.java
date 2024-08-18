@@ -77,6 +77,7 @@ public class JwtUtils {
 	// Accepts Collection<GrantedAuthority> n rets comma separated list of it's
 	// string form
 
+
 	public Long getId(String authHeader) {
 		String token = authHeader.substring(7);
 		Claims claim = validateJwtToken(token);
