@@ -16,6 +16,7 @@ import AboutUs from './pages/AboutUs.jsx';
 import Hospitals from './pages/Hospitals.jsx';
 import Careers from './pages/Careers.jsx';
 import AdminEmpList from './pages/AdminEmpList.jsx';
+import AdminScheduleList from './pages/AdminScheduleList.jsx';
 
 function App() {
   return (
@@ -36,9 +37,11 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/doctor/dashboard" element={<PatientDashboard />} />
             <Route path="/admin/emplist" element={<AdminEmpList />} />
-
+            <Route path='/admin/schedulelist' element={<AdminScheduleList />} />
 
           </Route>
+
+
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
