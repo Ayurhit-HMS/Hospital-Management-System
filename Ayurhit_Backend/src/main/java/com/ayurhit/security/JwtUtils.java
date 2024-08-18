@@ -68,7 +68,6 @@ public class JwtUtils {
 	
 	public  Long getId(String token) {
 		Claims claim = validateJwtToken(token);
-		  ((Integer) claim.get("userId")).longValue();
 		 return ((Integer) claim.get("userId")).longValue();
 	}
 
