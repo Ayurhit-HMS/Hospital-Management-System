@@ -57,13 +57,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return modelMapper.map(persistedAppointment, BookAppointmentDTO.class);
 	}
 
-	public boolean cancelAppointment(Long appointmentId) {
-		Appointment appointment = appointmentDAO.findById(appointmentId).orElse(null);
-		appointment.setStatus(AppointmentStatus.CANCELLED);
-		appointmentDAO.save(appointment);
-		return true;
-	}
-
 	@Override
 	public Boolean updateAppointmentStatus(Long id) {
 		System.out.println("Updating using new");

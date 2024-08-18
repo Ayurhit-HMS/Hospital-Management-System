@@ -57,6 +57,8 @@ const LoginPage = () => {
           navigate('/patient/dashboard')
           toast.success("Login successful")
         }
+        else if(decoded.authorities =='ROLE_DOCTOR'){
+          navigate('/doctor/appointments')
 
         }
       } else {
