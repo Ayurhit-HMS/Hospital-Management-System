@@ -3,14 +3,11 @@ package com.ayurhit.dto;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.ayurhit.entity.Address;
-import com.ayurhit.entity.Admin;
-import com.ayurhit.entity.Branch;
-import com.ayurhit.entity.Language;
 import com.ayurhit.type.EmployeeStatus;
 import com.ayurhit.type.EmploymentType;
-import com.ayurhit.type.Gender;
 import com.ayurhit.type.WorkShift;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,29 +15,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
-public class AdminResponseDTO {
-
-	private String firstName;
-
-	private String lastName;
-
-	private String email;
-
-	private Gender gender;
-
-	private String phone;
-
-	private LocalDate birthDate;
-
-	private String profilePhoto;
-
-	private AddressDTO addressdDTO;
+public class EmployeeResponseDTO extends UserResponseDTO{
 
 	private double salary;
 	
@@ -54,9 +34,7 @@ public class AdminResponseDTO {
 	
 	private EmployeeStatus employeeStatus;
 
-	private Set<LanguagesDTO> languagesDTO ;
+	private Set<LanguagesDTO> languages;
 	
-	private BranchDTO branchDTO;
-	
-	private AdminResponseDTO managerDTO;
+	private BranchDTO branch;
 }
