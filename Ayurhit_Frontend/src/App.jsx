@@ -45,8 +45,6 @@ function App() {
             <Route path='/admin/emplist' element={< AdminEmpList/>} />
             <Route path='/admin/schedulelist' element={<AdminScheduleList />} />
             <Route path='/admin/deptlist' element={<AdminDeptList />} />
-            <Route path='/admin/addschedule' element={<AdminAddSchedule />} />
-
             <Route path="/about" element={<AboutUs />} />  
           </Route>
 
@@ -55,7 +53,7 @@ function App() {
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
             <Route path="/admin/addDoctor" element={<AdminAddDoctor/>} />
-
+            <Route path='/admin/addschedule' element={<AdminAddSchedule />} />
           </Route>
         </Routes>
       </Router>

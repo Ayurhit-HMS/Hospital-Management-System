@@ -6,14 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class LanguagesDTO {
-	
+public class RoleResDTO {
+
 	private Long id;
-	 
-	private String name;
+	private String roleName;
 }
