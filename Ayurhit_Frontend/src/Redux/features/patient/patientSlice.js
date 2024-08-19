@@ -4,6 +4,7 @@ const patientSlice = createSlice({
   name: 'patient',
   initialState: {
     patient: null,
+    logout:null
   },
   reducers: {
     setPatientDetails: (state, action) => {

@@ -7,7 +7,7 @@ import { getDoctors } from "../services/doctorService";
 import { getScheduls } from "../services/scheduleService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { scheduleNewAppointment } from "../services/AppointmentService";
+import { scheduleNewAppointment } from "../services/appointmentService";
 import { updateSchedules } from "../services/scheduleService";
 import { useSelector } from "react-redux";
 
@@ -38,14 +38,12 @@ function BookAppointment() {
         fetchAllDepartments();
     }, []);
 
-
-
-
     const selectDepartment = async (department) => {
         setSelectedDoctor(null);
         setSelectedSchedule(null);
 
         setSelectedDepartment(department);
+
         try {
             const response = await getDoctors(department);
             if (response && response.data) {
@@ -90,9 +88,10 @@ function BookAppointment() {
         try {
             let obj = { appointmentDate: selectedSchedule.scheduleDate, appointmentTime: selectedSchedule.scheduleTime, doctorId: selectedDoctor.id, patientId: 16 }
             const response = await scheduleNewAppointment(obj);
-            console.log(obj);
-            console.log("Response data:", response);
-            toast.success("Appointment booked successfully.");
+            if (response && response.status === 200) {
+                toast.success("Appointment booked successfully.");
+                navigate('/patient/appointments')
+            }
             if (response && response.status == 200) {
                 const response = await updateSchedules(selectedSchedule.id);
             }
