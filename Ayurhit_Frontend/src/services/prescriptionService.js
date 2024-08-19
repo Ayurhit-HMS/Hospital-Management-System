@@ -14,4 +14,4 @@ export async function getPrescriptions() {
     } catch (ex) {
         return null
     }
-}
+}   
