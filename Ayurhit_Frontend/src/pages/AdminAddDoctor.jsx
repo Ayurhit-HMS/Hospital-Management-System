@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addDoctor } from "../services/doctorService";
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { getAllBranches, getAllLanguages } from "../services/adminService";
+import { getAllDepartments } from "../services/departmentService"
 
 function AdminAddDoctor() {
 
@@ -39,6 +41,50 @@ function AdminAddDoctor() {
     const [licensingAuthority, setLicensingAuthority] = useState('')
     const [description, setDescription] = useState('')
     const [departmentId, setDepartmentId] = useState('')
+    const [Languages, setLanguages] = useState([])
+    const [branches, setBranches] = useState([])
+    const [departments, setDepartments] = useState([])
+    const [selectedLanguages, setSelectedLanguages] = useState([])
+    const [selectedLanguage, setSelectedLanguage] = useState(null)
+
+    useEffect(() => {
+        const fetchLanguages = async () => {
+            try {
+                const response = await getAllLanguages()
+                console.log(response.data)
+                if (response && response.status === 200) {
+                    setLanguages(response.data)
+                }
+            } catch (ex) {
+                console.log(ex)
+            }
+        }
+
+        const fetchBranches = async () => {
+            try {
+                const response = await getAllBranches()
+                console.log(response.data)
+                if (response && response.status === 200) {
+                    setBranches(response.data)
+                }
+            } catch (ex) {
+                console.log(ex)
+            }
+        }
+
+        const fetchDepartments = async () => {
+            try {
+                const response = await getAllDepartments()
+                setDepartments(response.data)
+                console.log(response.data)
+            } catch (ex) {
+                console.log(ex)
+            }
+        }
+        fetchLanguages()
+        fetchBranches()
+        fetchDepartments()
+    }, [])
 
     const addNewDoctor = async () => {
         const result = await addDoctor(
@@ -86,9 +132,17 @@ function AdminAddDoctor() {
         }
     }
 
+    const addLanguage = () => {
+        if (selectedLanguage && !selectedLanguages.includes(selectedLanguage)) {
+            setSelectedLanguages([...selectedLanguages, selectedLanguage])
+        }
+    }
+
     const OnCancel = async () => {
         navigate('/admin/emplist')
     }
+
+
     return (
 
         <div className="container">
@@ -309,38 +363,40 @@ function AdminAddDoctor() {
                                 </select>
                             </div>
 
+
                             <div className="col">
                                 <div className="mb-3">
-                                    <label htmlFor=''>Languages</label>
+                                    <label htmlFor=''>ConsultationFee</label>
                                     <input onChange={(e) => {
-                                        setEmployeeStatus(e.target.value)
+                                        setConsultationFees(e.target.value)
                                     }}
-                                        type="text"
+                                        type="number"
                                         className="form-control"
                                     />
                                 </div>
                             </div>
-
                         </div>
                         <div className="row">
                             <div className="col mb-3">
                                 <label className="form-label">Branch</label>
                                 <select class="form-select" name="branchId" value={branchId} onChange={(e) => {
-                                    setWorkShift(e.target.value)
+                                    setBranchId(e.target.value)
                                 }}>
                                     <option value="" disabled>Select Barnch</option>
-                                    <option value=""></option>
-                                    <option value=""></option>
+                                    {branches.map((branch) => (
+                                        <option key={branch.id}>{branch.name}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="col mb-3">
-                                <label className="form-label">Role</label>
-                                <select class="form-select" name="branchId" value={roleId} onChange={(e) => {
-                                    setWorkShift(e.target.value)
+                                <label className="form-label">Department</label>
+                                <select class="form-select" name="branchId" value={departmentId} onChange={(e) => {
+                                    setDepartmentId(e.target.value)
                                 }}>
-                                    <option value="" disabled>Select Role</option>
-                                    <option value=""></option>
-                                    <option value=""></option>
+                                    <option value="" disabled>Select Department</option>
+                                    {departments.map((department) => (
+                                        <option>{department.departmentName}</option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
@@ -390,51 +446,26 @@ function AdminAddDoctor() {
                         </div>
 
                         <div className="row">
+
+                        </div>
+                        <div className="row">
                             <div className="col">
                                 <div className="mb-3">
-                                    <label htmlFor=''>ConsultationFee</label>
-                                    <input onChange={(e) => {
-                                        setConsultationFees(e.target.value)
-                                    }}
-                                        type="number"
+                                    <label htmlFor="description">Description</label>
+                                    <textarea
+                                        id="description"
+                                        onChange={(e) => setDescription(e.target.value)}
                                         className="form-control"
                                     />
                                 </div>
                             </div>
 
 
-                            <div className="col mb-3">
-                                <label className="form-label">Department</label>
-                                <select class="form-select" name="branchId" value={departmentId} onChange={(e) => {
-                                    setDepartmentId(e.target.value)
-                                }}>
-                                    <option value="" disabled>Select Department</option>
-                                    <option value=""></option>
-                                    <option value=""></option>
-                                </select>
-                            </div>
-
-
-
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <div className="mb-3">
-                                    <label htmlFor=''>Description</label>
-                                    <input onChange={(e) => {
-                                        setDescription(e.target.value)
-                                    }}
-                                        type="text-area"
-                                        className="form-control"
-                                    />
-                                </div>
-                            </div>
-
                         </div>
 
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col">
-                                <label htmlFor="">Select Availability Schedule</label><br />
+                                <label className="mb-2" htmlFor="">Select Availability Schedule</label><br />
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
                                     <label class="form-check-label" for="inlineCheckbox1">Mon</label>
@@ -466,6 +497,20 @@ function AdminAddDoctor() {
                             </div>
                         </div>
 
+                        <div class="input-group mb-4 mt-4">
+                            <select class="form-select" id="inputGroupSelect04" value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
+                                <option selected>Select Language</option>
+                                {Languages.map((language) => (
+                                    <option value={language.name} >{language.name}</option>
+                                ))}
+                            </select>
+                            <button class="btn btn-success" type="button" onClick={addLanguage}>Add</button>
+                        </div>
+
+                        {selectedLanguages.map((language) => (
+                            <div>{language}</div>
+                        ))}
+
                         <div className="mb-3 text-center">
                             <button onClick={addNewDoctor} className='btn btn-success ps-2 pe-2'>Register</button>
                             <button onClick={OnCancel} className='btn btn-danger ps-3  pe-3 ms-5'>Cancel</button>
@@ -473,7 +518,7 @@ function AdminAddDoctor() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
 
     )
 
