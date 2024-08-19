@@ -3,9 +3,8 @@ import "../styles/patientDashboard.css"
 import Footer from "../components/Footer"
 import { useState } from "react";
 
-
-
 function PatientDashboard() {
+    
     const [isSidebarVisible, setSidebarVisible] = useState(true);
 
     const toggleSidebar = () => {

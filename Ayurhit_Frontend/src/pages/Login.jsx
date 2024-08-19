@@ -16,27 +16,29 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const [patient, setPatient] = useState();
-
-
   const fetchPatientDetails = async (jwt) => {
     try {
       if (jwt) {
         const response = await getPatientDetails(jwt);
+
         if (response && response.status === 200) {
-          dispatch(setPatientDetails(response));
-          setPatient(response);
-        }else{
-          toast.error("Sorry,Something went wrong, Please try again after some time")
-          navigate("/home")
+          const patientData = response.data;
+          console.log('patinet data',patientData)
+          console.log('response',response.data)
+
+          dispatch(setPatientDetails(response.data));
+          console.log('dispatched')
+        } else {
+          toast.error("Sorry, Something went wrong, Please try again after some time");
+          navigate("/home");
         }
       } else {
         console.error('JWT not found');
       }
-    } catch (error) {
-      console.error('Failed to fetch patient details:', error);
+    } catch (ex) {
+      console.error('Failed to fetch patient details:', ex);
     }
-  }
+  };
 
 
   const Login = async (event) => {
@@ -52,6 +54,7 @@ const LoginPage = () => {
         const token = response.data.jwt;
         const decoded = jwtDecode(token);
         sessionStorage.setItem("jwt", token)
+        console.log(token)
         if (decoded.authorities == 'ROLE_PATIENT') {
           fetchPatientDetails(token);
           navigate('/patient/dashboard')
