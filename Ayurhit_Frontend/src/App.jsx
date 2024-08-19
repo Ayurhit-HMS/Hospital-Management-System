@@ -18,6 +18,7 @@ import NewDoctorAppointment from './pages/DoctorAppointment.jsx'
 import AdminScheduleList from './pages/AdminScheduleList.jsx';
 import Prescription from './pages/Prescription.jsx'
 
+
 function App() {
   return (
     <div>
@@ -38,7 +39,11 @@ function App() {
             <Route path="/doctor/dashboard" element={<PatientDashboard />} />
             <Route path="/doctor/appointments" element={<NewDoctorAppointment />} />
             <Route path='/admin/schedulelist' element={<AdminScheduleList />} />
+            <Route path='/admin/deptlist' element={<AdminDeptList />} />
+            <Route path='/admin/addDepartment' element={<AdminAddDepartment/>} />
+
             <Route path="/about" element={<AboutUs />} />
+            
               
               
           </Route>

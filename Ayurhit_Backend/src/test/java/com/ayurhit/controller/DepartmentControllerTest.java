@@ -34,7 +34,7 @@ public class DepartmentControllerTest {
 				new DepartmentDTO(3L, "Neurology", "about", "path3"),
 				new DepartmentDTO(4L, "Oncology", "about", "path4"));
 
-		when(departmentService.getAllDepartments()).thenReturn(departments);
+		//when(departmentService.getAllDepartments()).thenReturn(departments);
 
 		mockMvc.perform(get("/departments")).andExpect(status().isOk())
 				.andExpect(jsonPath("$[0].departmentName").value("Cardiology"))

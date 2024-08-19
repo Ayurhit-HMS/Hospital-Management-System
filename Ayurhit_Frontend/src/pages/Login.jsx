@@ -60,6 +60,7 @@ const LoginPage = () => {
           navigate('/patient/dashboard')
           toast.success("Login successful")
         }
+
       } else {
         toast.error('Login failed')
       }
