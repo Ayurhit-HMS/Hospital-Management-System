@@ -41,3 +41,36 @@ export async function getAllSchedules(token) {
         return null;
     }
 }
+
+export async function addSchedule(
+    schedule_Date,
+    schedule_Time,
+    status,
+    doctorId,
+    adminId,
+    departmentId
+) {
+const body = {
+ schedule_Date,
+    schedule_Time,
+    status,
+    doctorId,
+    adminId,
+    departmentId
+}
+
+const token = sessionStorage.getItem("jwt")
+const url = createUrl('/schedules')
+try {
+ const response = await axios.post(url, body, {
+     headers: {
+         Authorization: `Bearer ${token}`
+     }
+ })
+ return response
+} catch (ex) {
+ return null
+}
+
+}
+

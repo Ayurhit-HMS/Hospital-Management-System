@@ -57,6 +57,9 @@ const LoginPage = () => {
           navigate('/patient/dashboard')
           toast.success("Login successful")
         }
+        else if(decoded.authorities =="ROLE_ADMIN") {
+          navigate('/admin/emplist')
+        }
 
       } else {
         toast.error('Login failed')

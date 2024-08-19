@@ -1,17 +1,18 @@
 import AdminSidebar from "../components/AdminSidebar";
 import { useEffect, useState } from "react";
+import {getAllEmployees} from "../services/employeeService";
 import Footer from "../components/Footer"
+import { getAdminDetails } from "../services/adminService";
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
+import "../styles/adminList.css";
 import "../styles/patientDashboard.css"
-import { getAllSchedules} from "../services/scheduleService";
-import { getAdminDetails } from "../services/adminService";
 
-function AdminScheduleList (){
+function AdminEmpList (){
 
     const navigate = useNavigate()
 
-    const [Schedules, setSchedules] = useState([])
+    const[Employees, setEmployees] = useState([])
 
     const [admin, setAdmin] = useState([])
 
@@ -19,8 +20,6 @@ function AdminScheduleList (){
         const fetchAdminDetails = async () => {
             try {
                 const jwt = sessionStorage.getItem("jwt");
-                const decoded = jwtDecode(jwt)
-                const email = decoded.sub
                 if (jwt) {
                     const response = await getAdminDetails(jwt);
                     console.log(response)
@@ -37,15 +36,13 @@ function AdminScheduleList (){
     }, []);
 
     useEffect(() => {
-        loadSchedules()
+        loadEmployees()
     }, [])
 
-    const loadSchedules = async () => {
+    const loadEmployees = async () => {
         const jwt = sessionStorage.getItem("jwt");
-        const result =await getAllSchedules(jwt)
-        console.log(result)
-
-        setSchedules(result)   
+        const result =await getAllEmployees(jwt)
+        setEmployees(result)   
     }
 
     const [isSidebarVisible, setSidebarVisible] = useState(true);
@@ -54,10 +51,12 @@ function AdminScheduleList (){
         setSidebarVisible(!isSidebarVisible);
     };
 
-    const AddSchedule = () => {
-       navigate('/admin/addSchedule')
+    const AddDoctor = () => {
+       navigate('/admin/addDoctor')
     }
 
+    const AddFrontDesk =() => {
+    }
 
     return (
         <div className="container-fluid ">
@@ -70,8 +69,9 @@ function AdminScheduleList (){
                     <div className={isSidebarVisible ? "ms-3" : "ms-0"}>
                         <div className="row">
                              <div>
-                                <h3 style={{textAlign : 'center', color : 'red'}}>Schedule List</h3>                                
-                                <button onClick={AddSchedule} className="btn btn-success" style={{marginBottom:10, marginRight:20}}>Add Schedule</button>
+                                <h3 style={{textAlign : 'center', color : 'red'}}>Employee List</h3>                                
+                                <button onClick={AddDoctor} className="btn btn-success" style={{marginBottom:10, marginRight:20}}>Add Doctor</button>
+                                <button onClick={AddFrontDesk} className="btn btn-success" style={{marginBottom:10}}>Add FrontDesk</button>
                             </div>
                             <br/>
                             <br/>
@@ -81,22 +81,26 @@ function AdminScheduleList (){
                                         <thead>
                                             <tr style={{textAlign : 'center'}}>
                                                 <th>ID</th>
-                                                <th>Schedule Date</th>
-                                                <th>Schedule Time</th>
-                                                <th>Schedule Status</th>
-                                                <th>Doctor Name</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Role</th>
+                                                <th>Email</th>
+                                                <th>Contact Number</th>
+                                                <th>WorkShift</th>
                                                 <th style={{textAlign : 'center'}}>Events</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {Schedules.map((schedule) => {
+                                            {Employees.map((employee) => {
                                                 return (
                                                     <tr style={{textAlign : 'center'}}>
-                                                        <td>{schedule.id}</td>
-                                                        <td>{schedule.scheduleDate}</td>
-                                                        <td>{schedule.scheduleTime}</td>                                  
-                                                        <td>{schedule.isSelected ? 'Selected' : 'Not Selected'}</td>
-                                                        <td>{schedule.doctorResponseDTO.firstName}</td>
+                                                        <td>{employee.id}</td>
+                                                        <td>{employee.firstName}</td>
+                                                        <td>{employee.lastName}</td>  
+                                                        <td>{employee.role.roleName}</td>                                     
+                                                        <td>{employee.email}</td>
+                                                        <td>{employee.phone}</td>
+                                                        <td>{employee.workShift}</td>
                                                         <td >
                                                             <tr className="d-flex justify-content-center">
                                                                 <td >
@@ -129,4 +133,4 @@ function AdminScheduleList (){
     );
 }
 
-export default AdminScheduleList;
+export default AdminEmpList;
