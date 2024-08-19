@@ -34,7 +34,7 @@ public class PatientServiceImpl implements PatientService {
 	public void addPatient(AddPatientDTO addPatientDTO) {
 		Patient patient = modelMapper.map(addPatientDTO, Patient.class);
 		patient.setBloodGroup(BloodGroup.fromCode(addPatientDTO.getBloodGroup()));
-		Role role = roleDAO.findById(1L).orElseThrow(() -> new RuntimeException("Role not found"));
+		Role role = roleDAO.findById(6L).orElseThrow(() -> new RuntimeException("Role not found"));
 		patient.setRole(role);
 		System.out.println(addPatientDTO.getPhone());
 		patient.setDeleted(false);
