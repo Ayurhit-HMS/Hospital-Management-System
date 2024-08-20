@@ -18,3 +18,37 @@ export async function getAdminDetails(token) {
         return null;
     }
 }
+
+export async function getAllLanguages() {
+    const url = createUrl('/languages')
+    const token = sessionStorage.getItem("jwt")
+    try {
+        const response = await axios.get(url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response; 
+    } catch (ex) {
+        console.error('Error fetching admin details:', ex);
+        return null;
+    }
+}
+
+
+
+export async function getAllBranches() {
+    const url = createUrl('/branches')
+    const token = sessionStorage.getItem("jwt")
+    try {
+        const response = await axios.get(url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response; 
+    } catch (ex) {
+        console.error('Error fetching admin details:', ex);
+        return null;
+    }
+}

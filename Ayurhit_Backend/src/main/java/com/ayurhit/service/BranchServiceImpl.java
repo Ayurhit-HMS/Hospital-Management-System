@@ -48,7 +48,6 @@ public class BranchServiceImpl implements BranchService {
 			Address address = mapper.map(dto.getAddressDTO(), Address.class);
 			branchEntity.setAddress(address);
 			mapper.map(dto, branchEntity);
-		
 			return mapper.map(branchEntity, BranchDTO.class);
 		}
 		return null;

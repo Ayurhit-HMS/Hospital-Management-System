@@ -3,16 +3,14 @@ import axios from "axios";
 import { createUrl, log } from '../utils/utils'
 
 export async function getDoctors(departmentName) {
-    const token = sessionStorage.getItem("jwt")
-
-    const url = createUrl(`/doctor/dept/${encodeURIComponent(departmentName)}`);
+    const url = createUrl(`/doctor/dept/${departmentName}`);
+    const token = sessionStorage.getItem("jwt");
     try {
-        const response = await axios.get(url, {
+        const response = await axios.get(url,{
             headers: {
                 Authorization: `Bearer ${token}`
             }
-            } );
-            console.log(response)
+        });
         return response;
     } catch (ex) {
         console.error('Failed to fetch doctors:', ex);

@@ -18,7 +18,7 @@ function AdminAddSchedule() {
     const [ScheduleDate, setScheduleDate] = useState(null)
     const [ScheduleTime, setScheduleTime] = useState(null)
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
     useEffect( () => {
       const fetchAllDepartments = async () => {
@@ -102,6 +102,7 @@ function AdminAddSchedule() {
     const OnCancel = async () => {
       navigate('/admin/schedulelist')
     }
+  
 
   return (
     <div className="container-fluid patient-dashboard-content">
