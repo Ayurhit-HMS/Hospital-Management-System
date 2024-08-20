@@ -21,6 +21,7 @@ import AdminScheduleList from './pages/AdminScheduleList.jsx';
 import AdminDeptList from './pages/AdminDeptList.jsx';
 import AdminAddDoctor from './pages/AdminAddDoctor.jsx';
 import AdminAddSchedule from './pages/AdminAddSchedule.jsx';
+import AdminAddDepartment from './pages/AdminAddDept.jsx';
 
 function App() {
   return (
@@ -46,7 +47,7 @@ function App() {
             <Route path='/admin/schedulelist' element={<AdminScheduleList />} />
             <Route path='/admin/deptlist' element={<AdminDeptList />} />
             <Route path='/admin/addschedule' element={<AdminAddSchedule />} />
-
+            <Route path='/admin/addDepartment' element={<AdminAddDepartment/>} />
             <Route path="/about" element={<AboutUs />} />
             
               
