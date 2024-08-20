@@ -22,53 +22,44 @@ import lombok.ToString;
 @Entity
 public class Bill extends BaseEntity {
 
-	@Column(nullable = false, precision = 10, scale = 2)
-	private Double amount;
-	
+	@Column(nullable = false, columnDefinition = "integer default 0")
 	private Double gstAmount;
-	
-	@Column(nullable = false, precision = 10, scale = 2)
-	private Double totalAmount;
-	
-	@Column(nullable = false, precision = 10, scale = 2)
+
+	@Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
 	private String billingDate;
-	
-	
+
 	private LocalDate dueDate;
-	
-	@Column(length=20, nullable =false)
+
+	@Column(length = 20, nullable = false)
 	private String status;
-	
-	@Column(length=20)
+
+	@Column(nullable = false,length = 20)
 	private String paymentMethod;
-	
-	@Column(length=50, nullable=false, unique=true)
+
+	@Column(length = 50, unique = true)
 	private String transactionId;
-	
-	@Column(nullable = false, precision = 10, scale = 2)
-	private Double consultationFee;
-	
-	@Column(nullable = false, precision = 10, scale = 2)
+
+	@Column(nullable = false, precision = 10, scale = 2,columnDefinition = "integer default 0")
 	private Double procedureFees;
-	
-	@Column(nullable = false, precision = 10, scale = 2)
+
+	@Column(nullable = false, precision = 10, scale = 2,columnDefinition = "integer default 0")
 	private Double medicationFees;
-	
-	@Column(nullable = false, precision = 10, scale = 2)
+
+	@Column(nullable = false, precision = 10, scale = 2,columnDefinition = "integer default 0")
 	private Double otherCharges;
-	
-	@Column(nullable = false, precision = 10, scale = 2)
+
+	@Column(nullable = false, precision = 10, scale = 2,columnDefinition = "integer default 0")
 	private Double discount;
 
 	@ManyToOne
-	@JoinColumn(name = "patient_id", nullable =false)
+	@JoinColumn(name = "patient_id", nullable = false)
 	private Patient patient;
 
 	@OneToOne
 	private Admission admission;
 
 	@ManyToOne
-	@JoinColumn(nullable =false)
+	@JoinColumn(nullable = false)
 	private Doctor doctor;
 
 	@ManyToOne

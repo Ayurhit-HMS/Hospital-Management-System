@@ -40,18 +40,23 @@ public class AdminResponseDTO {
 
 	private String profilePhoto;
 
-	private Address address;
+	private AddressDTO addressdDTO;
 
 	private double salary;
+	
 	private LocalDate joinedDate;
+	
 	private String qualification;
+	
 	private EmploymentType employmentType;
+	
 	private WorkShift workShift;
+	
 	private EmployeeStatus employeeStatus;
 
-	private Set<Language> languages ;
+	private Set<LanguagesDTO> languagesDTO ;
 	
-	private Branch branch;
+	private BranchDTO branchDTO;
 	
-	private Admin manager;
+	private AdminResponseDTO managerDTO;
 }

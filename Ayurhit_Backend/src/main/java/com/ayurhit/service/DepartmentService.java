@@ -3,6 +3,7 @@ package com.ayurhit.service;
 import java.util.List;
 
 import com.ayurhit.dto.DepartmentDTO;
+import com.ayurhit.dto.DepartmentResDTO;
 
 public interface DepartmentService {
 
@@ -10,7 +11,7 @@ public interface DepartmentService {
 	
 	DepartmentDTO updateDepartment(Long id, DepartmentDTO dto);
 
-	List<DepartmentDTO> getAllDepartments();
+	List<DepartmentResDTO> getAllDepartments();
 
 	String deleteDepartment(Long id);
 

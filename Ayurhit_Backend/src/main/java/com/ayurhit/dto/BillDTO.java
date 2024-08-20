@@ -1,7 +1,5 @@
 package com.ayurhit.dto;
 
-import com.ayurhit.entity.BaseEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +11,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class BillDTO extends BaseEntity {
-
+public class BillDTO {
+	private Long id;
 	private Double amount;
 	private Double gstAmount;
 	private Double totalAmount;
@@ -23,12 +21,12 @@ public class BillDTO extends BaseEntity {
 	private String status;
 	private String paymentMethod;
 	private String transactionId;
-	private Double consultationFee;
 	private Double procedureFees;
 	private Double medicationFees;
 	private Double otherCharges;
 	private Double discount;
 	private PatientDTO patient;
+	private PrescriptionDoctorDTO doctor;
 	private DepartmentDTO department;
 	private AdminDTO admin;
 }

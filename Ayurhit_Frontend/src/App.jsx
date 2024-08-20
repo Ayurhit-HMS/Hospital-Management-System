@@ -23,6 +23,13 @@ import Prescription from './pages/Prescription.jsx'
 
 
 
+import Prescription from './pages/Prescription.jsx'
+import AdminEmpList from './pages/AdminEmpList.jsx';
+import AdminScheduleList from './pages/AdminScheduleList.jsx';
+import AdminDeptList from './pages/AdminDeptList.jsx';
+import AdminAddDoctor from './pages/AdminAddDoctor.jsx';
+import AdminAddSchedule from './pages/AdminAddSchedule.jsx';
+import AdminAddDepartment from './pages/AdminAddDept.jsx';
 
 function App() {
   return (
@@ -43,11 +50,21 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/doctor/dashboard" element={<PatientDashboard />} />
             <Route path="/doctor/appointments" element={<NewDoctorAppointment />} />
+<<<<<<< HEAD
             <Route path="/doctor/prescription" element={<DoctorPrescription />} />
             
            
            
+=======
+
+            <Route path='/admin/emplist' element={< AdminEmpList/>} />
+            <Route path='/admin/schedulelist' element={<AdminScheduleList />} />
+            <Route path='/admin/deptlist' element={<AdminDeptList />} />
+            <Route path='/admin/addschedule' element={<AdminAddSchedule />} />
+            <Route path='/admin/addDepartment' element={<AdminAddDepartment/>} />
+>>>>>>> 9735c34e8789afc49eefb6801e3663ec191b0d13
             <Route path="/about" element={<AboutUs />} />
+            
               
               
           </Route>
@@ -56,6 +73,9 @@ function App() {
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
+            <Route path="/admin/addDoctor" element={<AdminAddDoctor/>} />
+
+
           </Route>
         </Routes>
       </Router>

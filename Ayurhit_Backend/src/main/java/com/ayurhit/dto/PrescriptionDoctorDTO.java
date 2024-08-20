@@ -14,4 +14,9 @@ import lombok.ToString;
 public class PrescriptionDoctorDTO {
 	private String firstName;
 	private String lastName;
+	private String phone;
+	private String qualification;
+	private String specelization;
+	private DepartmentDTO department;
+	private double consultationFees;
 }

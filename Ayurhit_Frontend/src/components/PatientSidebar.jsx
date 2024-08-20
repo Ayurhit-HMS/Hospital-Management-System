@@ -1,16 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logout } from '../Redux/actions';
 import "../styles/sidebar.css"
 import { useSelector } from 'react-redux';
+import { logout } from '../Redux/features/patient/patientSlice'
 
-function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
 
+function PatientSidebar({ isSidebarVisible, toggleSidebar }) {
     const patient = useSelector(state => state.patient.patient);
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        if (patient) {
+            console.log('patient in usestate',patient)
+        }
+    }, [patient]); 
 
     useEffect(() => {
         const offcanvasElement = document.getElementById('offcanvasScrolling');
@@ -34,7 +40,6 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar, patientDetails }) {
         dispatch(logout());
         sessionStorage.clear();
         navigate('/home');
-        window.location.reload();
     };
 
     const patientName = patient ? `${patient.firstName} ${patient.lastName}` : "User";

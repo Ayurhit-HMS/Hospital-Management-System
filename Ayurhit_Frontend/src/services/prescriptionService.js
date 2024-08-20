@@ -14,6 +14,7 @@ export async function getPrescriptions() {
     } catch (ex) {
         return null
     }
+
 }
 
 export async function getMedicines(token) {
@@ -45,3 +46,4 @@ export async function submitPrescription(DoctorPrescriptionDTO, token) {
         return null;
     }
 }
+

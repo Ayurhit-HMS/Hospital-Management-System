@@ -31,11 +31,9 @@ public class AppointmentController {
 	@GetMapping
 	public ResponseEntity<List<AppointmentDTO>> patientAppointments(@RequestHeader("Authorization") String authHeader) {
 
-		if (authHeader != null && authHeader.startsWith("Bearer ")) {
-			String token = authHeader.substring(7);
-
+		if (authHeader != null) {
 			try {
-				List<AppointmentDTO> appointments = appointmentService.getPatientAppointments(jwtUtils.getId(token));
+				List<AppointmentDTO> appointments = appointmentService.getPatientAppointments(jwtUtils.getId(authHeader));
 				return ResponseEntity.ok(appointments);
 			} catch (Exception e) {
 				e.printStackTrace();

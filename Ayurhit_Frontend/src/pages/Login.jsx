@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loginUser } from "../services/userService";
 import { jwtDecode } from 'jwt-decode';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getPatientDetails } from "../services/patientService";
 import { setPatientDetails } from '../Redux/features/patient/patientSlice';
 import { useDispatch } from 'react-redux';
@@ -16,27 +16,29 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const [patient, setPatient] = useState();
-
-  useEffect(() => {
-
-
-  }, []);
-
   const fetchPatientDetails = async (jwt) => {
     try {
       if (jwt) {
         const response = await getPatientDetails(jwt);
-        console.log(response)
-        setPatient(response);
-        dispatch(setPatientDetails(response));
+
+        if (response && response.status === 200) {
+          const patientData = response.data;
+          console.log('patinet data',patientData)
+          console.log('response',response.data)
+
+          dispatch(setPatientDetails(response.data));
+          console.log('dispatched')
+        } else {
+          toast.error("Sorry, Something went wrong, Please try again after some time");
+          navigate("/home");
+        }
       } else {
         console.error('JWT not found');
       }
-    } catch (error) {
-      console.error('Failed to fetch patient details:', error);
+    } catch (ex) {
+      console.error('Failed to fetch patient details:', ex);
     }
-  }
+  };
 
 
   const Login = async (event) => {
@@ -52,15 +54,16 @@ const LoginPage = () => {
         const token = response.data.jwt;
         const decoded = jwtDecode(token);
         sessionStorage.setItem("jwt", token)
-       if (decoded.authorities == 'ROLE_PATIENT') {
+        console.log(token)
+        if (decoded.authorities == 'ROLE_PATIENT') {
           fetchPatientDetails(token);
           navigate('/patient/dashboard')
           toast.success("Login successful")
         }
-        else if(decoded.authorities =='ROLE_DOCTOR'){
-          navigate('/doctor/appointments')
-
+        else if(decoded.authorities =="ROLE_ADMIN") {
+          navigate('/admin/emplist')
         }
+
       } else {
         toast.error('Login failed')
       }

@@ -1,6 +1,10 @@
 package com.ayurhit.service;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,10 +48,16 @@ public class BranchServiceImpl implements BranchService {
 			Address address = mapper.map(dto.getAddressDTO(), Address.class);
 			branchEntity.setAddress(address);
 			mapper.map(dto, branchEntity);
-		
 			return mapper.map(branchEntity, BranchDTO.class);
 		}
 		return null;
+	}
+	
+	@Override
+	public List<BranchDTO> getAllBranchDetails() {
+		List<Branch> branches = branchDAO.findAll();
+		Type targetListType = new TypeToken <List<BranchDTO>>() {}.getType();	
+		return mapper.map(branches, targetListType);
 	}
 
 }

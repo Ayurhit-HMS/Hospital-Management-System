@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ayurhit.dao.PatientDAO;
 import com.ayurhit.dao.RoleDAO;
 import com.ayurhit.dto.AddPatientDTO;
+import com.ayurhit.dto.PatientDTO;
 import com.ayurhit.entity.Patient;
 import com.ayurhit.entity.Role;
 import com.ayurhit.type.BloodGroup;
@@ -33,11 +34,17 @@ public class PatientServiceImpl implements PatientService {
 	public void addPatient(AddPatientDTO addPatientDTO) {
 		Patient patient = modelMapper.map(addPatientDTO, Patient.class);
 		patient.setBloodGroup(BloodGroup.fromCode(addPatientDTO.getBloodGroup()));
-		Role role = roleDAO.findById(1L).orElseThrow(() -> new RuntimeException("Role not found"));
+		Role role = roleDAO.findById(6L).orElseThrow(() -> new RuntimeException("Role not found"));
 		patient.setRole(role);
 		System.out.println(addPatientDTO.getPhone());
 		patient.setDeleted(false);
 		patient.setPassword(passwordEncoder.encode(addPatientDTO.getPassword()));
 		patientDAO.save(patient);
+	}
+	
+	@Override
+	public PatientDTO getPatientDetails(Long id) {
+		Patient patient = patientDAO.findById(id).orElseThrow(null);
+		return modelMapper.map(patient, PatientDTO.class);
 	}
 }

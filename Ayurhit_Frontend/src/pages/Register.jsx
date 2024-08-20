@@ -58,7 +58,7 @@ function Register() {
         } else {
             const response = await registerPatient(formData);
             log(formData.phone)
-            if (response.status === 200) {
+            if (response && response.status === 200) {
                 toast.success('Registration successful!, please sign in');
                 navigate('/login');
             } else {

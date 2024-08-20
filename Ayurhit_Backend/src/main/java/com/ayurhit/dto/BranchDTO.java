@@ -13,35 +13,35 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 public class BranchDTO {
-	
+
+	private Long id;
+
 	private int code;
-	
+
 	private String name;
-	
+
 	private String head;
-	
+
 	private String phone;
-	
+
 	private String latitude;
 	private String longitude;
-	
+
 	private String email;
-	
+
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private LocalDate establishedDate;
-	
-	
+
 	private String licenseNumber;
 	@Lob
 	private String description;
 
 	private AddressDTO addressDTO;
-	
+
 }

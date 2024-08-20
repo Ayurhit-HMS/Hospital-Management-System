@@ -97,10 +97,9 @@ public class AdminServiceImpl implements AdminService {
 		return "failed to delete admin details...";
 	}
 	
+	public AdminResponseDTO getAdminDetails(Long id) {
+		Admin admin = adminDAO.findById(id).orElseThrow();
+		return mapper.map(admin, AdminResponseDTO.class);
+	}
 	
-	
-	
-
-	
-
 }

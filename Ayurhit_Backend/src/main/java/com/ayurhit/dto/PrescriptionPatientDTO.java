@@ -12,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class PrescriptionPatientDTO {
-	String firstName;
-	String LastName;
+	private String firstName;
+	private String LastName;
+	private String birthDate;
 }
