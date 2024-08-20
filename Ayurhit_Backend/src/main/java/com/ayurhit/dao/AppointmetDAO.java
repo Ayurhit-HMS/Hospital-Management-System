@@ -11,5 +11,6 @@ import com.ayurhit.entity.Appointment;
 public interface AppointmetDAO extends JpaRepository<Appointment, Long> {
 
 	List<Appointment> findAppointmentsByPatientId(Long patientId);
+	List<Appointment> findAppointmentsByDoctorId(Long patientId);
 
 }

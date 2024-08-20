@@ -14,4 +14,36 @@ export async function getPrescriptions() {
     } catch (ex) {
         return null
     }
-}   
+
+}
+
+export async function getMedicines(token) {
+    const url = createUrl('/medicine');
+    try {
+        const response = await axios.get(url, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }});
+        return response
+    } catch (ex) {
+        console.log('Error fetching appointments', ex);
+        return null;
+    }
+}
+
+export async function submitPrescription(DoctorPrescriptionDTO, token) {
+    const url = createUrl('/prescriptions/add');  
+    try {
+        const response = await axios.post(url, DoctorPrescriptionDTO, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+               
+            }
+        });
+        return response;
+    } catch (ex) {
+        console.log('Error submitting prescription', ex);
+        return null;
+    }
+}
+

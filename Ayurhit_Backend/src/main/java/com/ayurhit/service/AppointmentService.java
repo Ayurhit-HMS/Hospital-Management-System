@@ -12,5 +12,7 @@ public interface AppointmentService {
 	BookAppointmentDTO bookAppointment(BookAppointmentDTO bookAppointmentDTO);
 
 	public Boolean updateAppointmentStatus(Long id);
+	
+	public Boolean cancelAppointment(Long id);
 
 }

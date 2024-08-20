@@ -28,6 +28,7 @@ export async function getPatientDetails(token) {
 }
 
 
+
 export async function getBills() {
     const url = createUrl('/bill');
     const token = sessionStorage.getItem("jwt")

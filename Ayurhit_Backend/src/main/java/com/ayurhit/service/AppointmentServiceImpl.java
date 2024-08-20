@@ -77,5 +77,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 			return false;
 		}
 	}
+	public Boolean cancelAppointment(Long id) {
+		
+		try {
+			Appointment appointment = appointmentDAO.findById(id).orElseThrow();
+			appointment.setStatus(AppointmentStatus.CANCELLED);
+			appointmentDAO.save(appointment);
+			return true;
+		}catch (Exception e) {
+			return false;
+		}
+		
+	}
 
 }

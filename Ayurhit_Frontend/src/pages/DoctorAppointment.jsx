@@ -2,13 +2,18 @@ import DoctorSidebar from "../components/DoctorSidebar";
 import "../styles/patientDashboard.css";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
-import { getAppointmentDetails} from "../services/doctorService";
+import { getAppointmentDetails,update,cancelAppointment} from "../services/AppointmentService";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 
 function NewDoctorAppointment() {
+    const navigate=useNavigate()
     const [appointment, setAppointments] = useState([]);
     const [isSidebarVisible, setSidebarVisible] = useState(true);
 
@@ -20,14 +25,16 @@ function NewDoctorAppointment() {
         const fetchAppointmentDetails = async () => {
             try{
                 const jwt=sessionStorage.getItem("jwt");
-                const response=getAppointmentDetails(jwt);
-                if (response && response.status === 200) {
-                    console.log(response.data)
+                const response= await getAppointmentDetails(jwt);
+                console.log(response)
+                if (response && response.status===200) {
+                    console.log(response)
                     setAppointments(response.data);
                 } else {
                     toast.error('No appointments found');
                 }
             } catch (ex) {
+                console.log(ex)
                 toast.error('An error occurred while fetching appointments');
             }
            
@@ -52,29 +59,48 @@ function NewDoctorAppointment() {
         
     };
 
+
     const updateStatus = async (appointmentId) => {
-        console.log('calling this')
-        try {
-            const response = await axios.put(`http://localhost:8080/${appointmentId}`);
-            refreshAppointments()
+        const jwt=sessionStorage.getItem("jwt");
+    
+        const response = await update(appointmentId,jwt);
+        
+        if (response && response.status === 200) {
+            const updatedResponse = await getAppointmentDetails(jwt);
+            if (updatedResponse && updatedResponse.status === 200)
+                setAppointments(updatedResponse.data)
+            toast.success('Appointment Update successfully');
+        } else {
+            toast.error('Failed to update appointment');
         }
-        catch (ex) {
+    };
 
+    
+
+    const handleCancel = async(appointmentId) => {
+        console.log(appointmentId)
+        const jwt=sessionStorage.getItem("jwt");
+       console.log(jwt)
+        const response = await cancelAppointment(appointmentId,jwt);
+        if (response && response.status === 200) {
+            const updatedResponse = await getAppointmentDetails(jwt);
+            if (updatedResponse && updatedResponse.status === 200)
+                setAppointments(updatedResponse.data)
+            toast.success('Appointment cancel successfully');
+        } else {
+            toast.error('Failed to cancel appointment');
         }
     }
 
-    function handle(appointmentId) {
-        toast.success('done')
-    }
 
-
-    const renderDoctorButtons = (status, appointmentId) => {
+    const renderDoctorButtons = (status, appointmentId,patientId, doctorId) => {
+     
         switch (status) {
             case 'PENDING':
                 return (
                     <>
                         <button className="btn btn-success" style={{ marginRight: '10px' }} onClick={() => updateStatus(appointmentId)}>Confirm</button>
-                        <button className="btn btn-danger" style={{ marginRight: '10px' }} onClick={() => handle(appointmentId)}>Cancel</button>
+                        <button className="btn btn-danger" style={{ marginRight: '10px' }} onClick={() => handleCancel(appointmentId)}>Cancel</button>
                     </>
                 );
             case 'CONFIRMED':
@@ -85,7 +111,16 @@ function NewDoctorAppointment() {
             case 'ATTENDED':
                 return (
                     <>
-                        <button className="btn btn-primary" style={{ marginRight: '10px' }} onClick={() => updateStatus(appointmentId)}>Prescript</button>
+                        <button className="btn btn-primary" style={{ marginRight: '10px' }} onClick={() =>{ updateStatus(appointmentId);navigate('/doctor/prescription',{
+                            state: {
+                                patientId: patientId,
+                                doctorId: doctorId,
+                                appointmentId: appointmentId
+                            }
+
+                        });
+                        }}>
+                            Prescript</button>
                         <button className="btn btn-secondary" disabled>-</button>
                     </>
                 );
@@ -106,32 +141,6 @@ function NewDoctorAppointment() {
         }
     };
 
-    const refreshAppointments = async () => {
-        console.log('refreshing')
-        const jwt = sessionStorage.getItem("jwt");
-        const decodedToken = jwtDecode(jwt);
-        const email = decodedToken.sub;
-        const response = await getAppointmentDetails(jwt, email);
-        setAppointments(response);
-    };
-
-
-    // const handleConfirm = async (appointmentId) => {
-    //     try {
-    //         const jwt = sessionStorage.getItem("jwt");
-    //         console.log('fetching')
-    //         try {
-
-    //             const response = await axios.put(`http://localhost:8080/${appointmentId}/status?status=CONFIRMED`);
-    //         } catch (ex) {
-    //             console.log('done')
-    //         }
-    //         toast.success("Appointment Confirmed")
-    //         refreshAppointments();
-    //     } catch (error) {
-    //         console.error('Failed to update appointment status:', error);
-    //     }
-    // };
 
     return (
         <div className="container-fluid patient-dashboard-content">
@@ -160,12 +169,13 @@ function NewDoctorAppointment() {
                                         {appointment.map((e) => (
                                             <tr style={{ textAlign: 'center' }} key={e.id}>
                                                 <td>{e.id}</td>
-                                                <td>{e.firstName} {e.lastName}</td>
+                                                <td>{e.patient.firstName} {e.patient.lastName}</td>
                                                 <td>{e.appointmentDate} {e.appointmentTime}</td>
                                                 <td>{e.status}</td>
                                                 <td>
                                                     <div className="d-flex justify-content-center">
-                                                        {renderDoctorButtons(e.status, e.id)}
+                                                        {renderDoctorButtons(e.status, e.id,e.patient.id,e.doctor.id)}
+                                                       
                                                     </div>
                                                 </td>
                                             </tr>
