@@ -23,8 +23,10 @@ public class AppointmentDetailsController {
 	private JwtUtils jwtUtils;
 
 	@GetMapping
-	public ResponseEntity<?> getAppointment(@RequestHeader String token) throws IOException {
-
+	public ResponseEntity<?> getAppointment(@RequestHeader("Authorization") String authHeader) throws IOException {
+		String token = authHeader.substring(7);
+		Long id = jwtUtils.getId(token);
+		System.out.println(id);
 		
 		return ResponseEntity.ok(appointmentDetailsService.findAppointmentsByDoctorId(jwtUtils.getId(token)));
 	}

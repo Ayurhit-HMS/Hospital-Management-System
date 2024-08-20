@@ -41,6 +41,7 @@ public class SecurityConfig {
 				// only required for JS clnts (react / angular) : for the pre flight requests
 				.antMatchers(HttpMethod.OPTIONS).permitAll()
 				 .antMatchers("/patients/**","/prescriptions/patinet").hasRole("PATIENT")
+				 .antMatchers("/appointments-doctor/**","/appointments/{id}","/medicine","/prescriptions/add","/appointments/cancel/**").hasRole("DOCTOR")
 				// .antMatchers("/departments/get").hasRole("ADMIN")
 				.anyRequest().authenticated().and()
 				// to tell spring sec : not to use HttpSession to store user's auth details

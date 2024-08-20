@@ -42,4 +42,9 @@ public class Prescription extends BaseEntity {
 	
 	@OneToOne
 	private Appointment appointment;
+	
+	 public void addPrescriptionMedicine(PrescriptionMedicine prescriptionMedicine) {
+	        prescriptionMedicines.add(prescriptionMedicine);
+	        prescriptionMedicine.setPrescription(this);
+	    }
 }

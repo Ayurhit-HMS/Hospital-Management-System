@@ -30,3 +30,5 @@ export async function getPatientDetails(token) {
         return null;
     }
 }
+
+

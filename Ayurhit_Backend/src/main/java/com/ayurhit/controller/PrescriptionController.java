@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ayurhit.dto.DoctorPrescriptionDTO;
 import com.ayurhit.dto.PrescriptionDTO;
 import com.ayurhit.security.JwtUtils;
 import com.ayurhit.service.PrescriptionService;
@@ -46,4 +49,10 @@ public class PrescriptionController {
 		List<PrescriptionDTO> prescriptions = prescriptionService.getDoctorPrescriptions(id);
 		return ResponseEntity.ok(prescriptions);
 	}
+	
+	 @PostMapping("/add")
+	    public String createPrescription(@RequestBody DoctorPrescriptionDTO prescriptionRequest) {
+	    	System.out.println("the requestDTO is "+prescriptionRequest);
+	        return prescriptionService.createPrescription(prescriptionRequest);
+	    }
 }

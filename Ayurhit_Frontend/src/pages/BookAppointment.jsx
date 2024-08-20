@@ -7,7 +7,7 @@ import { getDoctors } from "../services/doctorService";
 import { getScheduls } from "../services/scheduleService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { scheduleNewAppointment } from "../services/appointmentService";
+import {scheduleNewAppointment} from "../services/AppointmentService"
 import { updateSchedules } from "../services/scheduleService";
 import { useSelector } from "react-redux";
 

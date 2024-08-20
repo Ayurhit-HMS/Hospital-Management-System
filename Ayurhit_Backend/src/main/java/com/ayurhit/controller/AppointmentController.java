@@ -19,7 +19,7 @@ import com.ayurhit.security.JwtUtils;
 import com.ayurhit.service.AppointmentService;
 
 @RestController
-@RequestMapping("appointments")
+@RequestMapping("/appointments")
 public class AppointmentController {
 
 	@Autowired
@@ -57,5 +57,12 @@ public class AppointmentController {
 		Boolean isUpdated = appointmentService.updateAppointmentStatus(id);
 		return ResponseEntity.ok(isUpdated);
 
+	}
+	@PutMapping("/cancel/{id}")
+	public ResponseEntity<Boolean> cancelStatus(@PathVariable Long id)
+	{
+		System.out.println("in new cancel API");
+		Boolean isCancel = appointmentService.cancelAppointment(id);
+		return ResponseEntity.ok(isCancel);
 	}
 }
