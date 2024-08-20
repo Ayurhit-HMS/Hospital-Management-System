@@ -152,7 +152,7 @@ function AdminAddSchedule() {
 
               <div className="row" >
                 <div className="col-md-3"></div>
-                <div className="col-md-6">                      
+                <div className="col-md-6 w-25">                      
                   <div className='mb-3 mt-4'>
                     <label htmlFor='' className="mt-10">Schedule Date</label>
                     <input
