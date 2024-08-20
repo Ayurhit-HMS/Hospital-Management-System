@@ -42,20 +42,17 @@ export async function getAllSchedules(token) {
     }
 }
 
-export async function addSchedule(
-    schedule_Date,
-    schedule_Time,
-    status,
+export async function addSchedule({
+    scheduleDate,
+    scheduleTime,
     doctorId,
-    adminId,
     departmentId
+}
 ) {
 const body = {
- schedule_Date,
-    schedule_Time,
-    status,
+    scheduleDate,
+    scheduleTime,
     doctorId,
-    adminId,
     departmentId
 }
 
