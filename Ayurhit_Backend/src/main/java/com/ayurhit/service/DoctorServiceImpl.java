@@ -30,6 +30,7 @@ import com.ayurhit.entity.Doctor;
 import com.ayurhit.entity.Language;
 import com.ayurhit.entity.Role;
 import com.ayurhit.entity.Schedule;
+import com.ayurhit.type.EmployeeStatus;
 
 @Service
 @Transactional
@@ -94,14 +95,16 @@ public class DoctorServiceImpl implements DoctorService {
 		Branch branch = branchDAO.findById(dto.getBranchId()).orElseThrow();
 		Address address = getAddress(dto);
 		Address persistentAddress = addressDAO.save(address);
-		Role role = roleDAO.findById(dto.getRoleId()).orElseThrow();
+		Role role = roleDAO.findByRoleName("ROLE_DOCTOR");
 		Department department = departmentDAO.findById(dto.getDepartmentId()).orElseThrow(null);
 		Doctor doctorEntity = modelMapper.map(dto, Doctor.class);
+		doctorEntity.setEmployeeStatus(EmployeeStatus.ACTIVE);
 		doctorEntity.setPassword(encodedPassword);
 		doctorEntity.setDepartment(department);
 		doctorEntity.setBranch(branch);
 		doctorEntity.setAddress(persistentAddress);
 		doctorEntity.setRole(role);
+		doctorEntity.setDeleted(false);
 		doctorEntity.setLanguages(doctorLanguages);
 		Doctor persistentDoctor = doctorDAO.save(doctorEntity);
 		return modelMapper.map(persistentDoctor, DoctorResponseDTO.class);

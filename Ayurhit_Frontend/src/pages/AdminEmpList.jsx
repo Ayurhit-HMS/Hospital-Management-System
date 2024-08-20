@@ -61,16 +61,16 @@ function AdminEmpList (){
     return (
         <div className="container-fluid ">
             <div className="row" >
-                <div className={isSidebarVisible ? "col-md-3" : "col-md-0"}>
+                <div className={isSidebarVisible ? "col-md-2" : "col-md-0"}>
                     <div className="custom-sidebar"><AdminSidebar isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} adminDetails={admin}></AdminSidebar>
                     </div>
                 </div>
                 <div className="col patient-dashboard-content">
-                    <div className={isSidebarVisible ? "ms-3" : "ms-0"}>
+                    <div className={isSidebarVisible ? "ms-5" : "ms-0"}>
                         <div className="row">
                              <div>
                                 <h3 style={{textAlign : 'center', color : 'red'}}>Employee List</h3>                                
-                                <button onClick={AddDoctor} className="btn btn-success" style={{marginBottom:10, marginRight:20}}>Add Doctor</button>
+                                <button onClick={AddDoctor} className="btn btn-success ms-10" style={{marginBottom:10, marginRight:40, marginLeft:40}}>Add Doctor</button>
                                 <button onClick={AddFrontDesk} className="btn btn-success" style={{marginBottom:10}}>Add FrontDesk</button>
                             </div>
                             <br/>

@@ -37,73 +37,9 @@ export async function getAppointmentDetails(token) {
 }
 
 
-export async function addDoctor(
-    firstName,
-    lastName,
-    email,
-    password,
-    gender,
-    phone,
-    birthDate,
-    addressLine1,
-    addressLine2,
-    city,
-    state,
-    pinCode,
-    country,
-    salary,
-    joinedDate,
-    qualification,
-    employmentType,
-    workShift,
-    employeeStatus,
-    branchId,
-    roleId,
-    specialization,
-    licenseNumber,
-    licenseExpiryDate,
-    experience,
-    consultationFees,
-    availabilitySchedule,
-    licensingAuthority,
-    description,
-    departmentId,
-    isDeleted
-) {
-
-const body = {
-    firstName,
-    lastName,
-    email,
-    password,
-    gender,
-    phone,
-    birthDate,
-    addressLine1,
-    addressLine2,
-    city,
-    state,
-    pinCode,
-    country,
-    salary,
-    joinedDate,
-    qualification,
-    employmentType,
-    workShift,
-    employeeStatus,
-    branchId,
-    roleId,
-    specialization,
-    licenseNumber,
-    licenseExpiryDate,
-    experience,
-    consultationFees,
-    availabilitySchedule,
-    licensingAuthority,
-    description,
-    departmentId,
-    isDeleted
-}
+export async function addDoctor(obj) {
+console.log(obj)
+const body = obj
 const token = sessionStorage.getItem("jwt")
 const url = createUrl('/doctor')
 try {
@@ -112,6 +48,7 @@ const response = await axios.post(url, body, {
         Authorization: `Bearer ${token}`
     }
 })
+console.log(response)
 return response
 } catch (ex) {
 return null
