@@ -52,22 +52,19 @@ export async function getAllSchedules(token) {
     }
 }
 
-export async function addSchedule(
-    schedule_Date,
-    schedule_Time,
-    status,
+export async function addSchedule({
+    scheduleDate,
+    scheduleTime,
     doctorId,
-    adminId,
     departmentId
+}
 ) {
-    const body = {
-        schedule_Date,
-        schedule_Time,
-        status,
-        doctorId,
-        adminId,
-        departmentId
-    }
+const body = {
+    scheduleDate,
+    scheduleTime,
+    doctorId,
+    departmentId
+}
 
     const token = sessionStorage.getItem("jwt")
     const url = createUrl('/schedules')

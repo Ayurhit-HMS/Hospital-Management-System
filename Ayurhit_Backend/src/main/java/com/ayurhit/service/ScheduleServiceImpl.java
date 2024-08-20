@@ -42,16 +42,16 @@ public class ScheduleServiceImpl implements ScheduleService{
 	private ModelMapper modelMapper;
 	
 	@Override
-	public ScheduleResponseDTO addSchedule(ScheduleDTO dto) {
+	public ScheduleResponseDTO addSchedule(ScheduleDTO dto, Long id) {
 		Doctor doctor = doctorDao.findById(dto.getDoctorId()).orElseThrow();
 		Department department = departmentDao.findById(dto.getDepartmentId()).orElseThrow();
-		Admin admin = adminDao.findById(dto.getAdminId()).orElseThrow();
+		Admin admin = adminDao.findById(id).orElseThrow();
 		
 		Schedule scheduleEntity = modelMapper.map(dto, Schedule.class);
 		scheduleEntity.setAdmin(admin);
 		scheduleEntity.setDepartment(department);
 		scheduleEntity.setDoctor(doctor);
-		
+		scheduleEntity.setSelected(false);
 		Schedule persistentSchedule = scheduleDao.save(scheduleEntity);
 		return modelMapper.map(persistentSchedule, ScheduleResponseDTO.class);
 	}

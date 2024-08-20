@@ -8,7 +8,7 @@ import com.ayurhit.entity.Schedule;
 
 public interface ScheduleService {
 
-	ScheduleResponseDTO addSchedule(ScheduleDTO dto);
+	ScheduleResponseDTO addSchedule(ScheduleDTO dto, Long id);
 	
 	String updateScheduleStatus(Long scheduleId);
 	
