@@ -36,5 +36,22 @@ return null
 }
 }
 
+export async function deleteDoctor(id) {
+    const token = sessionStorage.getItem("jwt")
+    const url = createUrl(`/doctor/${id}`)
+
+    try {
+        const response = await axios.delete(url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        console.log(response)
+        return response
+        } catch (ex) {
+        return null
+        }
+    
+}
 
 

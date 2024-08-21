@@ -81,3 +81,20 @@ const body = {
 
 }
 
+export async function deleteSchedule(id) {
+
+    const token = sessionStorage.getItem("jwt")
+    const url = createUrl(`/schedules/${id}`)
+    try {
+        const response = await axios.delete(url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return response
+    } catch (ex) {
+        return null
+    }  
+    
+}
+

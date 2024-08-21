@@ -24,6 +24,11 @@ function AdminSidebar({ isSidebarVisible, toggleSidebar, adminDetails }) {
         toggleSidebar();
     };
 
+    const logoutUser = () => {
+        sessionStorage.clear();
+        navigate('/home');
+    };
+
     const admintName = adminDetails ? `${adminDetails.firstName} ${adminDetails.lastName}` : "User";
     return (
         <div>
@@ -41,9 +46,8 @@ function AdminSidebar({ isSidebarVisible, toggleSidebar, adminDetails }) {
                         <button className="btn btn-custom mb-2" onClick={() => { navigate('/admin/emplist') }}>Employees</button>
                         <button className="btn btn-custom mb-2" onClick={() => { navigate('/admin/schedulelist') }}>Schedules</button>
                         <button className="btn btn-custom mb-2" onClick={() => { navigate('/admin/deptlist') }}>Departments</button>
+                        <button className='btn btn-danger' onClick={logoutUser}>Logout</button>
 
-                        <button className="btn btn-custom mb-2">Ward</button>
-                        <button className="btn btn-custom mb-2">Settings</button>
                     </div>
                 </div>
             </div>

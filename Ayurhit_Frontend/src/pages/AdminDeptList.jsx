@@ -6,7 +6,9 @@ import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
 import "../styles/adminList.css";
 import "../styles/patientDashboard.css"
-import { getAllDepartments } from "../services/departmentService";
+import { deleteDepartment, getAllDepartments } from "../services/departmentService";
+import { toast } from "react-toastify";
+
 
 function AdminDeptList (){
 
@@ -59,16 +61,17 @@ function AdminDeptList (){
        navigate('/admin/addDepartment/')
     }
 
-    const EditDepartment = (id) => {
-      
-    }
 
-    const ViewDepartment = (id) => {
-        
-    }
-
-    const DeleteDepartment = (id) => {
-
+    const DeleteDepartment =async (id) => {
+        const response = await deleteDepartment(id)
+        console.log(response)
+        if (response && response.status === 200){
+            navigate('/admin/deptlist')
+            toast.success('Department deleted  successfully');
+        }
+        else{
+            toast.error('Failed to delete department');
+        }
     }
 
 
@@ -109,13 +112,7 @@ function AdminDeptList (){
                                                         <td >
                                                             <tr className="d-flex justify-content-center">
                                                                 <td >
-                                                                    <button onClick={EditDepartment(department.id)} className="btn btn-warning" style={{marginRight : '10px'}}>Edit</button>
-                                                                </td>
-                                                                <td >
-                                                                    <button onClick={ViewDepartment(department.id)} className="btn btn-primary" style={{marginRight : '10px'}}>View</button>
-                                                                </td>
-                                                                <td >
-                                                                    <button onClick={DeleteDepartment(department.id)} className="btn btn-danger" >Delete</button>
+                                                                    <button onClick={ () => DeleteDepartment(department.id)} className="btn btn-danger" >Delete</button>
                                                                 </td>
                                                             </tr>
                                                         </td>
