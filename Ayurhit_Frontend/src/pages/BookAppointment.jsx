@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import {scheduleNewAppointment} from "../services/AppointmentService"
-import { scheduleNewAppointment } from "../services/AppointmentService";
 import { updateSchedules } from "../services/scheduleService";
 import { useSelector } from "react-redux";
 

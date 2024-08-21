@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import "../styles/patientDashboard.css"
 import { getAllSchedules} from "../services/scheduleService";
 import { getAdminDetails } from "../services/adminService";
+import { toast } from "react-toastify";
+import { deleteSchedule } from "../services/scheduleService";
 
 function AdminScheduleList (){
 
@@ -58,6 +60,19 @@ function AdminScheduleList (){
        navigate('/admin/addSchedule')
     }
 
+    const DeleteSchedule =async (id) => {
+        const response = await deleteSchedule(id)
+        console.log(response)
+        if (response && response.status === 200){
+            navigate('/admin/schedulelist')
+            toast.success('Schedule deleted  successfully');
+
+        }
+        else{
+            toast.error('Failed to delete schedule');
+        }
+    }
+
 
     return (
         <div className="container-fluid ">
@@ -100,13 +115,7 @@ function AdminScheduleList (){
                                                         <td >
                                                             <tr className="d-flex justify-content-center">
                                                                 <td >
-                                                                    <button className="btn btn-warning" style={{marginRight : '10px'}}>Edit</button>
-                                                                </td>
-                                                                <td >
-                                                                    <button className="btn btn-primary" style={{marginRight : '10px'}}>View</button>
-                                                                </td>
-                                                                <td >
-                                                                    <button className="btn btn-danger" >Delete</button>
+                                                                    <button className="btn btn-danger" onClick={ () => DeleteSchedule(schedule.id)} >Delete</button>
                                                                 </td>
                                                             </tr>
                                                         </td>

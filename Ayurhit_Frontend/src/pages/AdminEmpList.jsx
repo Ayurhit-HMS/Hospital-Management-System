@@ -7,6 +7,9 @@ import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
 import "../styles/adminList.css";
 import "../styles/patientDashboard.css"
+import { deleteDoctor } from "../services/doctorService";
+import { toast } from "react-toastify";
+
 
 function AdminEmpList (){
 
@@ -55,7 +58,16 @@ function AdminEmpList (){
        navigate('/admin/addDoctor')
     }
 
-    const AddFrontDesk =() => {
+    const DeleteEmployee = async (id) => {
+        const response = await deleteDoctor(id)
+        console.log(response)
+        if (response && response.status === 200){
+            navigate('/admin/emplist')
+            toast.success('Employee deleted  successfully');
+        }
+        else{
+            toast.error('Failed to cancel appointment');
+        }
     }
 
     return (
@@ -71,7 +83,6 @@ function AdminEmpList (){
                              <div>
                                 <h3 style={{textAlign : 'center', color : 'red'}}>Employee List</h3>                                
                                 <button onClick={AddDoctor} className="btn btn-success ms-10" style={{marginBottom:10, marginRight:40, marginLeft:40}}>Add Doctor</button>
-                                <button onClick={AddFrontDesk} className="btn btn-success" style={{marginBottom:10}}>Add FrontDesk</button>
                             </div>
                             <br/>
                             <br/>
@@ -104,13 +115,7 @@ function AdminEmpList (){
                                                         <td >
                                                             <tr className="d-flex justify-content-center">
                                                                 <td >
-                                                                    <button className="btn btn-warning" style={{marginRight : '10px'}}>Edit</button>
-                                                                </td>
-                                                                <td >
-                                                                    <button className="btn btn-primary" style={{marginRight : '10px'}}>View</button>
-                                                                </td>
-                                                                <td >
-                                                                    <button className="btn btn-danger" >Delete</button>
+                                                                    <button className="btn btn-danger" onClick={() => DeleteEmployee(employee.id)}>Delete</button>
                                                                 </td>
                                                             </tr>
                                                         </td>
