@@ -16,7 +16,6 @@ function AdminAddDoctor() {
     const [gender, setGender] = useState('')
     const [phone, setPhone] = useState('')
     const [birthDate, setBirthDate] = useState('')
-    const [isDeleted, setIsDeleted] = useState('')
     const [addressLine1, setAddressLine1] = useState('')
     const [addressLine2, setAddressLine2] = useState('')
     const [city, setCity] = useState('')
@@ -28,16 +27,14 @@ function AdminAddDoctor() {
     const [qualification, setQualification] = useState('')
     const [employmentType, setEmploymentType] = useState('')
     const [workShift, setWorkShift] = useState('')
-    const [employeeStatus, setEmployeeStatus] = useState('')
 
     const [branchId, setBranchId] = useState('')
-    const [roleId, setRoleId] = useState('')
-    const [specialization, setSpecializtion] = useState('')
+    const [specialization, setSpecialization] = useState('')
     const [licenseNumber, setLicenseNumber] = useState('')
     const [licenseExpiryDate, setLicenseExiryDate] = useState('')
     const [experience, setExperience] = useState('')
     const [consultationFees, setConsultationFees] = useState('')
-    const [availabilitySchedule, setAvailabilitySchedules] = useState('')
+    const [availabilitySchedule, setAvailabilitySchedules] = useState([1,2,3])
     const [licensingAuthority, setLicensingAuthority] = useState('')
     const [description, setDescription] = useState('')
     const [departmentId, setDepartmentId] = useState('')
@@ -87,40 +84,35 @@ function AdminAddDoctor() {
     }, [])
 
     const addNewDoctor = async () => {
-        const result = await addDoctor(
-            firstName,
-            lastName,
-            email,
-            password,
-            gender,
-            phone,
-            birthDate,
-            addressLine1,
-            addressLine2,
-            city,
-            state,
-            pinCode,
-            country,
-            salary,
-            joinedDate,
-            qualification,
-            employmentType,
-            workShift,
-            employeeStatus,
-            branchId,
-            roleId,
-            specialization,
-            licenseNumber,
-            licenseExpiryDate,
-            experience,
-            consultationFees,
-            availabilitySchedule,
-            licensingAuthority,
-            description,
-            departmentId,
-            isDeleted,
 
-        );
+        let obj = {
+            firstName : firstName,
+            lastName : lastName,
+            email : email,
+            password : password,
+            gender : gender,
+            phone : phone,
+            birthDate : birthDate,
+            addressDTO : {addressLine1, addressLine2, city, state, pinCode, country},
+            salary : salary,
+            joinedDate : joinedDate,
+            qualification : qualification,
+            employmentType : employmentType,
+            languageIds : selectedLanguages,
+            branchId : branchId,
+            specialization : specialization,
+            licenseNumber : licenseNumber,
+            licenseExpiryDate : licenseExpiryDate,
+            experience : experience,
+            consultationFees : consultationFees,
+            availabilitySchedule : JSON.stringify(availabilitySchedule),
+            licensingAuthority : licensingAuthority,
+            description : description,
+            departmentId : departmentId,
+            workShift : workShift
+        } 
+
+        const result = await addDoctor(obj);
 
         console.log(result)
 
@@ -136,6 +128,10 @@ function AdminAddDoctor() {
         if (selectedLanguage && !selectedLanguages.includes(selectedLanguage)) {
             setSelectedLanguages([...selectedLanguages, selectedLanguage])
         }
+    }
+
+    const availabilitySchedules = () =>{
+        setAvailabilitySchedules("1,2,3")
     }
 
     const OnCancel = async () => {
@@ -201,9 +197,9 @@ function AdminAddDoctor() {
                                     setGender(e.target.value)
                                 }}>
                                     <option value="" disabled>Select Gender</option>
-                                    <option value="A+">Male</option>
-                                    <option value="A-">Female</option>
-                                    <option value="B+">Other</option>
+                                    <option value="MALE">Male</option>
+                                    <option value="FEMALE">Female</option>
+                                    <option value="OTHER">Other</option>
                                 </select>
                             </div>
 
@@ -310,7 +306,7 @@ function AdminAddDoctor() {
                                 <div className="mb-3">
                                     <label htmlFor=''>Salary</label>
                                     <input onChange={(e) => {
-                                        setSalary(e.target.value)
+                                        setSalary(Number(e.target.value))
                                     }}
                                         type="text"
                                         className="form-control"
@@ -368,7 +364,7 @@ function AdminAddDoctor() {
                                 <div className="mb-3">
                                     <label htmlFor=''>ConsultationFee</label>
                                     <input onChange={(e) => {
-                                        setConsultationFees(e.target.value)
+                                        setConsultationFees(Number(e.target.value))
                                     }}
                                         type="number"
                                         className="form-control"
@@ -380,22 +376,22 @@ function AdminAddDoctor() {
                             <div className="col mb-3">
                                 <label className="form-label">Branch</label>
                                 <select class="form-select" name="branchId" value={branchId} onChange={(e) => {
-                                    setBranchId(e.target.value)
+                                    setBranchId(Number(e.target.value))
                                 }}>
-                                    <option value="" disabled>Select Barnch</option>
+                                    <option value="" disabled>Select Branch</option>
                                     {branches.map((branch) => (
-                                        <option key={branch.id}>{branch.name}</option>
+                                        <option key={branch.id} value={branch.id}>{branch.name}</option>
                                     ))}
                                 </select>
                             </div>
                             <div className="col mb-3">
                                 <label className="form-label">Department</label>
-                                <select class="form-select" name="branchId" value={departmentId} onChange={(e) => {
-                                    setDepartmentId(e.target.value)
+                                <select class="form-select" name="departmentId" value={departmentId} onChange={(e) => {
+                                    setDepartmentId(Number(e.target.value))
                                 }}>
                                     <option value="" disabled>Select Department</option>
                                     {departments.map((department) => (
-                                        <option>{department.departmentName}</option>
+                                        <option key={department.id} value={department.id}>{department.departmentName}</option>
                                     ))}
                                 </select>
                             </div>
@@ -405,7 +401,7 @@ function AdminAddDoctor() {
                                 <div className="mb-3">
                                     <label htmlFor=''>Specialisation</label>
                                     <input onChange={(e) => {
-                                        setSpecializtion(e.target.value)
+                                        setSpecialization(e.target.value)
                                     }}
                                         type="text"
                                         className="form-control"
@@ -437,7 +433,7 @@ function AdminAddDoctor() {
                             <div className="mb-3 col">
                                 <label htmlFor=''>Experience</label>
                                 <input onChange={(e) => {
-                                    setExperience(e.target.value)
+                                    setExperience(Number(e.target.value))
                                 }}
                                     type="number"
                                     className="form-control"
@@ -467,41 +463,41 @@ function AdminAddDoctor() {
                             <div className="col">
                                 <label className="mb-2" htmlFor="">Select Availability Schedule</label><br />
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1" />
                                     <label class="form-check-label" for="inlineCheckbox1">Mon</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2" />
                                     <label class="form-check-label" for="inlineCheckbox2">Tue</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" />
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="3" />
                                     <label class="form-check-label" for="inlineCheckbox3">Wed</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" />
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="4" />
                                     <label class="form-check-label" for="inlineCheckbox3">Thu</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" />
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="5" />
                                     <label class="form-check-label" for="inlineCheckbox3">Fri</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" />
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="6" />
                                     <label class="form-check-label" for="inlineCheckbox3">Sat</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" />
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="7" />
                                     <label class="form-check-label" for="inlineCheckbox3">Sun</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="input-group mb-4 mt-4">
-                            <select class="form-select" id="inputGroupSelect04" value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
+                            <select class="form-select" id="inputGroupSelect04" value={selectedLanguage} onChange={(e) => setSelectedLanguage(Number(e.target.value))}>
                                 <option selected>Select Language</option>
                                 {Languages.map((language) => (
-                                    <option value={language.name} >{language.name}</option>
+                                    <option value={language.id}>{language.name}</option>
                                 ))}
                             </select>
                             <button class="btn btn-success" type="button" onClick={addLanguage}>Add</button>

@@ -2,7 +2,7 @@ import PatientSidebar from "../components/PatientSidebar";
 import "../styles/patientDashboard.css"
 import Footer from "../components/Footer"
 import { useEffect, useState } from "react";
-import { getPrescriptions } from "../services/PrescriptionService";
+import { getPrescriptions } from "../services/prescriptionService";
 import { toast } from "react-toastify";
 import logo from "../images/logo.png"
 import html2canvas from 'html2canvas';

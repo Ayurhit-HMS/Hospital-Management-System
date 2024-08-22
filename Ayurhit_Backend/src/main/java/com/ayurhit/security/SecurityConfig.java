@@ -35,16 +35,22 @@ public class SecurityConfig {
 		http.cors().and().
 		// disable CSRF token generation n verification
 				csrf().disable().exceptionHandling().authenticationEntryPoint(authEntry).and().authorizeRequests()
-				.antMatchers("/prescriptions/patient", "/users/signup", "/users/signin", "/roles/**", "/admin/**",
-						"/address/**", "/v*/api-doc*/**", "/swagger-ui/**", "/patients", "/languages/**",
-						"/departments/**", "/branches/**")
-				.permitAll()
-				// only required for JS clnts (react / angular) : for the pre flight requests
-				.antMatchers(HttpMethod.OPTIONS).permitAll()
+
+				
 				.antMatchers("/patients/**", "/prescriptions/patinet", "/bill", "/doctor/dept/**",
 						"/doctor/schedules/**", "/appointments", "/chronicCondition/**")
 				.hasRole("PATIENT")
-				// .antMatchers("/departments/get").hasRole("ADMIN")
+
+				.antMatchers("/prescriptions/patient", "/users/signup", "/users/signin", 
+						"/address/**", "/v*/api-doc*/**", "/swagger-ui/**", "/patients")
+				.permitAll()
+				// only required for JS clnts (react / angular) : for the pre flight requests
+				.antMatchers(HttpMethod.OPTIONS).permitAll()
+				 .antMatchers("/appointments-doctor/**","/appointments/{id}","/medicine","/prescriptions/add","/appointments/cancel/**").hasRole("DOCTOR")
+				 .antMatchers("/departments/**", "/doctor/**", "/admin/**", "/roles/**", "/lanuages/**", "/branches/**").hasRole("ADMIN")
+		 .antMatchers("/patients/**","/prescriptions/patinet","/bill","/doctor/dept/**","/doctor/schedules/**","/appointments").hasRole("PATIENT")
+
+
 				.anyRequest().authenticated().and()
 				// to tell spring sec : not to use HttpSession to store user's auth details
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

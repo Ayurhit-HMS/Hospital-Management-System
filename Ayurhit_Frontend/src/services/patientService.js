@@ -28,6 +28,7 @@ export async function getPatientDetails(token) {
 }
 
 
+
 export async function getBills() {
     const url = createUrl('/bill');
     const token = sessionStorage.getItem("jwt")
@@ -43,6 +44,7 @@ export async function getBills() {
         return null;
     }
 }
+
 
 
 
@@ -110,3 +112,4 @@ export const addPastSurgeryDetails = async (pastSurgery) => {
         throw error;
     }
 };
+
