@@ -43,7 +43,7 @@ public class Patient extends User {
 	private String insuranceNumber;
 
 	@Column(length = 50)
-	private String ABHA_Id;
+	private String abhaId;
 
 	@ManyToMany
 	private Set<Allergy> allergies = new HashSet<>();
@@ -55,7 +55,7 @@ public class Patient extends User {
 	private Set<CurrentMedication> currentMedications = new HashSet<>();
 
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<PastSurgery> PastSurgeries = new HashSet<>();
+	private Set<PastSurgery> pastSurgeries = new HashSet<>();
 
 	@ManyToOne
 	private InsuranceProvider insuranceProvider;

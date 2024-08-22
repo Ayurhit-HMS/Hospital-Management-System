@@ -2,8 +2,6 @@ package com.ayurhit.dto;
 
 import java.time.LocalDate;
 
-import com.ayurhit.type.Gender;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,17 +13,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserDTO {
-	private Long id;
+public class BasicDetailsDTO {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String password;
-	private Gender gender;
-	private String phone;
+	private String gender;
 	private LocalDate birthDate;
-	private String profilePhoto;
-	private boolean isDeleted;
-	private AddressDTO address;
-	private Long roleId;
+	private String phone;
+	private String bloodGroup;
+	private String abhaId;
 }

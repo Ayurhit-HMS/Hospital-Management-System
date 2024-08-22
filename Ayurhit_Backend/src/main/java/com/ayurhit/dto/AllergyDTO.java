@@ -12,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class AllergyDTO {
+	private Long id;
 	private String name;
 	private String description;
 }

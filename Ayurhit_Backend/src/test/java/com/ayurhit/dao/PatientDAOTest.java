@@ -36,7 +36,7 @@ public class PatientDAOTest {
 		patient.setEmergencyContactName("Narayan");
 		patient.setEmergencyContactNumber("123456789");
 		patient.setInsuranceNumber("INS12345");
-		patient.setABHA_Id("ABHA123456");
+		patient.setAbhaId("ABHA123456");
 		patient.setAllergies(new HashSet<>());
 		patient.setChronicConditions(new HashSet<>());
 		patient.setCurrentMedications(new HashSet<>());
@@ -56,7 +56,7 @@ public class PatientDAOTest {
 		assertEquals("Narayan", savedPatient.getEmergencyContactName());
 		assertEquals("123456789", savedPatient.getEmergencyContactNumber());
 		assertEquals("INS12345", savedPatient.getInsuranceNumber());
-		assertEquals("ABHA123456", savedPatient.getABHA_Id());
+		assertEquals("ABHA123456", savedPatient.getAbhaId());
 	}
 
 }

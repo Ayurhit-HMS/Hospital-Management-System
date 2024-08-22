@@ -39,7 +39,7 @@ public class Application {
 			public void addCorsMappings(CorsRegistry registry) {
 				String allowedOrigins = env.getProperty("app.cors.allowed-origins", "*");
 				registry.addMapping("/**").allowedOrigins(allowedOrigins)
-						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*");
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS","PATCH").allowedHeaders("*");
 			}
 		};
 	}

@@ -4,17 +4,20 @@ import video from '../videos/home.mp4'
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { persistor } from "../Redux/store"
+import { useDispatch } from "react-redux"
+import { setPatientDetails } from "../Redux/features/patient/patientSlice"
 
 
 
 function Home() {
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const token = sessionStorage.getItem("jwt")
         if (!token) {
-            persistor.purge()
+            dispatch(setPatientDetails(null))
         }
-    },[])
+    }, [])
 
     const navigate = useNavigate()
     return (
