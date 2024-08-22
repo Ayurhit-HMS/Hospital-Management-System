@@ -14,7 +14,6 @@ export async function getPrescriptions() {
     } catch (ex) {
         return null
     }
-
 }
 
 export async function getMedicines(token) {
@@ -24,6 +23,8 @@ export async function getMedicines(token) {
             headers: {
                 'Authorization': `Bearer ${token}`
             }});
+
+            console.log('this function called')
         return response
     } catch (ex) {
         console.log('Error fetching appointments', ex);

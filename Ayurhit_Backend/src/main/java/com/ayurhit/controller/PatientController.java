@@ -15,6 +15,7 @@ import com.ayurhit.dto.AddressDetialsDTO;
 import com.ayurhit.dto.AllergyDTO;
 import com.ayurhit.dto.BasicDetailsDTO;
 import com.ayurhit.dto.ChronicConditionDTO;
+import com.ayurhit.dto.CurrentMedicationDetailsDTO;
 import com.ayurhit.dto.InsuranceDetailsDTO;
 import com.ayurhit.dto.PatientDTO;
 import com.ayurhit.security.JwtUtils;
@@ -83,6 +84,16 @@ public class PatientController {
 			@RequestHeader("Authorization") String authHeader) {
 
 		PatientDTO updatedPatient = patientService.addAllergy(jwtUtils.getId(authHeader), allergyDTO);
+		return ResponseEntity.ok(updatedPatient);
+	}
+
+	@PostMapping("/currentMedication")
+	public ResponseEntity<PatientDTO> addCurrentMedication(
+			@RequestBody CurrentMedicationDetailsDTO currentMedicationDetailsDTO,
+			@RequestHeader("Authorization") String authHeader) {
+		System.out.println(currentMedicationDetailsDTO);
+		PatientDTO updatedPatient = patientService.addCurrentMedication(jwtUtils.getId(authHeader),
+				currentMedicationDetailsDTO);
 		return ResponseEntity.ok(updatedPatient);
 	}
 

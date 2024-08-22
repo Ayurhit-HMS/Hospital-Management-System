@@ -20,18 +20,3 @@ export const getAllAllergies = async () => {
 
 
 
-export const addAllergyDetails = async (chronicCondition) => {
-    try {
-        const url = createUrl("/patients/allergy")
-        const token = sessionStorage.getItem("jwt")
-        const response = await axios.post(url, chronicCondition, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        return response;
-    } catch (error) {
-        console.error("Failed to update patient details", error);
-        throw error;
-    }
-};

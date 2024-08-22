@@ -27,7 +27,7 @@ public class CurrentMedicationImpl implements CurrentMedicationService {
 	@Override
 	public CurrentMedicationDTO addCurrentMedication(CurrentMedicationDTO currentMedicationDTO) {
 		CurrentMedication currentMedication = modelMapper.map(currentMedicationDTO, CurrentMedication.class);
-		Medicine medicine = medicineDAO.findById(currentMedicationDTO.getMedicineDTO().getId()).orElseThrow(null);
+		Medicine medicine = medicineDAO.findById(currentMedicationDTO.getMedicine().getId()).orElseThrow(null);
 		currentMedication.setMedicine(medicine);
 		CurrentMedication persistedCurrentMedication = currentMedicationDAO.save(currentMedication);
 		return modelMapper.map(persistedCurrentMedication, CurrentMedicationDTO.class);
