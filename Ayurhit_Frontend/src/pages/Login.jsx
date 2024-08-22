@@ -23,8 +23,8 @@ const LoginPage = () => {
 
         if (response && response.status === 200) {
           const patientData = response.data;
-          console.log('patinet data',patientData)
-          console.log('response',response.data)
+          console.log('patinet data', patientData)
+          console.log('response', response.data)
 
           dispatch(setPatientDetails(response.data));
           console.log('dispatched')
@@ -60,10 +60,11 @@ const LoginPage = () => {
           navigate('/patient/dashboard')
           toast.success("Login successful")
         }
-        else if(decoded.authorities =="ROLE_ADMIN") {
+        else if (decoded.authorities == "ROLE_ADMIN") {
           navigate('/admin/emplist')
+        } else if (decoded.authorities == "ROLE_DOCTOR") {
+          navigate('/doctor/dashboard')
         }
-
       } else {
         toast.error('Login failed')
       }

@@ -22,10 +22,10 @@ import lombok.ToString;
 @Entity
 public class Bill extends BaseEntity {
 
-	@Column(nullable = false, columnDefinition = "integer default 0")
+	@Column(columnDefinition = "integer default 0")
 	private Double gstAmount;
 
-	@Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
+	@Column(columnDefinition = "DATE DEFAULT CURRENT_DATE")
 	private String billingDate;
 
 	private LocalDate dueDate;
@@ -33,22 +33,22 @@ public class Bill extends BaseEntity {
 	@Column(length = 20, nullable = false)
 	private String status;
 
-	@Column(nullable = false,length = 20)
+	@Column(length = 20)
 	private String paymentMethod;
 
 	@Column(length = 50, unique = true)
 	private String transactionId;
 
-	@Column(nullable = false, precision = 10, scale = 2,columnDefinition = "integer default 0")
+	@Column(precision = 10, scale = 2,columnDefinition = "integer default 0")
 	private Double procedureFees;
 
-	@Column(nullable = false, precision = 10, scale = 2,columnDefinition = "integer default 0")
+	@Column( precision = 10, scale = 2,columnDefinition = "integer default 0")
 	private Double medicationFees;
 
-	@Column(nullable = false, precision = 10, scale = 2,columnDefinition = "integer default 0")
+	@Column(precision = 10, scale = 2,columnDefinition = "integer default 0")
 	private Double otherCharges;
 
-	@Column(nullable = false, precision = 10, scale = 2,columnDefinition = "integer default 0")
+	@Column(precision = 10, scale = 2,columnDefinition = "integer default 0")
 	private Double discount;
 
 	@ManyToOne

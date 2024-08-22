@@ -2,18 +2,18 @@ import DoctorSidebar from "../components/DoctorSidebar";
 import "../styles/patientDashboard.css";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
-import { getAppointmentDetails,update,cancelAppointment} from "../services/AppointmentService";
+import { getAppointmentDetails, update, cancelAppointment } from "../services/AppointmentService";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { generateNewBill } from "../services/billService"
 
 
 
 
 
 function NewDoctorAppointment() {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const [appointment, setAppointments] = useState([]);
     const [isSidebarVisible, setSidebarVisible] = useState(true);
 
@@ -23,11 +23,11 @@ function NewDoctorAppointment() {
 
     useEffect(() => {
         const fetchAppointmentDetails = async () => {
-            try{
-                const jwt=sessionStorage.getItem("jwt");
-                const response= await getAppointmentDetails(jwt);
+            try {
+                const jwt = sessionStorage.getItem("jwt");
+                const response = await getAppointmentDetails(jwt);
                 console.log(response)
-                if (response && response.status===200) {
+                if (response && response.status === 200) {
                     console.log(response)
                     setAppointments(response.data);
                 } else {
@@ -37,16 +37,16 @@ function NewDoctorAppointment() {
                 console.log(ex)
                 toast.error('An error occurred while fetching appointments');
             }
-           
+
         };
         fetchAppointmentDetails();
     }, []);
 
     const fetchAppointmentDetails = async () => {
 
-        try{
-            const jwt=sessionStorage.getItem("jwt");
-            const response=getAppointmentDetails(jwt);
+        try {
+            const jwt = sessionStorage.getItem("jwt");
+            const response = getAppointmentDetails(jwt);
             if (response && response.status === 200) {
                 console.log(response.data)
                 setAppointments(response.data);
@@ -56,15 +56,15 @@ function NewDoctorAppointment() {
         } catch (ex) {
             toast.error('An error occurred while fetching appointments');
         }
-        
+
     };
 
 
     const updateStatus = async (appointmentId) => {
-        const jwt=sessionStorage.getItem("jwt");
-    
-        const response = await update(appointmentId,jwt);
-        
+        const jwt = sessionStorage.getItem("jwt");
+
+        const response = await update(appointmentId, jwt);
+
         if (response && response.status === 200) {
             const updatedResponse = await getAppointmentDetails(jwt);
             if (updatedResponse && updatedResponse.status === 200)
@@ -75,13 +75,13 @@ function NewDoctorAppointment() {
         }
     };
 
-    
 
-    const handleCancel = async(appointmentId) => {
+
+    const handleCancel = async (appointmentId) => {
         console.log(appointmentId)
-        const jwt=sessionStorage.getItem("jwt");
-       console.log(jwt)
-        const response = await cancelAppointment(appointmentId,jwt);
+        const jwt = sessionStorage.getItem("jwt");
+        console.log(jwt)
+        const response = await cancelAppointment(appointmentId, jwt);
         if (response && response.status === 200) {
             const updatedResponse = await getAppointmentDetails(jwt);
             if (updatedResponse && updatedResponse.status === 200)
@@ -92,9 +92,21 @@ function NewDoctorAppointment() {
         }
     }
 
+    const generateBill = async (appointmentId, patientId, doctorId) => {
+        try {
+            const response = await generateNewBill({ patientId, doctorId })
+            if (response && response.status === 200) {
+                updateStatus(appointmentId);
+                toast.success("Bill generated succesfully")
+            }
+        } catch (error) {
 
-    const renderDoctorButtons = (status, appointmentId,patientId, doctorId) => {
-     
+        }
+    }
+
+
+    const renderDoctorButtons = (status, appointmentId, patientId, doctorId) => {
+
         switch (status) {
             case 'PENDING':
                 return (
@@ -111,14 +123,15 @@ function NewDoctorAppointment() {
             case 'ATTENDED':
                 return (
                     <>
-                        <button className="btn btn-primary" style={{ marginRight: '10px' }} onClick={() =>{ updateStatus(appointmentId);navigate('/doctor/prescription',{
-                            state: {
-                                patientId: patientId,
-                                doctorId: doctorId,
-                                appointmentId: appointmentId
-                            }
+                        <button className="btn btn-primary" style={{ marginRight: '10px' }} onClick={() => {
+                            updateStatus(appointmentId); navigate('/doctor/prescription', {
+                                state: {
+                                    patientId: patientId,
+                                    doctorId: doctorId,
+                                    appointmentId: appointmentId
+                                }
 
-                        });
+                            });
                         }}>
                             Prescript</button>
                         <button className="btn btn-secondary" disabled>-</button>
@@ -127,7 +140,7 @@ function NewDoctorAppointment() {
             case 'PRESCRIPTED':
                 return (
                     <>
-                        <button className="btn btn-warning" style={{ marginRight: '10px' }} onClick={() => updateStatus(appointmentId)}>Generate Bill</button>
+                        <button className="btn btn-warning" style={{ marginRight: '10px' }} onClick={() => generateBill(appointmentId, patientId, doctorId)}>Generate Bill</button>
                     </>
                 );
             case 'DONE':
@@ -174,8 +187,8 @@ function NewDoctorAppointment() {
                                                 <td>{e.status}</td>
                                                 <td>
                                                     <div className="d-flex justify-content-center">
-                                                        {renderDoctorButtons(e.status, e.id,e.patient.id,e.doctor.id)}
-                                                       
+                                                        {renderDoctorButtons(e.status, e.id, e.patient.id, e.doctor.id)}
+
                                                     </div>
                                                 </td>
                                             </tr>

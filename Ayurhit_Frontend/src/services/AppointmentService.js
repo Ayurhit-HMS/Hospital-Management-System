@@ -34,11 +34,11 @@ export async function getAppointments(token) {
 
 
 
-export async function cancelAppointment(appointmentId,token) {
+export async function cancelAppointment(appointmentId, token) {
     const url = createUrl(`/appointments/cancel/${appointmentId}`);
     console.log(token)
     try {
-        const response = await axios.put(url,  {
+        const response = await axios.put(url, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -72,16 +72,15 @@ export async function update(appointmentId, token, data) {
 
 export async function getAppointmentDetails(token) {
 
-    
     const url = createUrl(`/appointments-doctor`);
-   
+
     try {
         const response = await axios.get(url, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-        return response; 
+        return response;
     } catch (ex) {
         console.error('Error fetching patient details:', ex);
         return null;
