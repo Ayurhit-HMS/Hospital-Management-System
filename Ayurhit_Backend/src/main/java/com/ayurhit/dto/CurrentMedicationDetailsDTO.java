@@ -11,8 +11,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CurrentMedicationDTO {
+public class CurrentMedicationDetailsDTO {
+	private Long medicineId;
 	private String dosage;
 	private String duration;
-	private MedicineDTO medicine;
 }

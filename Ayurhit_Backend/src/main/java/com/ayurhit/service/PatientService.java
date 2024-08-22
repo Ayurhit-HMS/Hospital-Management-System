@@ -5,6 +5,7 @@ import com.ayurhit.dto.AddressDetialsDTO;
 import com.ayurhit.dto.AllergyDTO;
 import com.ayurhit.dto.BasicDetailsDTO;
 import com.ayurhit.dto.ChronicConditionDTO;
+import com.ayurhit.dto.CurrentMedicationDetailsDTO;
 import com.ayurhit.dto.InsuranceDetailsDTO;
 import com.ayurhit.dto.PatientDTO;
 
@@ -22,4 +23,6 @@ public interface PatientService {
 	PatientDTO addChronicCondition(Long id, ChronicConditionDTO chronicConditionDTO);
 
 	PatientDTO addAllergy(Long id, AllergyDTO allergyDTO);
+
+	PatientDTO addCurrentMedication(Long id, CurrentMedicationDetailsDTO currentMedicationDetailsDTO);
 }

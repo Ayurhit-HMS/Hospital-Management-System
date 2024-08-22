@@ -113,3 +113,53 @@ export const addPastSurgeryDetails = async (pastSurgery) => {
     }
 };
 
+
+export async function addCurrentMedicationDetails(medicationDetails) {
+    const url = createUrl('/patients/currentMedication');
+    try {
+        const token = sessionStorage.getItem("jwt");
+        const response = await axios.post(url, medicationDetails, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        return response;
+    } catch (ex) {
+        console.error('Error adding medication:', ex);
+        return null;
+    }
+}
+
+
+export const addAllergyDetails = async (chronicCondition) => {
+    try {
+        const url = createUrl("/patients/allergy")
+        const token = sessionStorage.getItem("jwt")
+        const response = await axios.post(url, chronicCondition, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response;
+    } catch (error) {
+        console.error("Failed to update patient details", error);
+        throw error;
+    }
+};
+
+
+export const addChronicConditionDetails = async (chronicCondition) => {
+    try {
+        const url = createUrl("/patients/chronicCondition")
+        const token = sessionStorage.getItem("jwt")
+        const response = await axios.post(url, chronicCondition, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response;
+    } catch (error) {
+        console.error("Failed to update patient details", error);
+        throw error;
+    }
+};

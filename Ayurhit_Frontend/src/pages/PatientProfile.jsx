@@ -5,9 +5,11 @@ import Footer from "../components/Footer";
 import PatientSidebar from "../components/PatientSidebar";
 import profilePhoto from "../images/login_background.jpg";
 import { setPatientDetails } from "../Redux/features/patient/patientSlice";
-import { addAllergyDetails, getAllAllergies } from "../services/allergyService";
-import { addChronicConditionDetails, getAllChronicConditions } from "../services/chronicConditionService";
-import { addPastSurgeryDetails, updatePatientAddressDetails, updatePatientDetails, updatePatientInsuranceDetails } from "../services/patientService";
+import { getAllAllergies } from "../services/allergyService";
+import { getAllChronicConditions } from "../services/chronicConditionService";
+import { addAllergyDetails, addChronicConditionDetails, addPastSurgeryDetails, updatePatientAddressDetails, updatePatientDetails, updatePatientInsuranceDetails } from "../services/patientService";
+import { getMedicines } from "../services/prescriptionService";
+import { addCurrentMedicationDetails } from "../services/patientService";
 
 function PatientProfile() {
     const patient = useSelector((state) => state.patient.patient);
@@ -16,6 +18,7 @@ function PatientProfile() {
 
     const [chronicConditions, setChronicConditions] = useState([])
     const [allergies, setAllergies] = useState([])
+    const [medicines, setMedicines] = useState([])
 
     const [basicDetails, setbasicDetails] = useState({
         firstName: patient.firstName,
@@ -94,35 +97,13 @@ function PatientProfile() {
         });
     };
 
-    const getChronicConditions = async () => {
-        try {
-            const response = await getAllChronicConditions()
-            if (response && response.status === 200) {
-                setChronicConditions(response.data)
-                console.log(chronicConditions)
-            }
-        } catch (ex) {
-            console.log(ex)
-            toast.error("something went wrong")
-        }
+    const currentMedicationChange = (e) => {
+        const { name, value } = e.target;
+        setMedicationDetails({
+            ...medicationDetails,
+            [name]: value,
+        });
     };
-
-
-
-    const getAllergies = async () => {
-        try {
-            const response = await getAllAllergies()
-            if (response && response.status === 200) {
-                setAllergies(response.data)
-                console.log(allergy)
-            }
-        } catch (ex) {
-            console.log(ex)
-            toast.error("something went wrong")
-        }
-    };
-
-
 
     const pastSurgeryChange = (e) => {
         console.log(pastSurgery)
@@ -145,6 +126,47 @@ function PatientProfile() {
         });
         console.log(allergy)
     };
+
+
+    const getChronicConditions = async () => {
+        try {
+            const response = await getAllChronicConditions()
+            if (response && response.status === 200) {
+                setChronicConditions(response.data)
+                console.log(chronicConditions)
+            }
+        } catch (ex) {
+            console.log(ex)
+            toast.error("something went wrong")
+        }
+    };
+
+
+    const getAllergies = async () => {
+        try {
+            const response = await getAllAllergies()
+            if (response && response.status === 200) {
+                setAllergies(response.data)
+                console.log(allergy)
+            }
+        } catch (ex) {
+            console.log(ex)
+            toast.error("something went wrong")
+        }
+    };
+
+    const getAllMedicines = async () => {
+        try {
+            const token = sessionStorage.getItem("jwt")
+            const response = await getMedicines(token)
+            if (response && response.status === 200) {
+                setMedicines(response.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     const updateBasicDetails = async () => {
         try {
@@ -209,6 +231,21 @@ function PatientProfile() {
             console.error("Error updating patient", error);
         }
     };
+
+    const addCurrentMedication = async () => {
+        try {
+            const updatedPatient = await addCurrentMedicationDetails(medicationDetails);
+            console.log(updatedPatient)
+            if (updatedPatient && updatedPatient.status === 200) {
+                console.log('Updated patient data:', updatedPatient.data);
+                dispatch(setPatientDetails(updatedPatient.data));
+                toast.success('Current Medication added successfully');
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
 
     const addPastSurgery = async () => {
         try {
@@ -335,7 +372,7 @@ function PatientProfile() {
                                     <h3 className=" mb-4 mt-4">Current Medication</h3>
                                     <div className="row d-flex shadow rounded p-3">
                                         <div className="col">
-                                            <button className="btn btn-sm btn-success float-end" data-bs-toggle="modal" data-bs-target="#current-medication">Add</button>
+                                            <button className="btn btn-sm btn-success float-end" data-bs-toggle="modal" data-bs-target="#current-medication" onClick={getAllMedicines}>Add</button>
                                             <div className="row mt-3">
                                                 {patient.currentMedications && patient.currentMedications.length > 0 ? (
                                                     <table className="table mt-4 p-3">
@@ -350,10 +387,10 @@ function PatientProfile() {
                                                         <tbody>
                                                             {patient.currentMedications.map((medication, index) => (
                                                                 <tr key={index}>
-                                                                    <td>{medication.medicineName}</td>
+                                                                    <td>{medication.medicine.name}</td>
                                                                     <td>{medication.dosage}</td>
                                                                     <td>{medication.duration}</td>
-                                                                    <td>{medication.medicineCompany}</td>
+                                                                    <td>{medication.medicine.company}</td>
                                                                 </tr>
                                                             ))}
                                                         </tbody>
@@ -427,7 +464,6 @@ function PatientProfile() {
                                             </div>
                                         </div>
                                     </div>
-
 
                                     <h3 className=" mb-4 mt-4">Allergies</h3>
                                     <div className="row d-flex shadow rounded p-3">
@@ -681,10 +717,11 @@ function PatientProfile() {
                                     <div className="mb-3 col">
                                         <div className="mb-3">
                                             <label htmlFor="gender" className="form-label">Medicines</label>
-                                            <select className="form-select" id="gender" value={""}>
-                                                <option value="Male">Med1</option>
-                                                <option value="Female">Med2</option>
-                                                <option value="Other">med3</option>
+                                            <select className="form-select" id="medicines" name="medicineId" value={medicationDetails.medicineId} onChange={currentMedicationChange}>
+                                                <option value="">Select a medicine</option>
+                                                {medicines.map((medicine) => (
+                                                    <option key={medicine.id} value={medicine.id}>{medicine.name}</option>
+                                                ))}
                                             </select>
                                         </div>
                                     </div>
@@ -693,20 +730,20 @@ function PatientProfile() {
                                 <div className="row">
                                     <div className="mb-3 col">
                                         <label htmlFor="providerCode" className="form-label">Dosage</label>
-                                        <input type="text" className="form-control" id="providerCode" name="providerCode" value={insuranceDetails.providerCode} onChange={newInsuranceDetails} />
+                                        <input type="text" className="form-control" id="dosage" name="dosage" value={medicationDetails.dosage} onChange={currentMedicationChange} />
                                     </div>
                                 </div>
 
                                 <div className="row">
                                     <div className="mb-3 col">
                                         <label htmlFor="contactNumber" className="form-label">Duration</label>
-                                        <input type="text" className="form-control" id="contactNumber" name="contactNumber" value={insuranceDetails.contactNumber} onChange={newInsuranceDetails} />
+                                        <input type="text" className="form-control" id="duration" name="duration" value={medicationDetails.duration} onChange={currentMedicationChange} />
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div className="modal-footer d-flex justify-content-center">
-                            <button type="button" className="btn btn-success">Update</button>
+                            <button type="button" className="btn btn-success" onClick={addCurrentMedication}>Add</button>
                             <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -715,7 +752,7 @@ function PatientProfile() {
 
 
             {/* modal for add pastSurgery */}
-            <div className="modal fade modal" id="past-surgery" tabIndex="-1" aria-labelledby="insuranceDetailsLabel" aria-hidden="true">
+            <div className="modal fade modal" id="past-surgery" tabIndex="-1" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -754,7 +791,7 @@ function PatientProfile() {
             </div>
 
             {/* modal for chronic condition */}
-            <div className="modal fade modal" id="chronic-condition" tabIndex="-1" aria-labelledby="insuranceDetailsLabel" aria-hidden="true">
+            <div className="modal fade modal" id="chronic-condition" tabIndex="-1" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -790,7 +827,7 @@ function PatientProfile() {
 
 
             {/* modal for allergy */}
-            <div className="modal fade modal" id="allergy" tabIndex="-1" aria-labelledby="insuranceDetailsLabel" aria-hidden="true">
+            <div className="modal fade modal" id="allergy" tabIndex="-1" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">

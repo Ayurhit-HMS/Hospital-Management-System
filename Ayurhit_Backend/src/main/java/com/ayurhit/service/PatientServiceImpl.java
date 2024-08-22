@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ayurhit.dao.AddressDAO;
 import com.ayurhit.dao.AllergyDAO;
 import com.ayurhit.dao.ChronicConditionDAO;
+import com.ayurhit.dao.CurrentMedicationDAO;
 import com.ayurhit.dao.InsuranceProviderDAO;
+import com.ayurhit.dao.MedicineDAO;
 import com.ayurhit.dao.PatientDAO;
 import com.ayurhit.dao.RoleDAO;
 import com.ayurhit.dto.AddPatientDTO;
@@ -17,12 +19,15 @@ import com.ayurhit.dto.AddressDetialsDTO;
 import com.ayurhit.dto.AllergyDTO;
 import com.ayurhit.dto.BasicDetailsDTO;
 import com.ayurhit.dto.ChronicConditionDTO;
+import com.ayurhit.dto.CurrentMedicationDetailsDTO;
 import com.ayurhit.dto.InsuranceDetailsDTO;
 import com.ayurhit.dto.PatientDTO;
 import com.ayurhit.entity.Address;
 import com.ayurhit.entity.Allergy;
 import com.ayurhit.entity.ChronicCondition;
+import com.ayurhit.entity.CurrentMedication;
 import com.ayurhit.entity.InsuranceProvider;
+import com.ayurhit.entity.Medicine;
 import com.ayurhit.entity.Patient;
 import com.ayurhit.entity.Role;
 import com.ayurhit.type.BloodGroup;
@@ -54,6 +59,12 @@ public class PatientServiceImpl implements PatientService {
 
 	@Autowired
 	private AllergyDAO allergyDAO;
+
+	@Autowired
+	private MedicineDAO medicineDAO;
+
+	@Autowired
+	private CurrentMedicationDAO currentMedicationDAO;
 
 	@Override
 	public void addPatient(AddPatientDTO addPatientDTO) {
@@ -128,6 +139,19 @@ public class PatientServiceImpl implements PatientService {
 		Allergy persistedAllergy = allergyDAO.findById(allergyDTO.getId()).orElseThrow(null);
 		persistedPatient.getAllergies().add(persistedAllergy);
 		Patient updatedPatient = patientDAO.save(persistedPatient);
+		return modelMapper.map(updatedPatient, PatientDTO.class);
+	}
+
+	@Override
+	public PatientDTO addCurrentMedication(Long id, CurrentMedicationDetailsDTO currentMedicationDetailsDTO) {
+		Patient persistedPatient = patientDAO.findById(id).orElseThrow(null);
+		Medicine persistedMedicine = medicineDAO.findById(currentMedicationDetailsDTO.getMedicineId())
+				.orElseThrow(null);
+		CurrentMedication currentMedication = modelMapper.map(currentMedicationDetailsDTO, CurrentMedication.class);
+		currentMedication.setMedicine(persistedMedicine);
+		currentMedication.setPatient(persistedPatient);
+		currentMedicationDAO.save(currentMedication);
+		Patient updatedPatient = patientDAO.findById(id).orElseThrow(null);
 		return modelMapper.map(updatedPatient, PatientDTO.class);
 	}
 
