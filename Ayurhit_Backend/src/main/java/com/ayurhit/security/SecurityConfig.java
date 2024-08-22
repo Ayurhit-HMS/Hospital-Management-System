@@ -35,17 +35,18 @@ public class SecurityConfig {
 		http.cors().and().
 		// disable CSRF token generation n verification
 				csrf().disable().exceptionHandling().authenticationEntryPoint(authEntry).and().authorizeRequests()
+
+				
+				.antMatchers("/patients/**", "/prescriptions/patinet", "/bill", "/doctor/dept/**",
+						"/doctor/schedules/**", "/appointments", "/chronicCondition/**")
+				.hasRole("PATIENT")
+
 				.antMatchers("/prescriptions/patient", "/users/signup", "/users/signin", 
 						"/address/**", "/v*/api-doc*/**", "/swagger-ui/**", "/patients")
 				.permitAll()
 				// only required for JS clnts (react / angular) : for the pre flight requests
 				.antMatchers(HttpMethod.OPTIONS).permitAll()
-
-				 .antMatchers("/patients/**","/prescriptions/patinet").hasRole("PATIENT")
 				 .antMatchers("/appointments-doctor/**","/appointments/{id}","/medicine","/prescriptions/add","/appointments/cancel/**").hasRole("DOCTOR")
-				// .antMatchers("/departments/get").hasRole("ADMIN")
-
-
 				 .antMatchers("/departments/**", "/doctor/**", "/admin/**", "/roles/**", "/lanuages/**", "/branches/**").hasRole("ADMIN")
 		 .antMatchers("/patients/**","/prescriptions/patinet","/bill","/doctor/dept/**","/doctor/schedules/**","/appointments").hasRole("PATIENT")
 

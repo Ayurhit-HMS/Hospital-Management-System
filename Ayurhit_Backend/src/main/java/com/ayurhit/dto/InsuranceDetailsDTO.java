@@ -11,8 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ChronicConditionDTO {
-	private Long id;
-	private String name;
-	private String description;
+public class InsuranceDetailsDTO {
+	private String InsuranceNumber;
+	private InsuranceProviderDTO InsuranceProvider;
 }

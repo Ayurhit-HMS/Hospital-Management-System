@@ -44,3 +44,72 @@ export async function getBills() {
         return null;
     }
 }
+
+
+
+
+export const updatePatientDetails = async (patient) => {
+    try {
+        const url = createUrl("/patients/update/basic")
+        const token = sessionStorage.getItem("jwt")
+        const response = await axios.patch(url, patient, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response;
+    } catch (error) {
+        console.error("Failed to update patient details", error);
+        throw error;
+    }
+};
+
+
+export const updatePatientAddressDetails = async (patient) => {
+    try {
+        const url = createUrl("/patients/update/address")
+        const token = sessionStorage.getItem("jwt")
+        const response = await axios.patch(url, patient, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response;
+    } catch (error) {
+        console.error("Failed to update patient details", error);
+        throw error;
+    }
+};
+
+export const updatePatientInsuranceDetails = async (patient) => {
+    try {
+        const url = createUrl("/patients/update/insurance")
+        const token = sessionStorage.getItem("jwt")
+        const response = await axios.patch(url, patient, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response;
+    } catch (error) {
+        console.error("Failed to update patient details", error);
+        throw error;
+    }
+};
+
+export const addPastSurgeryDetails = async (pastSurgery) => {
+    try {
+        const url = createUrl("/pastSurgery")
+        const token = sessionStorage.getItem("jwt")
+        const response = await axios.post(url, pastSurgery, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response;
+    } catch (error) {
+        console.error("Failed to update patient details", error);
+        throw error;
+    }
+};
+

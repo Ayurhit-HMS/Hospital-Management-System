@@ -21,10 +21,10 @@ public class PatientDTO extends UserDTO {
 	private String emergencyContactName;
 	private String emergencyContactNumber;
 	private String insuranceNumber;
-	private String ABHA_Id;
+	private String abhaId;
 	private Set<AllergyDTO> allergies = new HashSet<>();
 	private Set<ChronicConditionDTO> chronicConditions = new HashSet<>();
 	private Set<CurrentMedicationDTO> currentMedications = new HashSet<>();
-	private Set<PastSurgeryDTO> PastSurgeries = new HashSet<>();
+	private Set<PastSurgeryDTO> pastSurgeries = new HashSet<>();
 	private InsuranceProvider insuranceProvider;
 }

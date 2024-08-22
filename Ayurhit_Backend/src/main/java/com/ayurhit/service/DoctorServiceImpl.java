@@ -65,12 +65,12 @@ public class DoctorServiceImpl implements DoctorService {
 
 	public Address getAddress(DoctorRequestDTO dto) {
 		Address address = new Address();
-		address.setAddressLine1(dto.getAddressDTO().getAddressLine1());
-		address.setAddressLine2(dto.getAddressDTO().getAddressLine2());
-		address.setCity(dto.getAddressDTO().getCity());
-		address.setCountry(dto.getAddressDTO().getCountry());
-		address.setPinCode(dto.getAddressDTO().getPinCode());
-		address.setState(dto.getAddressDTO().getState());
+		address.setAddressLine1(dto.getAddress().getAddressLine1());
+		address.setAddressLine2(dto.getAddress().getAddressLine2());
+		address.setCity(dto.getAddress().getCity());
+		address.setCountry(dto.getAddress().getCountry());
+		address.setPinCode(dto.getAddress().getPinCode());
+		address.setState(dto.getAddress().getState());
 
 		return address;
 	}
