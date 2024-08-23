@@ -33,7 +33,8 @@ public class AppointmentController {
 
 		if (authHeader != null) {
 			try {
-				List<AppointmentDTO> appointments = appointmentService.getPatientAppointments(jwtUtils.getId(authHeader));
+				List<AppointmentDTO> appointments = appointmentService
+						.getPatientAppointments(jwtUtils.getId(authHeader));
 				return ResponseEntity.ok(appointments);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -56,10 +57,9 @@ public class AppointmentController {
 		return ResponseEntity.ok(isUpdated);
 
 	}
+
 	@PutMapping("/cancel/{id}")
-	public ResponseEntity<Boolean> cancelStatus(@PathVariable Long id)
-	{
-		System.out.println("in new cancel API");
+	public ResponseEntity<Boolean> cancelStatus(@PathVariable Long id) {
 		Boolean isCancel = appointmentService.cancelAppointment(id);
 		return ResponseEntity.ok(isCancel);
 	}

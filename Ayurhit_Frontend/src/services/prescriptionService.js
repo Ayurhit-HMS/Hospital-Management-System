@@ -6,8 +6,8 @@ export async function getPrescriptions() {
     try {
         const token = sessionStorage.getItem("jwt");
         const response = await axios.get(url, {
-            headers : {
-                "Authorization" : `Bearer ${token}`
+            headers: {
+                "Authorization": `Bearer ${token}`
             }
         });
         return response
@@ -22,23 +22,20 @@ export async function getMedicines(token) {
         const response = await axios.get(url, {
             headers: {
                 'Authorization': `Bearer ${token}`
-            }});
-
-            console.log('this function called')
+            }
+        });
         return response
     } catch (ex) {
         console.log('Error fetching appointments', ex);
-        return null;
     }
 }
 
 export async function submitPrescription(DoctorPrescriptionDTO, token) {
-    const url = createUrl('/prescriptions/add');  
+    const url = createUrl('/prescriptions/add');
     try {
         const response = await axios.post(url, DoctorPrescriptionDTO, {
             headers: {
                 'Authorization': `Bearer ${token}`,
-               
             }
         });
         return response;

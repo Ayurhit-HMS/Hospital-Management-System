@@ -1,5 +1,4 @@
 import axios from "axios";
-//import { createUrl } from '../utils/utils';
 import { createUrl, log } from '../utils/utils'
 
 export async function getDoctors(departmentName) {

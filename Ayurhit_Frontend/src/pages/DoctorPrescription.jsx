@@ -1,23 +1,22 @@
+// 
+
 import DoctorSidebar from "../components/DoctorSidebar";
-import "../styles/patientDashboard.css"
-import Footer from "../components/Footer"
+import "../styles/patientDashboard.css";
+import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import { getPrescriptions } from "../services/prescriptionService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import {getMedicines,submitPrescription} from "../services/prescriptionService"
+import { getMedicines, submitPrescription } from "../services/prescriptionService";
 import { useLocation } from "react-router-dom";
 
-
 function DoctorPrescription() {
-
     const [medicines, setMedicines] = useState([]);
     const [prescriptionMedicines, setPrescriptionMedicines] = useState([]);
     const [selectedMedicine, setSelectedMedicine] = useState("");
     const [dosage, setDosage] = useState("");
     const [frequency, setFrequency] = useState("");
     const [duration, setDuration] = useState("");
-
 
     const { state } = useLocation();
     const { patientId, doctorId, appointmentId } = state || {};
@@ -30,58 +29,68 @@ function DoctorPrescription() {
             try {
                 const jwt = sessionStorage.getItem("jwt");
                 const response = await getMedicines(jwt);
-                console.log(response.data)
+                console.log(response.data);
                 if (response && response.status === 200) {
-                    console.log(response)
                     setMedicines(response.data);
                 }
             } catch (ex) {
-                console.log('Failed to fetch medicines:', ex);
+                console.log("Failed to fetch medicines:", ex);
             }
         };
         fetchMedicines();
     }, []);
 
+    const handleAddMedicine = () => {
+        if (!selectedMedicine || !dosage || !frequency || !duration) {
+            toast.error("Please fill in all fields to add a medicine.");
+            return;
+        }
 
+        const newMedicine = {
+            medicineName: selectedMedicine,
+            dosage,
+            frequency,
+            duration,
+        };
 
-
+        setPrescriptionMedicines([...prescriptionMedicines, newMedicine]);
+        setSelectedMedicine("");
+        setDosage("");
+        setFrequency("");
+        setDuration("");
+        toast.success("Medicine added!");
+    };
 
     const handleSubmitPrescription = async () => {
-        const newMedicine = { 
-            medicineName: selectedMedicine, dosage, frequency, duration };
-        
-        //setPrescriptionMedicines([...prescriptionMedicines, newMedicine]);
-        const updatedPrescriptionMedicines = [...prescriptionMedicines, newMedicine];
-        
+        if (prescriptionMedicines.length === 0) {
+            toast.error("Please add at least one medicine to submit the prescription.");
+            return;
+        }
+
         const DoctorPrescriptionDTO = {
             patientId,
             doctorId,
             appointmentId,
-            medicinesDTO: updatedPrescriptionMedicines
-           
+            medicinesDTO: prescriptionMedicines,
         };
-       
 
         try {
             const jwt = sessionStorage.getItem("jwt");
-             const response = await submitPrescription(DoctorPrescriptionDTO,jwt); 
-             if (response && response.status === 200) { // Submit the prescription to API
-            toast.success("Prescription submitted successfully!");
-           
-            navigate('/doctor/appointments');
-             }
+            console.log(DoctorPrescriptionDTO)
+            const response = await submitPrescription(DoctorPrescriptionDTO, jwt);
+            if (response && response.status === 200) {
+                toast.success("Prescription submitted successfully!");
+                navigate("/doctor/appointments");
+            }
         } catch (error) {
-            console.error('Failed to submit prescription:', error);
-            toast.error('Failed to submit prescription.');
+            console.error("Failed to submit prescription:", error);
+            toast.error("Failed to submit prescription.");
         }
     };
-
 
     const toggleSidebar = () => {
         setSidebarVisible(!isSidebarVisible);
     };
-
-    
 
     return (
         <div className="container-fluid patient-dashboard-content">
@@ -96,7 +105,7 @@ function DoctorPrescription() {
                         <div className="row text-center">
                             <span className="h2 mt-2">Prescriptions</span>
 
-                            <div className="dropdown-center mt-4" style={{ marginLeft: '42px' }} >
+                            <div className="dropdown-center mt-4" style={{ marginLeft: "42px" }}>
                                 <select
                                     className="form-select w-25"
                                     value={selectedMedicine}
@@ -111,7 +120,6 @@ function DoctorPrescription() {
                                 </select>
                             </div>
 
-
                             <input
                                 type="text"
                                 className="form-control mt-3 w-25 mx-auto"
@@ -119,7 +127,6 @@ function DoctorPrescription() {
                                 value={dosage}
                                 onChange={(e) => setDosage(e.target.value)}
                             />
-
 
                             <input
                                 type="text"
@@ -129,8 +136,6 @@ function DoctorPrescription() {
                                 onChange={(e) => setFrequency(e.target.value)}
                             />
 
-                            
-                            
                             <input
                                 type="text"
                                 className="form-control mt-3 w-25 mx-auto"
@@ -138,13 +143,41 @@ function DoctorPrescription() {
                                 value={duration}
                                 onChange={(e) => setDuration(e.target.value)}
                             />
-                           
 
-                            <div>
-                                 
-                                <button className="shadow btn btn-danger ms-5 mt-5 ps-5 pe-5" 
-                                onClick={handleSubmitPrescription}>
-                                    Submit
+                            <div className="mt-4">
+                                <button className="shadow btn btn-success ms-5 ps-5 pe-5" onClick={handleAddMedicine}>
+                                    Add Medicine
+                                </button>
+                            </div>
+
+                            <div className="mt-4">
+                                <h5>Added Medicines:</h5>
+                                {
+                                    prescriptionMedicines &&
+                                    <table className="table">
+                                        <thead>
+                                            <th>Medicine</th>
+                                            <th>Dosage</th>
+                                            <th>Frequency</th>
+                                            <th>Duration</th>
+                                        </thead>
+                                        <tbody>
+                                            {prescriptionMedicines.map((medicine) => (
+                                                <tr>
+                                                    <td>{medicine.medicineName}</td>
+                                                    <td>{medicine.dosage}</td>
+                                                    <td>{medicine.frequency}</td>
+                                                    <td>{medicine.duration}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                }
+                            </div>
+
+                            <div className="mt-4">
+                                <button className="shadow btn btn-danger ms-5 ps-5 pe-5" onClick={handleSubmitPrescription}>
+                                    Submit Prescription
                                 </button>
                             </div>
                         </div>
@@ -156,7 +189,6 @@ function DoctorPrescription() {
             </div>
         </div>
     );
-
 }
 
 export default DoctorPrescription;

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +18,6 @@ import com.ayurhit.dto.DoctorDTO;
 import com.ayurhit.dto.DoctorRequestDTO;
 import com.ayurhit.dto.ScheduleDTO;
 import com.ayurhit.dto.UpdateDoctorDTO;
-import com.ayurhit.security.JwtUtils;
 import com.ayurhit.service.DoctorService;
 
 @RestController

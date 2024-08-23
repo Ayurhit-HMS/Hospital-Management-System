@@ -2,7 +2,6 @@ import PatientSidebar from "../components/PatientSidebar";
 import "../styles/patientDashboard.css"
 import Footer from "../components/Footer"
 import { useEffect, useState } from "react";
-
 import { getAppointments } from "../services/AppointmentService";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
@@ -34,7 +33,9 @@ function PatientAppointments() {
 
     const fetchAppointments = async () => {
         try {
-            const response = await getAppointments(patient.id);
+            const token = sessionStorage.getItem("jwt")
+            console.log(token)
+            const response = await getAppointments(token);
             if (response && response.status === 200) {
                 console.log(response.data)
                 setAppointments(response.data);
@@ -46,7 +47,6 @@ function PatientAppointments() {
         }
     };
 
-
     const [isSidebarVisible, setSidebarVisible] = useState(true);
 
     const toggleSidebar = () => {
@@ -55,10 +55,9 @@ function PatientAppointments() {
 
     const cancel = async (appointmentId) => {
         const response = await cancelAppointment(appointmentId);
+        console.log(response)
         if (response && response.status === 200) {
-            const updatedResponse = await getAppointments(patient.id);
-            if (updatedResponse && updatedResponse.status === 200)
-                setAppointments(updatedResponse.data)
+            fetchAppointments()
             toast.success('Appointment cancelled successfully');
         } else {
             toast.error('Failed to cancel appointment');

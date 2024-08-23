@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import "../styles/sidebar.css"
+import { useNavigate } from 'react-router-dom';
 
 function DoctorSidebar() {
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const offcanvasElement = document.getElementById('offcanvasScrolling');
@@ -28,7 +31,7 @@ function DoctorSidebar() {
                     <div className="container d-grid">
                         <button className="btn btn-custom mb-2">Dashboard</button>
                         <button className="btn btn-custom mb-2">Profile</button>
-                        <button className="btn btn-custom mb-2">Appointments</button>
+                        <button className="btn btn-custom mb-2" onClick={() => { navigate("/doctor/appointments") }}>Appointments</button>
                         <button className="btn btn-custom mb-2">Pending Appointments</button>
                         <button className="btn btn-custom mb-2">Educational Resources</button>
                         <button className="btn btn-custom mb-2">Settings</button>

@@ -18,17 +18,13 @@ public class AppointmentDetailsController {
 
 	@Autowired
 	private AppointmentDetailsService appointmentDetailsService;
-	
+
 	@Autowired
 	private JwtUtils jwtUtils;
 
 	@GetMapping
 	public ResponseEntity<?> getAppointment(@RequestHeader("Authorization") String authHeader) throws IOException {
-		String token = authHeader.substring(7);
-		Long id = jwtUtils.getId(token);
-		System.out.println(id);
-		
-		return ResponseEntity.ok(appointmentDetailsService.findAppointmentsByDoctorId(jwtUtils.getId(token)));
+		return ResponseEntity.ok(appointmentDetailsService.findAppointmentsByDoctorId(jwtUtils.getId(authHeader)));
 	}
 
 }

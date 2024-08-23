@@ -23,6 +23,7 @@ import AdminDeptList from './pages/AdminDeptList.jsx';
 import AdminAddDoctor from './pages/AdminAddDoctor.jsx';
 import AdminAddSchedule from './pages/AdminAddSchedule.jsx';
 import AdminAddDepartment from './pages/AdminAddDept.jsx';
+import DoctorDashboard from './pages/DoctorDashboard.jsx';
 
 function App() {
   return (
@@ -41,30 +42,28 @@ function App() {
             <Route path="/patient/bills" element={<Bill />} />
             <Route path="/hospitals" element={<Hospitals />} />
             <Route path="/careers" element={<Careers />} />
-            <Route path="/doctor/dashboard" element={<PatientDashboard />} />
+
+
+            <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
             <Route path="/doctor/appointments" element={<NewDoctorAppointment />} />
             <Route path="/doctor/prescription" element={<DoctorPrescription />} />
-            
-           
-           
 
-
-            <Route path='/admin/emplist' element={< AdminEmpList/>} />
+            <Route path='/admin/emplist' element={< AdminEmpList />} />
             <Route path='/admin/schedulelist' element={<AdminScheduleList />} />
             <Route path='/admin/deptlist' element={<AdminDeptList />} />
             <Route path='/admin/addschedule' element={<AdminAddSchedule />} />
-            <Route path='/admin/addDepartment' element={<AdminAddDepartment/>} />
+            <Route path='/admin/addDepartment' element={<AdminAddDepartment />} />
             <Route path="/about" element={<AboutUs />} />
-            
-              
-              
+
+
+
           </Route>
 
 
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
-            <Route path="/admin/addDoctor" element={<AdminAddDoctor/>} />
+            <Route path="/admin/addDoctor" element={<AdminAddDoctor />} />
 
 
           </Route>
