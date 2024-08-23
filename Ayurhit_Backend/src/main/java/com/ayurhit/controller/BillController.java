@@ -26,13 +26,13 @@ public class BillController {
 	@Autowired
 	private JwtUtils jwtUtils;
 
-	@GetMapping
+	@GetMapping("/getBills")
 	public ResponseEntity<List<BillDTO>> getAllBills(@RequestHeader("Authorization") String authHeader) {
 		List<BillDTO> bills = billService.getPatientBills(jwtUtils.getId(authHeader));
 		return ResponseEntity.ok(bills);
 	}
 
-	@PostMapping
+	@PostMapping("/generate")
 	public ResponseEntity<Boolean> generateBill(@RequestBody BillDetailsDTO billDetailsDTO) {
 		System.out.println(billDetailsDTO);
 		Boolean isBillGenerated = billService.generateBill(billDetailsDTO);

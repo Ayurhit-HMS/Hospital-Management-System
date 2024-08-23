@@ -33,25 +33,26 @@ export async function getAppointments(token) {
 }
 
 
-
-export async function cancelAppointment(appointmentId, token) {
+export async function cancelAppointment(appointmentId) {
     const url = createUrl(`/appointments/cancel/${appointmentId}`);
-    console.log(token)
+    const token = sessionStorage.getItem("jwt");
     try {
-        const response = await axios.put(url, {
-            headers: {
-                Authorization: `Bearer ${token}`
+        const response = await axios.put(
+            url,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             }
-        });
-        console.log(response)
-
-
-        return response
+        );
+        return response;
     } catch (ex) {
         console.error('Error cancelling appointment', ex);
         return null;
     }
 }
+
 
 
 export async function update(appointmentId, token, data) {

@@ -21,7 +21,7 @@ function Bill() {
         const fetchData = async () => {
             try {
                 const response = await getBills();
-                if (response && response.status === 200) {
+                if (response) {
                     console.log(response.data)
                     const sortedBills = response.data.sort((a, b) => new Date(b.billingDate) - new Date(a.billingDate));
                     setBills(sortedBills);
@@ -198,7 +198,6 @@ function Bill() {
                     </div>
                 </div>
             </div>
-
             <div className="modal fade" id="billModal" tabIndex="-1" aria-labelledby="billModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg">
                     <div className="modal-content">

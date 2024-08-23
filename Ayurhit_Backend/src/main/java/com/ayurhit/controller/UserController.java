@@ -23,5 +23,4 @@ public class UserController {
 		ValidUserDTO user = userService.loginUser(loginDTO).orElseThrow(null);	
 		return ResponseEntity.ok(user);
 	}
-
 }

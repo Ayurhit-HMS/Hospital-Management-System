@@ -27,17 +27,17 @@ export async function getPatientDetails(token) {
     }
 }
 
-
-
 export async function getBills() {
-    const url = createUrl('/bill');
+    const url = createUrl('/bill/getBills');
     const token = sessionStorage.getItem("jwt")
+    console.log(token)
     try {
         const response = await axios.get(url, {
             headers: {
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         });
+        console.log(response)
         return response;
     } catch (ex) {
         console.error('Error fetching patient details:', ex);

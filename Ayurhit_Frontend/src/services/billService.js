@@ -3,8 +3,7 @@ import { createUrl } from "../utils/utils";
 
 
 export async function generateNewBill(billdetails) {
-    console.log(billdetails)
-    const url = createUrl('/bill')
+    const url = createUrl('/bill/generate')
     const token = sessionStorage.getItem("jwt")
     try {
         const response = await axios.post(url, billdetails, {
