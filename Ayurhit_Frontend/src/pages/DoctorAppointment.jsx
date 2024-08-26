@@ -76,7 +76,6 @@ function NewDoctorAppointment() {
     };
 
 
-
     const handleCancel = async (appointmentId) => {
         console.log(appointmentId)
         const jwt = sessionStorage.getItem("jwt");

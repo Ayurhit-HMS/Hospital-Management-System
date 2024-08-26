@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: rohitbagal166/ayurhit_hospitals:backend
+        ports:
+        - containerPort: 7070 
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://mysql-service:3306/ayurhit_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+        - name: SPRING_DATASOURCE_USERNAME
+          value: root
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: manager
+        - name: SECRET_KEY
+          value: MyAyurhit-Hospital-Management-System-PGDAC-MARCH2024-FINALPROJECT
+        - name: EXP_TIMEOUT
+          value: "86400000"
+        - name: APP_CORS_ALLOWED_ORIGINS
+          value: http://frontend-service:3000

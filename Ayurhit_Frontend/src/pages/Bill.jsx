@@ -41,19 +41,12 @@ function Bill() {
     const calculateTotalAmount = (bill) => {
         let total = 0;
         if (bill) {
-            console.log(bill)
             total += bill.doctor.consultationFees;
-            console.log(total)
             total += bill.medicationFees;
-            console.log(total)
             total += bill.procedureFees;
-            console.log(total)
             total += bill.otherCharges;
-            console.log(total)
             if (bill.gstAmount) total += bill.gstAmount;
-            console.log(total)
             if (bill.discount) total -= bill.discount;
-            console.log(total)
         }
         return total.toFixed(2);
     };

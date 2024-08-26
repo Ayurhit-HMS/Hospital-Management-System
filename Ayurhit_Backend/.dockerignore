@@ -1,0 +1,28 @@
+# Ignore the Maven or Gradle build directory
+
+build/
+
+# Ignore IDE-specific files and directories
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Ignore configuration files for local development
+application-dev.properties
+application-local.properties
+
+# Ignore source control directories
+.git/
+.gitignore
+.gitmodules

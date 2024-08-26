@@ -13,12 +13,6 @@ function PatientSidebar({ isSidebarVisible, toggleSidebar }) {
 
 
     useEffect(() => {
-        if (patient) {
-            console.log('patient in usestate',patient)
-        }
-    }, [patient]); 
-
-    useEffect(() => {
         const offcanvasElement = document.getElementById('offcanvasScrolling');
         const bsOffcanvas = new window.bootstrap.Offcanvas(offcanvasElement);
         bsOffcanvas.show();
