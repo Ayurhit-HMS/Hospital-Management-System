@@ -9,11 +9,11 @@
 		<version>2.7.18</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>spring_boot_backend_template</artifactId>
+	<groupId>com.ayurhit</groupId>
+	<artifactId>Ayurhit_Backend</artifactId>
 	<version>0.0.1</version>
-	<name>spring_boot_backend_template</name>
-	<description>Template Project for Spring Boot based Backend </description>
+	<name>Ayurhit_Backend</name>
+	<description>Project for Spring Boot based Backend </description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

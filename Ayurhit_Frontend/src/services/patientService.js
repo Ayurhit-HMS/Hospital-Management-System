@@ -3,6 +3,7 @@ import { createUrl, log } from '../utils/utils'
 
 export async function registerPatient(formData) {
     const url = createUrl('/patients');
+    console.log(url)
     try {
         const response = await axios.post(url, formData);
         return response;
